@@ -37,7 +37,7 @@
         }
         
         /* Smooth, bouncy transitions */
-        .game-card, .menu-card {
+        .game-card, .menu-card, .video-card {
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
         }
         
@@ -102,6 +102,9 @@
                 </button>
                 <button onclick="navigateTo('lego')" id="nav-lego" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-violet-600 hover:bg-slate-50">
                     🧱 Legomania
+                </button>
+                <button onclick="navigateTo('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-amber-600 hover:bg-amber-50 flex items-center gap-1.5 border border-dashed border-amber-200">
+                    🔑 Teacher Panel
                 </button>
             </div>
         </div>
@@ -187,14 +190,22 @@
                     </div>
                 </div>
 
-                <!-- YouTube Kids Playlist Panel -->
+                <!-- YouTube Kids Dynamic Media Player -->
                 <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
-                    <h3 class="font-display font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
-                        <span>🎵 Kids College Chill & Study Tunes</span>
-                        <span class="bg-red-100 text-red-600 font-bold text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider">YouTube Playlist</span>
-                    </h3>
-                    <div class="relative w-full overflow-hidden rounded-2xl shadow-inner border border-slate-100 bg-slate-100" style="padding-top: 56.25%;">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-slate-800 flex items-center gap-2">
+                                <span>🎵 Classroom Study & Beat Station</span>
+                            </h3>
+                            <p class="text-xs text-slate-400 font-medium">Click on any video in the tracks below to load and listen!</p>
+                        </div>
+                        <span class="self-start sm:self-auto bg-red-100 text-red-600 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">Dynamic Player</span>
+                    </div>
+
+                    <!-- Video Active Screen -->
+                    <div class="relative w-full overflow-hidden rounded-2xl shadow-inner border border-slate-100 bg-slate-900 mb-6" style="padding-top: 56.25%;">
                         <iframe 
+                            id="home-video-player"
                             class="absolute top-0 left-0 w-full h-full" 
                             src="https://www.youtube.com/embed/videoseries?list=PL3oW2tjiIxvSclM6P6Kzve05S95-y_2aA" 
                             title="Kids Study Playlist" 
@@ -203,7 +214,12 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <p class="text-xs text-slate-400 mt-3 font-medium">Safe, cheerful kids music selected to help maintain background focus during graphic design work.</p>
+
+                    <!-- Video Navigation Playlist Tracks -->
+                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Approved Tracks</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="home-playlist-tracks">
+                        <!-- Rendered dynamically by JS based on user database -->
+                    </div>
                 </div>
             </div>
 
@@ -338,7 +354,7 @@
                 </button>
                 <button onclick="setFilter('other')" id="filter-other" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-slate-800 border-2 border-transparent hover:border-slate-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499c.173-.434.762-.434.935 0l1.838 4.706c.078.2.268.334.484.344l5.132.226c.467.02.656.593.298.895l-3.864 3.264c-.163.137-.233.353-.183.56l1.096 4.542c.1.415-.357.747-.738.526l-4.468-2.585a.555.555 0 00-.546 0l-4.468 2.585c-.381.22-.838-.111-.738-.526l1.096-4.542c.05-.207-.02-.423-.183-.56L3.102 10.23c-.358-.302-.169-.875.298-.895l5.132-.226c.216-.01.406-.144.484-.344l1.838-4.706z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499c.173-.434.762-.434.935 0l1.838 4.706c.078.2.268.334.484.344l5.132.226c.467.02.656.593.298.895l-3.864 3.264c-.163.137-.233.353-.183.56l1.096 4.542c.1.415-.357.747-.738.526l-4.468-2.585a.555.555 0 00-.546 0l-4.468 2.585c-.381.22-.838-.111-.738-.526l1.096-4.542c.05-.207-.02-.423-.183-.56L3.102 10.23c-.358-.302-.169-.875.298-.895l5.132.226c.216-.01.406-.144.484-.344l1.838-4.706z" />
                     </svg>
                     <span>Other Favorites</span>
                 </button>
@@ -546,6 +562,188 @@
         </div>
     </section>
 
+    <!-- ================= PAGE 5: ADMIN PORTAL ================= -->
+    <section id="page-admin" class="page-view hidden">
+        <header class="bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
+            <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
+                <span class="bg-amber-400/30 text-white font-bold text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Teacher Control Room</span>
+                <h1 class="font-display font-bold text-3xl md:text-4xl tracking-wide mb-2">
+                    Kids College CMS Panel 🔑
+                </h1>
+                <p class="text-amber-100 text-xs md:text-sm font-medium max-w-xl">
+                    Password secure dashboard to visually update games list, add YouTube lessons, and generate fully compiled code updates for GitHub!
+                </p>
+            </div>
+        </header>
+
+        <div class="max-w-5xl mx-auto px-4 md:px-8 py-10">
+            <!-- LOCK SCREEN VIEW -->
+            <div id="admin-login-card" class="max-w-md mx-auto bg-white p-8 rounded-[32px] shadow-xl border border-slate-100">
+                <div class="text-center mb-6">
+                    <span class="text-4xl">🔐</span>
+                    <h3 class="font-display font-bold text-2xl text-slate-800 mt-2">Login Required</h3>
+                    <p class="text-xs text-slate-400 mt-1">Stark State Kids College Credentials Only</p>
+                </div>
+                
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Username</label>
+                        <input type="text" id="admin-user" required placeholder="e.g., admin" class="w-full bg-slate-50 px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-500 focus:outline-none focus:bg-white text-sm font-semibold text-slate-700">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Password</label>
+                        <input type="password" id="admin-pass" required placeholder="e.g., password" class="w-full bg-slate-50 px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-500 focus:outline-none focus:bg-white text-sm font-semibold text-slate-700">
+                    </div>
+                    <button type="submit" class="w-full bg-slate-900 hover:bg-amber-600 text-white font-bold text-sm py-3.5 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2">
+                        <span>Access CMS Dashboard</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- DASHBOARD CONTENT VIEW (HIDDEN BY DEFAULT) -->
+            <div id="admin-dashboard" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Sidebar Tools Navigation -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-slate-100 flex flex-col gap-2">
+                        <button onclick="switchAdminTab('games')" id="btn-adm-games" class="admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-white shadow-sm">
+                            🎮 Manage Games
+                        </button>
+                        <button onclick="switchAdminTab('videos')" id="btn-adm-videos" class="admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all text-slate-600 hover:bg-slate-50">
+                            🎵 Manage Videos
+                        </button>
+                        <button onclick="switchAdminTab('export')" id="btn-adm-export" class="admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all text-slate-600 hover:bg-slate-50">
+                            💾 Export Code for GitHub
+                        </button>
+                        
+                        <div class="border-t border-slate-100 my-2"></div>
+                        
+                        <button onclick="handleAdminLogout()" class="flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm text-red-500 hover:bg-red-50 transition-all">
+                            🚪 Logout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Central Config Dashboard Workspace -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- TAB 1: GAMES MANAGER -->
+                    <div id="adm-view-games" class="admin-view-panel space-y-6">
+                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Add Approved Game</h3>
+                            <form onsubmit="handleNewGameSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Game ID (Unique, lowercase, no spaces)</label>
+                                    <input type="text" id="add-game-id" required placeholder="e.g., retrobowl" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Game Title</label>
+                                    <input type="text" id="add-game-title" required placeholder="e.g., Retro Bowl" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Game URL (Browser Play Link)</label>
+                                    <input type="url" id="add-game-url" required placeholder="e.g., https://retrobowl.me/" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Category Category</label>
+                                    <select id="add-game-cat" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none font-semibold">
+                                        <option value="multiplayer">Multiplayer</option>
+                                        <option value="1player">1 Player</option>
+                                        <option value="learning">Learning & Science</option>
+                                        <option value="other">Other Favorites</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Players Descriptor</label>
+                                    <input type="text" id="add-game-players" required placeholder="e.g., 20 Players Max" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tags (Comma-separated)</label>
+                                    <input type="text" id="add-game-tags" placeholder="e.g., Arcade, Platformer, Logic" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Emoji Badge</label>
+                                    <input type="text" id="add-game-emoji" required placeholder="e.g., 🕹️" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Kid-Friendly Description</label>
+                                    <textarea id="add-game-desc" required rows="2" placeholder="Explain how the game is played..." class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none resize-none"></textarea>
+                                </div>
+                                <button type="submit" class="sm:col-span-2 bg-amber-500 hover:bg-slate-900 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
+                                    ➕ Insert Game into Database
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Games List Table -->
+                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Current Games Database</h3>
+                            <div class="overflow-y-auto max-h-96 space-y-2" id="adm-games-table-list">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: VIDEOS MANAGER -->
+                    <div id="adm-view-videos" class="admin-view-panel hidden space-y-6">
+                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Add Approved YouTube Video</h3>
+                            <form onsubmit="handleNewVideoSubmit(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Video Title</label>
+                                    <input type="text" id="add-vid-title" required placeholder="e.g., Chill Beats Lofi Remix" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">YouTube Link / Playlist URL</label>
+                                    <input type="url" id="add-vid-url" required placeholder="e.g., https://www.youtube.com/watch?v=..." class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <input type="checkbox" id="add-vid-playlist" class="rounded border-slate-300 text-amber-500 focus:ring-amber-500">
+                                    <label class="text-xs font-bold text-slate-600">This link is a YouTube Playlist series</label>
+                                </div>
+                                <button type="submit" class="w-full bg-amber-500 hover:bg-slate-900 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
+                                    ➕ Insert Video into Database
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Videos List Table -->
+                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Current Classroom Videos</h3>
+                            <div class="overflow-y-auto max-h-96 space-y-2" id="adm-videos-table-list">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: CODE EXPORT -->
+                    <div id="adm-view-export" class="admin-view-panel hidden space-y-6">
+                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                            <h3 class="font-display font-bold text-lg text-slate-800 mb-2">💾 Generate GitHub Build Code</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed mb-6">
+                                Since GitHub Pages runs statically, changes to your files don't write automatically to your server. Click the button below, copy the newly serialized website source code, and overwrite your index.html inside GitHub to make your changes permanent!
+                            </p>
+
+                            <button onclick="generateStaticSource()" class="w-full bg-slate-900 hover:bg-amber-500 text-white font-bold text-xs py-3 rounded-xl transition-all shadow-md mb-6 flex items-center justify-center gap-2">
+                                <span>🛠️ Compile Compiled Code block</span>
+                            </button>
+
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Deploy Source Code</label>
+                                    <button onclick="copyGeneratedCode()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[10px] py-1 px-3 rounded-md transition-colors">
+                                        📋 Copy Code
+                                    </button>
+                                </div>
+                                <textarea id="generated-code-box" readonly rows="12" class="w-full bg-slate-950 font-mono text-[10px] leading-tight text-emerald-400 p-4 rounded-xl border border-slate-800 focus:outline-none" placeholder="Compiled code will output here..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer (Universal Footer connected to all pages) -->
     <footer class="bg-white border-t border-slate-100 mt-auto py-8 px-4 text-center">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-sm">
@@ -556,8 +754,9 @@
 
     <!-- Game Database & Connected Multi-Page Core Engine -->
     <script>
-        // Deep game catalog, matching categories and metadata tags
-        const gamesDataset = [
+        // ================= DATABASE DECLARATIONS (Mutable for Prototype) =================
+        /* BEGIN_GAMES_DATA */
+        let gamesDataset = [
             {
                 id: "shellshock",
                 title: "Shellshock.io",
@@ -809,12 +1008,23 @@
                 emoji: "🦖"
             }
         ];
+        /* END_GAMES_DATA */
+
+        /* BEGIN_VIDEOS_DATA */
+        let videosDataset = [
+            { id: "v1", title: "Kids Study Mix - Cool Chill Instrumentals", url: "https://www.youtube.com/embed/videoseries?list=PL3oW2tjiIxvSclM6P6Kzve05S95-y_2aA", isPlaylist: true },
+            { id: "v2", title: "Lofi Hip Hop Radio - Calm Beats to Code to", url: "https://www.youtube.com/embed/jfKfPfyJRdk", isPlaylist: false },
+            { id: "v3", title: "Cheerful Acoustic Guitar Music", url: "https://www.youtube.com/embed/O-Lre_Ue-n4", isPlaylist: false }
+        ];
+        /* END_VIDEOS_DATA */
 
         // State Manager
         let currentPage = 'home';
         let currentFilter = 'all';
         let searchQuery = '';
         let favorites = [];
+        let isAdminLoggedIn = false;
+        let currentAdminTab = 'games';
 
         // Dynamic elements
         const gamesGrid = document.getElementById('games-grid');
@@ -845,6 +1055,11 @@
                 }
             });
 
+            // If navigating to home, refresh playlist layout
+            if (pageId === 'home') {
+                renderClassroomPlaylist();
+            }
+
             // Scroll to top automatically on transition
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -852,7 +1067,7 @@
         // Handle direct loads or bookmarks via hash
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.substring(1);
-            if (hash && ['home', 'gaming', 'comics', 'lego'].includes(hash)) {
+            if (hash && ['home', 'gaming', 'comics', 'lego', 'admin'].includes(hash)) {
                 navigateTo(hash);
             }
         });
@@ -861,7 +1076,7 @@
         window.onload = function () {
             // Read URL Hash or fallback to home
             const initialHash = window.location.hash.substring(1);
-            if (initialHash && ['home', 'gaming', 'comics', 'lego'].includes(initialHash)) {
+            if (initialHash && ['home', 'gaming', 'comics', 'lego', 'admin'].includes(initialHash)) {
                 navigateTo(initialHash);
             } else {
                 navigateTo('home');
@@ -884,6 +1099,7 @@
             renderGames();
             initComicStudio();
             initLegoStudio();
+            renderClassroomPlaylist();
 
             // Set up search events
             searchInput.addEventListener('input', (e) => {
@@ -903,6 +1119,33 @@
                 renderGames();
             });
         };
+
+        // ================= CLASSROOM PLAYLIST RENDERING =================
+        function renderClassroomPlaylist() {
+            const trackGrid = document.getElementById('home-playlist-tracks');
+            trackGrid.innerHTML = '';
+
+            videosDataset.forEach((vid, index) => {
+                const isActive = index === 0;
+                trackGrid.innerHTML += `
+                    <div onclick="setMainVideo('${vid.url}')" class="video-card cursor-pointer bg-slate-50 hover:bg-violet-50 border border-slate-200 hover:border-violet-300 p-4 rounded-2xl flex items-center gap-3">
+                        <div class="bg-violet-100 text-violet-700 w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0">
+                            ${vid.isPlaylist ? '📻' : '📹'}
+                        </div>
+                        <div class="overflow-hidden">
+                            <h5 class="text-xs font-bold text-slate-800 truncate">${vid.title}</h5>
+                            <span class="text-[10px] text-slate-400 font-semibold tracking-wide uppercase">${vid.isPlaylist ? 'YouTube Playlist' : 'YouTube Video'}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function setMainVideo(url) {
+            const player = document.getElementById('home-video-player');
+            player.src = url;
+            showToast("Playing updated media track!", "🎵");
+        }
 
         // ================= FAVORITES ENGINE =================
         function toggleFavorite(gameId, event) {
@@ -1239,6 +1482,235 @@
                 toast.classList.add('translate-y-20', 'opacity-0');
                 toast.classList.remove('translate-y-0', 'opacity-100');
             }, 3000);
+        }
+
+        // ================= TEACHER ADMIN CORE CMS ENGINE =================
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('admin-user').value.trim();
+            const pass = document.getElementById('admin-pass').value.trim();
+
+            if (user === 'admin' && pass === 'password') {
+                isAdminLoggedIn = true;
+                document.getElementById('admin-login-card').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                
+                // Update Nav Label to indicate active session
+                document.getElementById('nav-admin').innerHTML = "🔓 Teacher Dashboard";
+                
+                // Initial renders
+                renderAdminGamesList();
+                renderAdminVideosList();
+                showToast("Access Granted. Welcome, Eugene!", "🔐");
+            } else {
+                showToast("Invalid Credentials. Please try again.", "❌");
+            }
+        }
+
+        function handleAdminLogout() {
+            isAdminLoggedIn = false;
+            document.getElementById('admin-login-card').classList.remove('hidden');
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('nav-admin').innerHTML = "🔑 Teacher Panel";
+            
+            // Wipe forms
+            document.getElementById('admin-user').value = '';
+            document.getElementById('admin-pass').value = '';
+            showToast("Logged out successfully.", "🚪");
+        }
+
+        function switchAdminTab(tabId) {
+            currentAdminTab = tabId;
+            
+            // Update panel visibility
+            const panels = document.querySelectorAll('.admin-view-panel');
+            panels.forEach(p => p.classList.add('hidden'));
+            document.getElementById(`adm-view-${tabId}`).classList.remove('hidden');
+
+            // Toggle tab active highlights
+            const tabButtons = document.querySelectorAll('.admin-tab-btn');
+            tabButtons.forEach(btn => {
+                if (btn.id === `btn-adm-${tabId}`) {
+                    btn.className = "admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-white shadow-sm";
+                } else {
+                    btn.className = "admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all text-slate-600 hover:bg-slate-50";
+                }
+            });
+        }
+
+        // --- SUB-CMS 1: GAMES MANAGEMENT ---
+        function renderAdminGamesList() {
+            const listContainer = document.getElementById('adm-games-table-list');
+            listContainer.innerHTML = '';
+
+            gamesDataset.forEach(game => {
+                listContainer.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl">${game.emoji}</span>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">${game.title}</h4>
+                                <span class="text-[9px] text-slate-400 font-bold uppercase">${game.category}</span>
+                            </div>
+                        </div>
+                        <button onclick="deleteGame('${game.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
+                            Remove
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function handleNewGameSubmit(event) {
+            event.preventDefault();
+            const id = document.getElementById('add-game-id').value.trim();
+            const title = document.getElementById('add-game-title').value.trim();
+            const url = document.getElementById('add-game-url').value.trim();
+            const category = document.getElementById('add-game-cat').value;
+            const players = document.getElementById('add-game-players').value.trim();
+            const tagsInput = document.getElementById('add-game-tags').value;
+            const emoji = document.getElementById('add-game-emoji').value.trim();
+            const desc = document.getElementById('add-game-desc').value.trim();
+
+            const tags = tagsInput.split(',').map(t => t.trim()).filter(t => t !== '');
+
+            // Construct and inject game object
+            const newGame = { id, title, url, category, desc, players, tags, emoji };
+            gamesDataset.push(newGame);
+
+            // Re-render
+            renderAdminGamesList();
+            renderGames(); // Refresh playground UI instantly in dynamic session
+
+            // Reset Form fields
+            event.target.reset();
+            showToast(`"${title}" inserted successfully!`, "🎮");
+        }
+
+        function deleteGame(gameId) {
+            gamesDataset = gamesDataset.filter(game => game.id !== gameId);
+            renderAdminGamesList();
+            renderGames();
+            showToast("Game removed from Database.", "🗑️");
+        }
+
+        // --- SUB-CMS 2: VIDEOS MANAGEMENT ---
+        function renderAdminVideosList() {
+            const listContainer = document.getElementById('adm-videos-table-list');
+            listContainer.innerHTML = '';
+
+            videosDataset.forEach(vid => {
+                listContainer.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl">${vid.isPlaylist ? '📻' : '📹'}</span>
+                            <div class="max-w-[200px] sm:max-w-xs overflow-hidden">
+                                <h4 class="text-xs font-bold text-slate-800 truncate">${vid.title}</h4>
+                                <span class="text-[9px] text-slate-400 font-bold uppercase">${vid.isPlaylist ? 'YouTube Playlist' : 'YouTube Video'}</span>
+                            </div>
+                        </div>
+                        <button onclick="deleteVideo('${vid.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
+                            Remove
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function handleNewVideoSubmit(event) {
+            event.preventDefault();
+            const title = document.getElementById('add-vid-title').value.trim();
+            const rawUrl = document.getElementById('add-vid-url').value.trim();
+            const isPlaylist = document.getElementById('add-vid-playlist').checked;
+
+            // Transform normal watch urls to embed urls automatically
+            let embedUrl = rawUrl;
+            if (!rawUrl.includes('embed')) {
+                if (rawUrl.includes('list=')) {
+                    const listReg = rawUrl.match(/[&?]list=([^&]+)/);
+                    if (listReg) embedUrl = `https://www.youtube.com/embed/videoseries?list=${listReg[1]}`;
+                } else {
+                    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                    const match = rawUrl.match(regExp);
+                    if (match && match[2].length === 11) {
+                        embedUrl = `https://www.youtube.com/embed/${match[2]}`;
+                    }
+                }
+            }
+
+            const id = 'v' + (videosDataset.length + 1);
+            const newVideo = { id, title, url: embedUrl, isPlaylist };
+            videosDataset.push(newVideo);
+
+            // Refresh dashboards
+            renderAdminVideosList();
+            renderClassroomPlaylist();
+
+            event.target.reset();
+            showToast(`Video track updated!`, "🎵");
+        }
+
+        function deleteVideo(vidId) {
+            videosDataset = videosDataset.filter(vid => vid.id !== vidId);
+            renderAdminVideosList();
+            renderClassroomPlaylist();
+            showToast("Video removed from Database.", "🗑️");
+        }
+
+        // --- SUB-CMS 3: STATIC EXPORT & DEPLOY CORE ---
+        function generateStaticSource() {
+            // Read active document source dynamically
+            fetch(window.location.href)
+                .then(response => {
+                    if (!response.ok) throw new Error("Network offline or direct file scheme");
+                    return response.text();
+                })
+                .then(htmlContent => {
+                    const compiledOutput = buildStaticReplacement(htmlContent);
+                    document.getElementById('generated-code-box').value = compiledOutput;
+                    showToast("Static source generated successfully!", "💻");
+                })
+                .catch(err => {
+                    console.warn("Falling back to client-side DOM compiler:", err);
+                    // Standard robust fallback to document outerHTML if CORS/local scheme restricts fetch
+                    let rawHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+                    const compiledOutput = buildStaticReplacement(rawHtml);
+                    document.getElementById('generated-code-box').value = compiledOutput;
+                    showToast("Static source compiled!", "💻");
+                });
+        }
+
+        function buildStaticReplacement(rawHtml) {
+            // Regex match the data markers to replace dataset arrays directly with new states
+            const serializedGames = JSON.stringify(gamesDataset, null, 12);
+            const serializedVideos = JSON.stringify(videosDataset, null, 12);
+
+            let resultHtml = rawHtml;
+
+            // Target replacement for games block
+            const gamesRegex = /(\/\*\s*BEGIN_GAMES_DATA\s*\*\/)[\s\S]*?(\/\*\s*END_GAMES_DATA\s*\*\/)/g;
+            resultHtml = resultHtml.replace(gamesRegex, `$1\n        let gamesDataset = ${serializedGames};\n        $2`);
+
+            // Target replacement for videos block
+            const videosRegex = /(\/\*\s*BEGIN_VIDEOS_DATA\s*\*\/)[\s\S]*?(\/\*\s*END_VIDEOS_DATA\s*\*\/)/g;
+            resultHtml = resultHtml.replace(videosRegex, `$1\n        let videosDataset = ${serializedVideos};\n        $2`);
+
+            // Clean temporary active styles or credentials so the file builds completely fresh
+            resultHtml = resultHtml.replace(/isAdminLoggedIn\s*=\s*true/g, 'isAdminLoggedIn = false');
+            resultHtml = resultHtml.replace(/currentPage\s*=\s*'admin'/g, 'currentPage = \'home\'');
+            
+            return resultHtml;
+        }
+
+        function copyGeneratedCode() {
+            const codeBox = document.getElementById('generated-code-box');
+            if (!codeBox.value) {
+                showToast("Please compile the code block first!", "⚠️");
+                return;
+            }
+            codeBox.select();
+            document.execCommand('copy');
+            showToast("Copied to clipboard. Paste into GitHub!", "📋");
         }
     </script>
 </body>
