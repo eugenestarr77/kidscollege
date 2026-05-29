@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Space Invaders Premium</title>
+    <style>
+        :root {
+            --neon-green: #39ff14;
+            --neon-pink: #ff007f;
+            --neon-blue: #00f0ff;
+            --dark-bg: #0a0a0c;
+            --cabinet-rim: #1f1f2e;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 10px;
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Retro Arcade Cabinet Wrapper */
+        .arcade-container {
+            background-color: #121216;
+            border: 4px solid var(--cabinet-rim);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8),
+                        0 0 30px rgba(0, 240, 255, 0.1);
+            max-width: 840px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--neon-blue);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Canvas container handles scaling keeping aspect ratio */
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            background-color: #000;
+            border: 4px solid #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 0 40px rgba(0,0,0,1), 
+                        0 0 15px rgba(255, 255, 255, 0.1);
+            aspect-ratio: 4 / 3;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+        }
+
+        /* Layout Controls Info and Interactive Virtual Pad */
+        .control-panel {
+            width: 100%;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* CSS-Based Retro Keycaps UI */
+        .instructions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            margin-top: 8px;
+            padding-top: 15px;
+            border-top: 1px solid #222;
+        }
+
+        .instruction-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 11px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .instruction-group-title {
+            color: var(--neon-blue);
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 4px;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 4px;
+        }
+
+        .key-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .key-cap {
+            background: #252530;
+            border: 1px solid #444;
+            border-bottom: 3px solid #111;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #fff;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 11px;
+            display: inline-block;
+            box-shadow: 0 2px 2px rgba(0,0,0,0.4);
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        /* Virtual Joystick / Buttons Pad for Touch & Mouse */
+        .virtual-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 5px 10px;
+        }
+
+        .d-pad {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-pad {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            background-color: #1e1e24;
+            border: 2px solid #3e3e4f;
+            color: #fff;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #0f0f13;
+            transition: all 0.05s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .btn-dir {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            border-color: var(--neon-blue);
+        }
+
+        .btn-fire {
+            height: 60px;
+            min-width: 100px;
+            background-color: #d90429;
+            border-color: #ef233c;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 0 #8d0801;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .btn-fire:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .system-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .btn-sys {
+            font-size: 0.8rem;
+            padding: 8px 15px;
+            border-color: #555;
+            background-color: #2a2a35;
+        }
+
+        /* Sound toggles */
+        .audio-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            color: var(--neon-green);
+            pointer-events: none;
+            z-index: 10;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+            .btn-dir {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .btn-fire {
+                height: 50px;
+                min-width: 80px;
+                font-size: 1rem;
+            }
+            .btn-sys {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+            .instructions-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="arcade-container">
+        <header>
+            <h1>SPACE INVADERS</h1>
+            <div class="subtitle">Retro Core Machine Premium</div>
+        </header>
+
+        <div class="canvas-wrapper">
+            <div id="audioStatus" class="audio-indicator">AUDIO: CLICK TO ACTIVATE</div>
+            <!-- Internal standard resolution scaled perfectly in wrappers -->
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+        </div>
+
+        <div class="control-panel">
+            <!-- Game Action Buttons -->
+            <div class="virtual-controls">
+                <div class="d-pad">
+                    <button id="btnLeft" class="btn btn-dir">◀</button>
+                    <button id="btnRight" class="btn btn-dir">▶</button>
+                </div>
+                <div class="action-pad">
+                    <button id="btnFire" class="btn btn-fire">FIRE</button>
+                </div>
+            </div>
+
+            <!-- Utility Pause & Reset Controls -->
+            <div class="system-controls">
+                <button id="btnPause" class="btn btn-sys">PAUSE [P]</button>
+                <button id="btnRestart" class="btn btn-sys">RESTART [R]</button>
+            </div>
+
+            <!-- Enhanced Instruct Panel with mechanical keycaps layout -->
+            <div class="instructions-grid">
+                <div class="instruction-group" style="border-right: 1px solid #222; padding-right: 10px;">
+                    <div class="instruction-group-title">Tactical Maneuvers</div>
+                    <div class="key-row">
+                        <span class="key-cap">◀</span> <span class="key-cap">▶</span>
+                        <span>Move Left / Right</span>
+                    </div>
+                    <div class="key-row" style="margin-top: 2px;">
+                        <span class="key-cap" style="width: 100px; text-align: center;">SPACEBAR</span>
+                        <span>Fire Laser Cannons</span>
+                    </div>
+                </div>
+                <div class="instruction-group">
+                    <div class="instruction-group-title">Cabinet Commands</div>
+                    <div class="key-row">
+                        <span class="key-cap">P</span> / <span class="key-cap">ESC</span>
+                        <span>Pause / Resume Game</span>
+                    </div>
+                    <div class="key-row" style="margin-top: 2px;">
+                        <span class="key-cap">R</span>
+                        <span>Instant Reset Wave</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// --- Audio Synth Engine (Retro Web Audio API) ---
+let audioCtx = null;
+
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        document.getElementById('audioStatus').innerText = "AUDIO: ONLINE";
+        document.getElementById('audioStatus').style.color = "#39ff14";
+    }
+}
+
+// Generate synthesizer sound effects dynamically in browser memory
+function playSound(type) {
+    if (!audioCtx) return;
+    
+    // Resume context if paused (browser policy guard)
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+
+    try {
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'laser') {
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(800, now);
+            osc.frequency.exponentialRampToValueAtTime(150, now + 0.15);
+            gainNode.gain.setValueAtTime(0.12, now);
+            gainNode.gain.linearRampToValueAtTime(0.01, now + 0.15);
+            osc.start(now);
+            osc.stop(now + 0.15);
+        } 
+        else if (type === 'explosion') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(140, now);
+            osc.frequency.exponentialRampToValueAtTime(20, now + 0.3);
+            gainNode.gain.setValueAtTime(0.25, now);
+            gainNode.gain.linearRampToValueAtTime(0.01, now + 0.3);
+            osc.start(now);
+            osc.stop(now + 0.3);
+        }
+        else if (type === 'alien_zap') {
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(220, now);
+            osc.frequency.setValueAtTime(110, now + 0.08);
+            gainNode.gain.setValueAtTime(0.04, now);
+            gainNode.gain.linearRampToValueAtTime(0.01, now + 0.16);
+            osc.start(now);
+            osc.stop(now + 0.16);
+        }
+        else if (type === 'pause') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(523.25, now); // C5
+            osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+            gainNode.gain.setValueAtTime(0.1, now);
+            gainNode.gain.linearRampToValueAtTime(0.01, now + 0.18);
+            osc.start(now);
+            osc.stop(now + 0.18);
+        }
+        else if (type === 'win') {
+            // Short victory arpeggio
+            const freqs = [523.25, 659.25, 783.99, 1046.50]; // C, E, G, C
+            freqs.forEach((f, i) => {
+                const subOsc = audioCtx.createOscillator();
+                const subGain = audioCtx.createGain();
+                subOsc.connect(subGain);
+                subGain.connect(audioCtx.destination);
+                subOsc.type = 'square';
+                subOsc.frequency.setValueAtTime(f, now + i * 0.1);
+                subGain.gain.setValueAtTime(0.08, now + i * 0.1);
+                subGain.gain.linearRampToValueAtTime(0.01, now + i * 0.1 + 0.15);
+                subOsc.start(now + i * 0.1);
+                subOsc.stop(now + i * 0.1 + 0.15);
+            });
+        }
+    } catch (e) {
+        console.warn("Audio failure: ", e);
+    }
+}
+
+
+// --- 16-Bit Grid Pixel Sprites Configurations ---
+// 1 represent filled pixel, 0 represents blank pixel space.
+const SPRITES = {
+    // Squid Type (Top Row)
+    squid: [
+        [
+            [0,0,0,1,1,0,0,0],
+            [0,0,1,1,1,1,0,0],
+            [0,1,1,1,1,1,1,0],
+            [1,1,0,1,1,0,1,1],
+            [1,1,1,1,1,1,1,1],
+            [0,0,1,0,0,1,0,0],
+            [0,1,0,1,1,0,1,0],
+            [1,0,1,0,0,1,0,1]
+        ],
+        [
+            [0,0,0,1,1,0,0,0],
+            [0,0,1,1,1,1,0,0],
+            [0,1,1,1,1,1,1,0],
+            [1,1,0,1,1,0,1,1],
+            [1,1,1,1,1,1,1,1],
+            [0,1,0,1,1,0,1,0],
+            [1,0,0,0,0,0,0,1],
+            [0,1,0,0,0,0,1,0]
+        ]
+    ],
+    // Crab Type (Middle Rows)
+    crab: [
+        [
+            [0,0,1,0,0,0,0,0,1,0,0],
+            [0,0,0,1,0,0,0,1,0,0,0],
+            [0,0,1,1,1,1,1,1,1,0,0],
+            [0,1,1,0,1,1,1,0,1,1,0],
+            [1,1,1,1,1,1,1,1,1,1,1],
+            [1,0,1,1,1,1,1,1,1,0,1],
+            [1,0,1,0,0,0,0,0,1,0,1],
+            [0,0,0,1,1,0,1,1,0,0,0]
+        ],
+        [
+            [0,0,1,0,0,0,0,0,1,0,0],
+            [1,0,0,1,0,0,0,1,0,0,1],
+            [1,0,1,1,1,1,1,1,1,0,1],
+            [1,1,1,0,1,1,1,0,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1],
+            [0,1,1,1,1,1,1,1,1,1,0],
+            [0,0,1,0,0,0,0,0,1,0,0],
+            [0,1,0,0,0,0,0,0,0,1,0]
+        ]
+    ],
+    // Octopus Type (Bottom Rows)
+    octopus: [
+        [
+            [0,0,0,1,1,1,1,0,0,0,0,0],
+            [0,1,1,1,1,1,1,1,1,1,1,0],
+            [1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,0,0,1,1,0,0,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1],
+            [0,0,0,1,1,0,0,1,1,0,0,0],
+            [0,0,1,1,0,1,1,0,1,1,0,0],
+            [1,1,0,0,0,0,0,0,0,0,1,1]
+        ],
+        [
+            [0,0,0,1,1,1,1,0,0,0,0,0],
+            [0,1,1,1,1,1,1,1,1,1,1,0],
+            [1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,0,0,1,1,0,0,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1],
+            [0,0,1,1,1,0,0,1,1,1,0,0],
+            [0,1,1,0,0,1,1,0,0,1,1,0],
+            [0,0,0,1,1,0,0,1,1,0,0,0]
+        ]
+    ],
+    // Player Laser Cannon Tank
+    player: [
+        [0,0,0,0,0,1,1,0,0,0,0,0],
+        [0,0,0,0,0,1,1,0,0,0,0,0],
+        [0,0,0,0,1,1,1,1,0,0,0,0],
+        [0,1,1,1,1,1,1,1,1,1,1,0],
+        [1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1]
+    ]
+};
+
+
+// --- Game State Configurations ---
+let gameState = 'PLAYING'; // Available states: 'PLAYING', 'PAUSED', 'GAMEOVER', 'LEVEL_CLEAR'
+let score = 0;
+let highScore = parseInt(localStorage.getItem('space_invaders_hi_score') || '0', 10);
+let level = 1;
+let keys = {};
+let tickCount = 0; // Tracks overall elapsed cycles to alternate animations
+
+// Input directions (keyboard & virtual keys)
+let inputLeft = false;
+let inputRight = false;
+
+// Entities
+let player = {};
+let bullets = [];
+let invaders = [];
+let invaderBullets = [];
+
+const invaderRows = 5;
+const invaderCols = 10;
+const invaderWidth = 44;
+const invaderHeight = 28;
+const invaderPadding = 12;
+const invaderOffsetTop = 75;
+const invaderOffsetLeft = 50;
+
+let invaderDirection = 1; // 1 = Right, -1 = Left
+let invaderSpeed = 0.8;
+const invaderDropDistance = 15;
+
+const playerInitialY = canvas.height - 70;
+
+
+// --- Game Engine Initializer ---
+function initGame() {
+    score = 0;
+    level = 1;
+    startNewLevel();
+}
+
+// Begins a new level session, scaling difficulty parameters dynamically
+function startNewLevel() {
+    gameState = 'PLAYING';
+    bullets = [];
+    invaderBullets = [];
+    invaderDirection = 1;
+    
+    // Scale invader movement speed incrementally by level
+    invaderSpeed = 0.75 + (level - 1) * 0.25;
+
+    player = {
+        x: canvas.width / 2 - 25,
+        y: playerInitialY,
+        width: 52,
+        height: 30,
+        speed: 6,
+        color: '#39ff14' // Neon Green
+    };
+
+    initInvaders();
+}
+
+function initInvaders() {
+    invaders = [];
+    for (let r = 0; r < invaderRows; r++) {
+        // Map invader types based on rows for varied layouts
+        let type = 'octopus'; 
+        if (r === 0) type = 'squid';
+        else if (r === 1 || r === 2) type = 'crab';
+
+        for (let c = 0; c < invaderCols; c++) {
+            const x = c * (invaderWidth + invaderPadding) + invaderOffsetLeft;
+            const y = r * (invaderHeight + invaderPadding) + invaderOffsetTop;
+            invaders.push({ 
+                x, 
+                y, 
+                width: invaderWidth, 
+                height: invaderHeight, 
+                alive: true,
+                type: type 
+            });
+        }
+    }
+}
+
+
+// --- Controls Mapping ---
+
+// Keyboards Inputs
+window.addEventListener('keydown', (e) => {
+    initAudio(); // Trigger audio setup safely on interactive key presses
+
+    const keyLower = e.key.toLowerCase();
+
+    // Prevent default scroll actions on navigation-related keys
+    if (['space', ' ', 'arrowleft', 'arrowright'].includes(keyLower)) {
+        e.preventDefault();
+    }
+
+    if (e.key === 'Escape' || keyLower === 'p') {
+        togglePause();
+        return;
+    }
+
+    if (keyLower === 'r') {
+        playSound('pause');
+        initGame();
+        return;
+    }
+
+    if (e.key === 'ArrowLeft') inputLeft = true;
+    if (e.key === 'ArrowRight') inputRight = true;
+
+    if (e.key === ' ' && gameState === 'PLAYING') {
+        firePlayerWeapon();
+    }
+});
+
+window.addEventListener('keyup', (e) => {
+    if (e.key === 'ArrowLeft') inputLeft = false;
+    if (e.key === 'ArrowRight') inputRight = false;
+});
+
+// Setup Virtual Touch/Mouse Controls
+function setupVirtualControls() {
+    const btnLeft = document.getElementById('btnLeft');
+    const btnRight = document.getElementById('btnRight');
+    const btnFire = document.getElementById('btnFire');
+    const btnPause = document.getElementById('btnPause');
+    const btnRestart = document.getElementById('btnRestart');
+
+    // Directionals mapping
+    const setLeft = (active) => { initAudio(); inputLeft = active; };
+    const setRight = (active) => { initAudio(); inputRight = active; };
+
+    btnLeft.addEventListener('mousedown', () => setLeft(true));
+    btnLeft.addEventListener('mouseup', () => setLeft(false));
+    btnLeft.addEventListener('mouseleave', () => setLeft(false));
+    btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); setLeft(true); });
+    btnLeft.addEventListener('touchend', (e) => { e.preventDefault(); setLeft(false); });
+
+    btnRight.addEventListener('mousedown', () => setRight(true));
+    btnRight.addEventListener('mouseup', () => setRight(false));
+    btnRight.addEventListener('mouseleave', () => setRight(false));
+    btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); setRight(true); });
+    btnRight.addEventListener('touchend', (e) => { e.preventDefault(); setRight(false); });
+
+    // Weapons mapping
+    btnFire.addEventListener('mousedown', () => { initAudio(); firePlayerWeapon(); });
+    btnFire.addEventListener('touchstart', (e) => { e.preventDefault(); initAudio(); firePlayerWeapon(); });
+
+    // Pause system
+    btnPause.addEventListener('click', () => { initAudio(); togglePause(); });
+
+    // Restart System
+    btnRestart.addEventListener('click', () => {
+        initAudio();
+        playSound('pause');
+        initGame();
+    });
+}
+
+function firePlayerWeapon() {
+    if (gameState !== 'PLAYING') return;
+    if (bullets.length < 3) {
+        bullets.push({ 
+            x: player.x + player.width / 2 - 2, 
+            y: player.y - 12, 
+            width: 4, 
+            height: 15, 
+            speed: 8 
+        });
+        playSound('laser');
+    }
+}
+
+function togglePause() {
+    if (gameState === 'PLAYING') {
+        gameState = 'PAUSED';
+        playSound('pause');
+    } else if (gameState === 'PAUSED') {
+        gameState = 'PLAYING';
+        playSound('pause');
+    }
+}
+
+
+// --- Collision Logic ---
+function rectIntersect(rect1, rect2) {
+    return rect1.x < rect2.x + rect2.width &&
+           rect1.x + rect1.width > rect2.x &&
+           rect1.y < rect2.y + rect2.height &&
+           rect1.y + rect1.height > rect2.y;
+}
+
+
+// --- Game Core Updates ---
+function update() {
+    if (gameState !== 'PLAYING') return;
+
+    tickCount++; // Progress retro animation cycles
+
+    // 1. Move Player (Keyboards + Virtual Inputs)
+    if (inputLeft && player.x > 0) {
+        player.x -= player.speed;
+    }
+    if (inputRight && player.x < canvas.width - player.width) {
+        player.x += player.speed;
+    }
+
+    // 2. Move Player Bullets
+    bullets.forEach((bullet, index) => {
+        bullet.y -= bullet.speed;
+        if (bullet.y < 0) bullets.splice(index, 1);
+    });
+
+    // 3. Move Alien Forces
+    let shiftDown = false;
+    invaders.forEach(invader => {
+        if (!invader.alive) return;
+        invader.x += invaderSpeed * invaderDirection;
+
+        // Wall collisions trigger drop down sequence
+        if (invader.x + invader.width >= canvas.width || invader.x <= 0) {
+            shiftDown = true;
+        }
+
+        // Alien forces reach baseline
+        if (invader.y + invader.height >= player.y) {
+            triggerGameOver();
+        }
+    });
+
+    if (shiftDown) {
+        invaderDirection *= -1;
+        invaders.forEach(invader => {
+            if (invader.alive) invader.y += invaderDropDistance;
+        });
+        // Slowly increase speed as invaders drop down
+        invaderSpeed += 0.12; 
+    }
+
+    // 4. Enemy Attacks (Frequency scales with Level)
+    const fireProbability = 0.012 + (level * 0.003); 
+    if (Math.random() < fireProbability && invaders.some(i => i.alive)) {
+        const aliveInvaders = invaders.filter(i => i.alive);
+        const randomInvader = aliveInvaders[Math.floor(Math.random() * aliveInvaders.length)];
+        invaderBullets.push({
+            x: randomInvader.x + randomInvader.width / 2,
+            y: randomInvader.y + randomInvader.height,
+            width: 4,
+            height: 12,
+            speed: 3.5 + (level * 0.15) // Speed up laser-fire marginally by level
+        });
+        playSound('alien_zap');
+    }
+
+    // 5. Move Enemy Laser-Fire
+    invaderBullets.forEach((bullet, index) => {
+        bullet.y += bullet.speed;
+        if (bullet.y > canvas.height) invaderBullets.splice(index, 1);
+
+        // Enemy impact on Player
+        if (rectIntersect(bullet, player)) {
+            triggerGameOver();
+        }
+    });
+
+    // 6. Laser Impact Logic: Player vs Invaders
+    bullets.forEach((bullet, bIdx) => {
+        invaders.forEach((invader) => {
+            if (invader.alive && rectIntersect(bullet, invader)) {
+                invader.alive = false;
+                bullets.splice(bIdx, 1);
+                
+                // Score scales slightly by row elevation
+                let scoreGain = 10;
+                if (invader.type === 'squid') scoreGain = 30;
+                else if (invader.type === 'crab') scoreGain = 20;
+                score += scoreGain;
+
+                // Sync new local high score immediately
+                if (score > highScore) {
+                    highScore = score;
+                    localStorage.setItem('space_invaders_hi_score', highScore);
+                }
+
+                playSound('explosion');
+            }
+        });
+    });
+
+    // 7. Check Level Victory State
+    if (!invaders.some(invader => invader.alive)) {
+        gameState = 'LEVEL_CLEAR';
+        playSound('win');
+        
+        // Start next level automatically after a brief celebration flash
+        setTimeout(() => {
+            if (gameState === 'LEVEL_CLEAR') {
+                level++;
+                startNewLevel();
+            }
+        }, 2200);
+    }
+}
+
+function triggerGameOver() {
+    gameState = 'GAMEOVER';
+    playSound('explosion');
+}
+
+
+// --- Custom Pixel-Art Renderer ---
+// Iterates through coordinate matrices to draw scalable pixel shapes
+function drawSprite(sprite, x, y, width, height, color) {
+    const rows = sprite.length;
+    const cols = sprite[0].length;
+    
+    const pixelWidth = width / cols;
+    const pixelHeight = height / rows;
+
+    ctx.fillStyle = color;
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            if (sprite[r][c] === 1) {
+                ctx.fillRect(
+                    Math.floor(x + c * pixelWidth), 
+                    Math.floor(y + r * pixelHeight), 
+                    Math.ceil(pixelWidth), 
+                    Math.ceil(pixelHeight)
+                );
+            }
+        }
+    }
+}
+
+
+// --- Render Graphics Engine ---
+function draw() {
+    // Clear canvas
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Grid Scanline Overlay Filter (Virtual CRT Glass Effect)
+    ctx.strokeStyle = "rgba(18, 18, 18, 0.4)";
+    ctx.lineWidth = 1;
+    for (let i = 0; i < canvas.height; i += 4) {
+        ctx.beginPath();
+        ctx.moveTo(0, i);
+        ctx.lineTo(canvas.width, i);
+        ctx.stroke();
+    }
+
+    // 1. Draw Green Retro Player Ship
+    drawSprite(SPRITES.player, player.x, player.y, player.width, player.height, player.color);
+
+    // 2. Draw Player Lasers
+    ctx.fillStyle = '#ffffff';
+    bullets.forEach(bullet => {
+        ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+    });
+
+    // Determine current walking animation frame index (0 or 1) based on elapsed ticks
+    const animationFrame = Math.floor(tickCount / 30) % 2;
+
+    // 3. Draw Animated Space Invaders
+    invaders.forEach(invader => {
+        if (invader.alive) {
+            const spriteData = SPRITES[invader.type][animationFrame];
+            const color = varColorFromY(invader.y);
+            drawSprite(spriteData, invader.x, invader.y, invader.width, invader.height, color);
+        }
+    });
+
+    // 4. Draw Alien Lasers
+    ctx.fillStyle = '#ff0055';
+    invaderBullets.forEach(bullet => {
+        ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+    });
+
+    // 5. Draw Classic Cabinet HUD Info Header
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 20px "Courier New", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(`SCORE: ${String(score).padStart(4, '0')}`, 30, 35);
+    
+    ctx.textAlign = 'center';
+    ctx.fillText(`HI-SCORE: ${String(highScore).padStart(4, '0')}`, canvas.width / 2, 35);
+
+    ctx.textAlign = 'right';
+    ctx.fillStyle = varColorFromY(80);
+    ctx.fillText(`WAVE: ${level}`, canvas.width - 30, 35);
+
+    // Subtle in-game footer utility bar (always visible during gameplay)
+    if (gameState === 'PLAYING') {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+        ctx.font = '10px "Courier New", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('PRESS [P] / [ESC] TO PAUSE   ||   PRESS [R] TO INSTANT RESTART', canvas.width / 2, canvas.height - 15);
+    }
+
+    // Context-Aware State Overlay Windows
+    if (gameState === 'PAUSED') {
+        drawOverlay('rgba(0, 0, 0, 0.65)', varColorFromY(100), 'PAUSED', 'PRESS P, ESC, OR TAP THE PAUSE BUTTON TO RESUME');
+    } else if (gameState === 'GAMEOVER') {
+        drawOverlay('rgba(25, 0, 0, 0.85)', '#ff0055', 'GAME OVER', 'TAP RESTART OR PRESS THE R KEY TO RETRY');
+    } else if (gameState === 'LEVEL_CLEAR') {
+        drawOverlay('rgba(0, 25, 0, 0.85)', '#39ff14', `WAVE ${level} CLEAR!`, 'PREPARING NEXT WAVE INCOMING...');
+    }
+}
+
+// Generates dynamic retro neon colors based on row elevation
+function varColorFromY(y) {
+    if (y < 130) return '#ff007f'; // Neon Hot Pink (Top rows)
+    if (y < 220) return '#00f0ff'; // Neon Cyan (Middle rows)
+    return '#ffea00'; // Retro Yellow (Bottom rows)
+}
+
+// Universal Overlay Window Block Renderer
+function drawOverlay(bgColor, textColor, mainTitle, subText) {
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = textColor;
+    ctx.font = 'bold 44px "Courier New", monospace';
+    ctx.fillText(mainTitle, canvas.width / 2, canvas.height / 2 - 10);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '16px "Courier New", monospace';
+    ctx.fillText(subText, canvas.width / 2, canvas.height / 2 + 40);
+}
+
+
+// --- Main Clock Dispatcher ---
+function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+}
+
+// --- Init Systems Execution ---
+setupVirtualControls();
+initGame();
+loop();
+</script>
+
+</body>
+</html>
