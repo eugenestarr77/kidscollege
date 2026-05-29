@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Space Invaders Premium</title>
+    <title>Space Invaders | Retro Starrcade</title>
     <style>
         :root {
             --neon-green: #39ff14;
@@ -228,6 +228,23 @@
             background-color: #2a2a35;
         }
 
+        /* Low-profile subtle exit link at bottom of chassis */
+        .subtle-exit {
+            margin-top: 15px;
+            font-size: 11px;
+            color: #444;
+            text-decoration: none;
+            letter-spacing: 3px;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .subtle-exit:hover {
+            color: var(--neon-pink);
+            text-shadow: 0 0 8px var(--neon-pink);
+        }
+
         /* Sound toggles */
         .audio-indicator {
             position: absolute;
@@ -273,7 +290,7 @@
     <div class="arcade-container">
         <header>
             <h1>SPACE INVADERS</h1>
-            <div class="subtitle">Retro Core Machine Premium</div>
+            <div class="subtitle">RETRO STARRCADE</div>
         </header>
 
         <div class="canvas-wrapper">
@@ -294,7 +311,7 @@
                 </div>
             </div>
 
-            <!-- Utility Pause & Reset Controls -->
+            <!-- Utility Pause & Reset Controls with Dynamic Exit Link -->
             <div class="system-controls">
                 <button id="btnPause" class="btn btn-sys">PAUSE [P]</button>
                 <button id="btnRestart" class="btn btn-sys">RESTART [R]</button>
@@ -326,6 +343,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Subtle exit branding link at the bottom of the cabinet -->
+        <a href="https://eugenestarr.com" target="_blank" class="subtle-exit">EUGENESTARR.COM</a>
     </div>
 
 <script>
