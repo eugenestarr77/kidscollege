@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eugene Starr's Kids College | Classes Hub</title>
+    <title>EUGENESTARR.COM Browser Arcade</title>
     <!-- Tailwind CSS CDN for premium layout and modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
@@ -18,9 +18,11 @@
                     },
                     colors: {
                         brand: {
-                            light: '#a78bfa',
-                            DEFAULT: '#7c3aed',
-                            dark: '#5b21b6',
+                            light: '#2dd4bf', // teal-400
+                            DEFAULT: '#0d9488', // teal-600
+                            dark: '#0f766e', // teal-700
+                            orange: '#f97316', // orange-500
+                            orangeDark: '#ea580c', // orange-600
                             bg: '#f8fafc',
                         }
                     }
@@ -37,7 +39,7 @@
         }
         
         /* Smooth, bouncy transitions */
-        .game-card, .menu-card, .video-card {
+        .game-card, .menu-card {
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
         }
         
@@ -55,20 +57,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
-
-        /* 3D LEGO stud styling */
-        .lego-brick {
-            position: relative;
-            box-shadow: inset -3px -3px 6px rgba(0,0,0,0.25), inset 3px 3px 6px rgba(255,255,255,0.35);
-        }
-        .lego-brick::after {
-            content: '';
-            position: absolute;
-            top: 20%; left: 20%; right: 20%; bottom: 20%;
-            border-radius: 50%;
-            background: inherit;
-            box-shadow: inset 1px 1px 2px rgba(255,255,255,0.4), 1px 1px 3px rgba(0,0,0,0.3);
-        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -77,33 +65,21 @@
     <nav class="bg-white border-b border-slate-100 py-3.5 px-4 md:px-8 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <!-- Branding Header -->
-            <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
-                <div class="bg-violet-600 text-white p-2.5 rounded-2xl shadow-md shadow-violet-200">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('gaming')">
+                <div class="bg-teal-600 text-white p-2.5 rounded-2xl shadow-md shadow-teal-100">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-6.75a1.125 1.125 0 00-1.125 1.125v3.375m9 0h-9M9 10.125h.008v.008H9v-.008zm6 0h.008v.008H15v-.008zm0-3h.008v.008H15V7.125zm-6 0h.008v.008H9V7.125z" />
                     </svg>
                 </div>
                 <div>
-                    <span class="font-display font-bold text-xl tracking-wide text-slate-800">Eugene Starr's Kids College</span>
-                    <span class="inline-block ml-2 bg-violet-100 text-violet-700 font-bold text-xs px-2.5 py-0.5 rounded-full">Stark State Hub</span>
+                    <span class="font-display font-bold text-xl tracking-wide text-slate-800">EUGENESTARR.COM</span>
+                    <span class="inline-block ml-2 bg-teal-50 text-teal-700 font-bold text-xs px-2.5 py-0.5 rounded-full">Browser Arcade</span>
                 </div>
             </div>
             
             <!-- Navigation Links -->
             <div class="flex flex-wrap items-center justify-center gap-1 md:gap-2">
-                <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-violet-600 bg-violet-50">
-                    🏠 Home
-                </button>
-                <button onclick="navigateTo('gaming')" id="nav-gaming" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-violet-600 hover:bg-slate-50">
-                    🎮 Gaming Lab
-                </button>
-                <button onclick="navigateTo('comics')" id="nav-comics" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-violet-600 hover:bg-slate-50">
-                    🎨 Comic Creation
-                </button>
-                <button onclick="navigateTo('lego')" id="nav-lego" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-violet-600 hover:bg-slate-50">
-                    🧱 Legomania
-                </button>
-                <button onclick="navigateTo('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-amber-600 hover:bg-amber-50 flex items-center gap-1.5 border border-dashed border-amber-200">
+                <button onclick="navigateTo('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-orange-600 hover:bg-orange-50 flex items-center gap-1.5 border border-dashed border-orange-200">
                     🔑 Teacher Panel
                 </button>
             </div>
@@ -116,209 +92,32 @@
         <span id="toast-msg">Success!</span>
     </div>
 
-    <!-- ================= PAGE 1: HOME HUB ================= -->
-    <section id="page-home" class="page-view">
-        <!-- Hero Banner -->
-        <header class="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white py-16 px-4 md:px-8 text-center relative overflow-hidden">
+    <!-- ================= PAGE 2: GAMING LAB (MAIN ARCADE LANDING) ================= -->
+    <section id="page-gaming" class="page-view">
+        <!-- Hero Header with Blue-Green to Dark Cyan Gradient -->
+        <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-800 text-white py-14 px-4 md:px-8 text-center relative overflow-hidden flex flex-col items-center">
+            <!-- Subtle background lighting decoration -->
             <div class="absolute inset-0 opacity-10">
                 <div class="absolute w-72 h-72 bg-white rounded-full -top-12 -left-12 filter blur-2xl"></div>
                 <div class="absolute w-80 h-80 bg-white rounded-full -bottom-20 -right-20 filter blur-3xl"></div>
             </div>
-            <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
-                <span class="bg-violet-500/30 text-white font-bold text-sm px-4 py-1.5 rounded-full mb-4 backdrop-blur-sm">Summer Classes & Youth Labs</span>
-                <h1 class="font-display font-bold text-3xl md:text-5xl tracking-wide leading-tight mb-3">
-                    Stark State Kids College Hub 🚀
+            
+            <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center w-full">
+                <!-- Arcade Typography -->
+                <h1 class="font-display font-bold text-3xl md:text-5xl tracking-wide text-center mb-1">
+                    EUGENESTARR.COM
                 </h1>
-                <p class="text-violet-100 text-base md:text-lg font-medium max-w-2xl">
-                    Welcome! This is the official student learning portal run by instructor Eugene Starr. Discover creative, interactive digital design workspaces customized for classrooms.
+                <div class="font-display font-light text-2xl md:text-4xl tracking-wide mb-5 text-teal-100 flex items-center justify-center gap-2.5">
+                    🎮 <span>Browser Arcade</span> 🎮
+                </div>
+                
+                <!-- Welcome Text: Lab-focused and child-monitored copy -->
+                <p class="text-teal-50 text-sm md:text-base font-medium max-w-2xl mb-8 leading-relaxed text-center">
+                    Welcome to the arcade! This monitored catalog is specifically curated for children ages 7-12 to enjoy a fun mix of single-player challenges and collaborative multiplayer games. Perfect for safe computer labs with an adult present to guide and facilitate the play.
                 </p>
-            </div>
-        </header>
-
-        <div class="max-w-7xl mx-auto px-4 md:px-8 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Left & Middle: Classroom Links & Interactive Playlists -->
-            <div class="lg:col-span-2 space-y-8">
-                <!-- Welcome & Explanation -->
-                <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100">
-                    <h2 class="font-display font-bold text-2xl text-slate-800 mb-4 flex items-center gap-2">
-                        <span>👋 Welcome Students and Parents!</span>
-                    </h2>
-<div class="space-y-6">
-    <p class="text-slate-600 leading-relaxed">
-        My courses are structured to help kids socialize, feel safe, learn, play, create, and build confidence.
-    </p>
-
-    <div class="space-y-4 font-normal text-slate-600 leading-relaxed">
-        <p>
-            <strong class="font-semibold text-slate-800">🎮 Gaming Lab:</strong> A much different experience than playing single-player or online with friends because everyone is in the same room interacting (kind of like old-school LAN parties). In addition, they are learning PC gaming, and many of the games are educational.
-        </p>
-        <p>
-            <strong class="font-semibold text-slate-800">🧱 Lego-Mania:</strong> We create custom projects and more. Kids are introduced to Lego culture in general; they learn about playsets, parks, terms, cartoons, movies, and influencers.
-        </p>
-        <p>
-            <strong class="font-semibold text-slate-800">🎨 Comic Creation:</strong> Kids are introduced to screenwriting, concept art, character creation, and storyboarding. By the end of the class, they create and share their own custom comic.
-        </p>
-    </div>
-
-    <p class="text-slate-600 leading-relaxed pt-2 border-t border-slate-100">
-        Below you can visit the hubs for my three classes. Each page contains resources for students. Admittedly, the Gaming Lab is by far the most content heavy because students rely on it as a hub for 'approved' games.
-    </p>
-</div>
-                </div>
-
-                <!-- Three Big Category Launch Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Gaming Lab Launch -->
-                    <div onclick="navigateTo('gaming')" class="menu-card bg-white border border-slate-200 hover:border-violet-400 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:shadow-violet-100 cursor-pointer flex flex-col justify-between">
-                        <div>
-                            <div class="text-3xl mb-4 bg-violet-50 w-12 h-12 flex items-center justify-center rounded-2xl">🎮</div>
-                            <h3 class="font-display font-bold text-lg text-slate-800 mb-2">Gaming Lab</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Handpicked browser-based arcade, puzzle, and learning challenges.</p>
-                        </div>
-                        <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-violet-600">
-                            Launch Lab &rarr;
-                        </span>
-                    </div>
-
-                    <!-- Comic Creation Launch -->
-                    <div onclick="navigateTo('comics')" class="menu-card bg-white border border-slate-200 hover:border-purple-400 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:shadow-purple-100 cursor-pointer flex flex-col justify-between">
-                        <div>
-                            <div class="text-3xl mb-4 bg-purple-50 w-12 h-12 flex items-center justify-center rounded-2xl">🎨</div>
-                            <h3 class="font-display font-bold text-lg text-slate-800 mb-2">Comic Maker</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Write, character-design, and customize comic panels dynamically.</p>
-                        </div>
-                        <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-purple-600">
-                            Create Comics &rarr;
-                        </span>
-                    </div>
-
-                    <!-- Legomania Launch -->
-                    <div onclick="navigateTo('lego')" class="menu-card bg-white border border-slate-200 hover:border-orange-400 rounded-3xl p-6 shadow-sm hover:shadow-xl hover:shadow-orange-100 cursor-pointer flex flex-col justify-between">
-                        <div>
-                            <div class="text-3xl mb-4 bg-orange-50 w-12 h-12 flex items-center justify-center rounded-2xl">🧱</div>
-                            <h3 class="font-display font-bold text-lg text-slate-800 mb-2">Legomania</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Build 2D designs pixel-by-pixel using dynamic 3D LEGO studs.</p>
-                        </div>
-                        <span class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-orange-600">
-                            Start Building &rarr;
-                        </span>
-                    </div>
-                </div>
-
-                <!-- YouTube Kids Dynamic Media Player -->
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
-                        <div>
-                            <h3 class="font-display font-bold text-lg text-slate-800 flex items-center gap-2">
-                                <span>🎵 Classroom Study & Beat Station</span>
-                            </h3>
-                            <p class="text-xs text-slate-400 font-medium">Click on any video in the tracks below to load and listen!</p>
-                        </div>
-                        <span class="self-start sm:self-auto bg-red-100 text-red-600 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">Dynamic Player</span>
-                    </div>
-
-                    <!-- Video Active Screen -->
-                    <div class="relative w-full overflow-hidden rounded-2xl shadow-inner border border-slate-100 bg-slate-900 mb-6" style="padding-top: 56.25%;">
-                        <iframe 
-                            id="home-video-player"
-                            class="absolute top-0 left-0 w-full h-full" 
-                            src="https://www.youtube.com/embed/videoseries?list=PLeXXvjso9ZVq3wZKdPlG-5ksau_gBwobA" 
-                            title="Kids Study Playlist" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-
-                    <!-- Video Navigation Playlist Tracks -->
-                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Approved Tracks</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="home-playlist-tracks">
-                        <!-- Rendered dynamically by JS -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column: Interactive Contact Form -->
-            <div class="space-y-8">
-                <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 sticky top-24">
-                    <div class="bg-violet-50 p-4 rounded-2xl mb-6">
-                        <h3 class="font-display font-bold text-xl text-violet-800 mb-1">📬 Teacher Contact Box</h3>
-                        <p class="text-xs text-violet-600 font-medium leading-relaxed">Have a question or want to share a project idea? Send a note directly to Mr. Starr's inbox!</p>
-                    </div>
-
-                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Your Name</label>
-                            <input 
-                                type="text" 
-                                id="contact-name" 
-                                required 
-                                placeholder="Student or Parent name" 
-                                class="w-full bg-slate-50 hover:bg-slate-100 focus:bg-white text-sm text-slate-700 font-medium px-4 py-3 rounded-xl border border-slate-200 focus:border-violet-500 focus:outline-none transition-colors"
-                            >
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Email Address</label>
-                            <input 
-                                type="email" 
-                                id="contact-email" 
-                                required 
-                                placeholder="name@domain.com" 
-                                class="w-full bg-slate-50 hover:bg-slate-100 focus:bg-white text-sm text-slate-700 font-medium px-4 py-3 rounded-xl border border-slate-200 focus:border-violet-500 focus:outline-none transition-colors"
-                            >
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Your Kids College Class</label>
-                            <select 
-                                id="contact-subject"
-                                class="w-full bg-slate-50 hover:bg-slate-100 focus:bg-white text-sm text-slate-700 font-semibold px-4 py-3 rounded-xl border border-slate-200 focus:border-violet-500 focus:outline-none transition-colors"
-                            >
-                                <option value="Gaming Lab Portal">🎮 Gaming Lab Portal</option>
-                                <option value="Comic strip Creation">🎨 Comic Strip Creation</option>
-                                <option value="Legomania Build Studio">🧱 Legomania Build Studio</option>
-                                <option value="General Question">❔ General Question / Other</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Message</label>
-                            <textarea 
-                                id="contact-message" 
-                                required 
-                                rows="4" 
-                                placeholder="Write your message here..." 
-                                class="w-full bg-slate-50 hover:bg-slate-100 focus:bg-white text-sm text-slate-700 font-medium px-4 py-3 rounded-xl border border-slate-200 focus:border-violet-500 focus:outline-none transition-colors resize-none mb-2"
-                            ></textarea>
-                        </div>
-                        <button 
-                            type="submit" 
-                            class="w-full bg-slate-900 hover:bg-violet-600 text-white font-bold text-sm py-3.5 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2"
-                        >
-                            <span>Send Message</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-                            </svg>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================= PAGE 2: GAMING LAB ================= -->
-    <section id="page-gaming" class="page-view hidden">
-        <!-- Hero Header -->
-        <header class="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
-            <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
-                <h1 class="font-display font-bold text-3xl md:text-5xl tracking-wide mb-3">
-                    Kids Arcade & Gaming Lab 🎮
-                </h1>
-                <p class="text-violet-100 text-sm md:text-base font-medium max-w-2xl mb-6">
-                    A safe collection of browser games optimized for focus, strategy, memory, and creative problem solving.
-                </p>
-                <p style="margin:0; padding 5px; border:solid 1px white;"><a href="https://docs.google.com/document/d/14WLR8rk_CjPnmvttPybxI3r8Z806UaLiyP7sYA2mFrk/edit?usp=drive_link" target="_blank">Game Codes and Links</a></p>
                 
                 <!-- Dynamic Search Bar -->
-                <div class="w-full max-w-lg bg-white p-2 rounded-2xl shadow-xl shadow-indigo-900/10 flex items-center gap-2">
+                <div class="w-full max-w-lg bg-white p-2 rounded-2xl shadow-xl shadow-teal-950/20 flex items-center gap-2 mb-6">
                     <div class="pl-3 text-slate-400">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.604 10.604z" />
@@ -328,7 +127,7 @@
                         type="text" 
                         id="search-input" 
                         placeholder="Search for games (e.g., Pac-Man, Space, AI)..." 
-                        class="w-full text-slate-700 placeholder-slate-400 focus:outline-none font-medium py-1 text-sm"
+                        class="w-full text-slate-700 placeholder-slate-400 focus:outline-none font-medium py-1 text-sm bg-transparent"
                     >
                     <button 
                         id="search-reset-btn" 
@@ -337,49 +136,64 @@
                         ✕ Reset
                     </button>
                 </div>
+
+                <!-- Live Class Document Button -->
+                <a href="https://docs.google.com/document/d/14WLR8rk_CjPnmvttPybxI3r8Z806UaLiyP7sYA2mFrk/edit?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-white/10 hover:bg-orange-500 hover:border-orange-600 text-white font-bold text-sm px-6 py-2.5 rounded-full border border-white/20 tracking-wide transition-all shadow-md backdrop-blur-md transform hover:scale-105 active:scale-95">
+                    📖 Live Class Document
+                </a>
             </div>
         </header>
 
         <!-- Catalog Container -->
         <div class="max-w-7xl mx-auto w-full px-4 md:px-8 py-8">
-            <!-- Navigation Tabs / Category Filters (Refined with Clicker Category and without 'other') -->
+            <!-- Navigation Tabs / Category Filters (Updated active colors to Teal) -->
             <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 pb-2 border-b border-slate-200">
-                <button onclick="setFilter('all')" id="filter-all" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-violet-600 text-white border-2 border-violet-600">
+                <button onclick="setFilter('all')" id="filter-all" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-teal-600 text-white border-2 border-teal-600">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
                     </svg>
                     <span>All Games</span>
                 </button>
-                <button onclick="setFilter('multiplayer')" id="filter-multiplayer" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-slate-800 border-2 border-transparent hover:border-slate-300">
+                <button onclick="setFilter('multiplayer')" id="filter-multiplayer" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
                     </svg>
                     <span>Multiplayer</span>
                 </button>
-                <button onclick="setFilter('1player')" id="filter-1player" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-slate-800 border-2 border-transparent hover:border-slate-300">
+                <button onclick="setFilter('1player')" id="filter-1player" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                     </svg>
                     <span>1 Player</span>
                 </button>
-                <button onclick="setFilter('clicker')" id="filter-clicker" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-slate-800 border-2 border-transparent hover:border-slate-300">
+                <button onclick="setFilter('clicker')" id="filter-clicker" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-1.138z" />
                     </svg>
                     <span>Clicker Games</span>
                 </button>
-                <button onclick="setFilter('learning')" id="filter-learning" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-slate-800 border-2 border-transparent hover:border-slate-300">
+                <button onclick="setFilter('learning')" id="filter-learning" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A5.905 5.905 0 018 3.443m4.26 6.704L12 3m0 0l-4.26 6.704m4.26-6.704a5.905 5.905 0 018 3.443m-2.658.813a50.57 50.57 0 012.658.813M12 13.75a3.25 3.25 0 110-6.5 3.25 3.25 0 010 6.5z" />
                     </svg>
                     <span>Learning & Science</span>
                 </button>
-                <button onclick="setFilter('favorites')" id="filter-favorites" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-slate-800 border-2 border-transparent hover:border-slate-300">
+                <button onclick="setFilter('favorites')" id="filter-favorites" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
                     <svg class="w-4 h-4 fill-red-500 text-red-500" viewBox="0 0 24 24">
                         <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
                     </svg>
                     <span>My Favorites (<span id="fav-count">0</span>)</span>
                 </button>
+            </div>
+
+            <!-- Dynamic Category Header and Description -->
+            <div id="category-intro" class="mb-8 p-6 bg-white border-l-4 border-teal-500 rounded-r-2xl shadow-sm transition-all duration-300">
+                <h2 id="category-title" class="font-display font-bold text-xl md:text-2xl text-teal-800 mb-2 flex items-center gap-2">
+                    <!-- Title injected dynamically -->
+                </h2>
+                <p id="category-description" class="text-slate-600 text-sm leading-relaxed">
+                    <!-- Description injected dynamically -->
+                </p>
             </div>
 
             <!-- Dynamic Game Grid -->
@@ -397,197 +211,69 @@
                 <h3 class="font-display font-bold text-xl text-slate-800 mb-2">No Games Found</h3>
                 <p class="text-slate-500 max-w-sm mx-auto">We couldn't find any games matching your current filter or search criteria. Try a different search term or category!</p>
             </div>
-        </div>
-    </section>
 
-    <!-- ================= PAGE 3: COMIC CREATION ================= -->
-    <section id="page-comics" class="page-view hidden">
-        <header class="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
-            <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
-                <span class="bg-purple-500/30 text-white font-bold text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Multimedia Lab</span>
-                <h1 class="font-display font-bold text-3xl md:text-5xl tracking-wide mb-3">
-                    Comic Strip Creation Studio 🎨
-                </h1>
-                <p class="text-violet-100 text-sm md:text-base font-medium max-w-2xl">
-                    Design your own storyboards! Write dialogues, place dynamic characters, and learn the foundations of framing, design balance, and sequence-based storytelling.
-                </p>
-            </div>
-        </header>
-
-        <div class="max-w-6xl mx-auto px-4 md:px-8 py-10">
-            <!-- Comic Strip Workspace Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                <!-- Settings Panel -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 space-y-6">
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-800 mb-1">Comic Tools</h3>
-                        <p class="text-xs text-slate-400">Select a panel to edit its scene.</p>
+            <!-- ================= SAFETY DISCLAIMER BOARD ================= -->
+            <div class="mt-16 bg-gradient-to-br from-teal-50/50 via-amber-50/40 to-orange-50/40 border-2 border-teal-100 rounded-[32px] p-6 md:p-8 shadow-sm">
+                <div class="flex flex-col md:flex-row gap-5 items-start">
+                    <div class="bg-teal-600 text-white p-3 rounded-2xl shrink-0 shadow-md shadow-teal-100">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.959 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.105-2.582-.307-3.818A11.947 11.947 0 0112 2.714z" />
+                        </svg>
                     </div>
-
-                    <!-- Panel Selector -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">1. Select Active Panel</label>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button onclick="selectComicPanel(0)" id="btn-panel-0" class="panel-selector-btn py-2 text-sm font-bold rounded-xl border-2 border-violet-600 bg-violet-50 text-violet-700">Panel 1</button>
-                            <button onclick="selectComicPanel(1)" id="btn-panel-1" class="panel-selector-btn py-2 text-sm font-bold rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50">Panel 2</button>
-                            <button onclick="selectComicPanel(2)" id="btn-panel-2" class="panel-selector-btn py-2 text-sm font-bold rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50">Panel 3</button>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-display font-bold text-lg text-slate-800 mb-2">Parent Disclaimer & Lab Safety Notice</h4>
+                            <p class="text-slate-600 text-xs md:text-sm leading-relaxed mb-3">
+                                Welcome, parents! This catalog is curated by Eugene Starr as a safe repository for supervised recreation. Please review our safety notes to understand how the browser games operate:
+                            </p>
                         </div>
-                    </div>
-
-                    <!-- Character Selector -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">2. Choose Actor</label>
-                        <div class="grid grid-cols-4 gap-2 text-2xl">
-                            <button onclick="setComicCharacter('🦸')" class="hover:bg-slate-100 p-2 rounded-xl border border-slate-100 transition-colors">🦸</button>
-                            <button onclick="setComicCharacter('👽')" class="hover:bg-slate-100 p-2 rounded-xl border border-slate-100 transition-colors">👽</button>
-                            <button onclick="setComicCharacter('🐱')" class="hover:bg-slate-100 p-2 rounded-xl border border-slate-100 transition-colors">🐱</button>
-                            <button onclick="setComicCharacter('🤖')" class="hover:bg-slate-100 p-2 rounded-xl border border-slate-100 transition-colors">🤖</button>
-                            <button onclick="setComicCharacter('🦕')" class="hover:bg-slate-100 p-2 rounded-xl border border-slate-100 transition-colors">🦕</button>
-                            <button onclick="setComicCharacter('🧙')" class="hover:bg-slate-100 p-2 rounded-xl border border-slate-100 transition-colors">🧙</button>
-                            <button onclick="setComicCharacter('🦊')" class="hover:bg-slate-100 p-2 rounded-xl border border-slate-100 transition-colors">🦊</button>
-                            <button onclick="setComicCharacter('🚀')" class="hover:bg-slate-100 p-2 rounded-xl border border-slate-100 transition-colors">🚀</button>
-                        </div>
-                    </div>
-
-                    <!-- Background Color Selector -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">3. Background Scene</label>
-                        <div class="grid grid-cols-4 gap-2">
-                            <button onclick="setComicBg('bg-sky-100')" class="w-full h-8 rounded-lg bg-sky-200 border border-sky-300 transition-all hover:scale-105" title="Sky"></button>
-                            <button onclick="setComicBg('bg-amber-100')" class="w-full h-8 rounded-lg bg-amber-200 border border-amber-300 transition-all hover:scale-105" title="Desert"></button>
-                            <button onclick="setComicBg('bg-emerald-100')" class="w-full h-8 rounded-lg bg-emerald-200 border border-emerald-300 transition-all hover:scale-105" title="Forest"></button>
-                            <button onclick="setComicBg('bg-rose-100')" class="w-full h-8 rounded-lg bg-rose-200 border border-rose-300 transition-all hover:scale-105" title="Sunset"></button>
-                        </div>
-                    </div>
-
-                    <!-- Dialog Input -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">4. Speech Dialogue</label>
-                        <input 
-                            type="text" 
-                            id="comic-bubble-text" 
-                            oninput="updateComicText(this.value)"
-                            placeholder="Write dialogue..." 
-                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-700 font-medium focus:outline-none focus:border-violet-500 focus:bg-white"
-                        >
-                    </div>
-
-                    <button onclick="resetComic()" class="w-full border-2 border-dashed border-red-200 hover:border-red-400 text-red-500 font-bold text-xs py-2.5 rounded-xl transition-colors">
-                        🗑️ Reset Storyboard
-                    </button>
-                </div>
-
-                <!-- Three Panel Strip Render -->
-                <div class="lg:col-span-3 space-y-6">
-                    <div class="bg-slate-900 p-6 md:p-8 rounded-[36px] shadow-lg border-4 border-slate-800">
-                        <!-- Strip Grid -->
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <!-- Panel 1 -->
-                            <div onclick="selectComicPanel(0)" id="render-panel-0" class="h-64 rounded-2xl bg-sky-100 border-4 border-violet-600 relative overflow-hidden flex flex-col items-center justify-between p-4 cursor-pointer">
-                                <span class="absolute top-2 left-2 bg-slate-900/80 backdrop-blur-sm text-white font-bold text-[10px] py-0.5 px-2 rounded-full">PANEL 1</span>
-                                <!-- Speech Bubble -->
-                                <div id="bubble-0" class="bg-white text-slate-800 border-2 border-slate-800 py-1.5 px-3 rounded-2xl text-xs font-bold max-w-full text-center shadow-md relative mt-4 transform -rotate-1">
-                                    <span>Hello Stark State!</span>
-                                    <div class="absolute w-2 h-2 bg-white border-r-2 border-b-2 border-slate-800 rotate-45 -bottom-1.5 left-1/2 transform -translate-x-1/2"></div>
-                                </div>
-                                <!-- Character -->
-                                <div id="char-0" class="text-7xl mb-4 transition-transform hover:scale-110">🦸</div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-2xl border border-slate-100">
+                                <h5 class="font-bold text-xs text-teal-800 mb-1">🎮 The Core Goal is Play</h5>
+                                <p class="text-slate-500 text-[11px] leading-relaxed">
+                                    While several of our sandbox puzzle games offer deep cognitive, scientific, or mathematical logic, the primary focus of this arcade is **active recreation and playground socialization**.
+                                </p>
+                            </div>
+                            
+                            <div class="bg-white p-4 rounded-2xl border border-slate-100">
+                                <h5 class="font-bold text-xs text-orange-700 mb-1">💥 Cartoon Action (No Blood)</h5>
+                                <p class="text-slate-500 text-[11px] leading-relaxed">
+                                    Certain combat titles (like *Shellshock.io* or *SmashKarts*) feature shooting elements or explosions. All combat experiences are **entirely bloodless, cartoonish, and non-graphic**.
+                                </p>
                             </div>
 
-                            <!-- Panel 2 -->
-                            <div onclick="selectComicPanel(1)" id="render-panel-1" class="h-64 rounded-2xl bg-amber-100 border-4 border-transparent relative overflow-hidden flex flex-col items-center justify-between p-4 cursor-pointer">
-                                <span class="absolute top-2 left-2 bg-slate-900/80 backdrop-blur-sm text-white font-bold text-[10px] py-0.5 px-2 rounded-full">PANEL 2</span>
-                                <!-- Speech Bubble -->
-                                <div id="bubble-1" class="bg-white text-slate-800 border-2 border-slate-800 py-1.5 px-3 rounded-2xl text-xs font-bold max-w-full text-center shadow-md relative mt-4 transform rotate-1">
-                                    <span>Is that an alien?!</span>
-                                    <div class="absolute w-2 h-2 bg-white border-r-2 border-b-2 border-slate-800 rotate-45 -bottom-1.5 left-1/2 transform -translate-x-1/2"></div>
-                                </div>
-                                <!-- Character -->
-                                <div id="char-1" class="text-7xl mb-4">👽</div>
+                            <div class="bg-white p-4 rounded-2xl border border-slate-100">
+                                <h5 class="font-bold text-xs text-red-600 mb-1">💬 Classroom Chat vs. Strangers</h5>
+                                <p class="text-slate-500 text-[11px] leading-relaxed">
+                                    During class, kids use **private rooms and password protection** to play safely with their peers. If played at home outside of class, public servers will expose children to public, unmoderated chat lobbies with online strangers.
+                                </p>
                             </div>
 
-                            <!-- Panel 3 -->
-                            <div onclick="selectComicPanel(2)" id="render-panel-2" class="h-64 rounded-2xl bg-emerald-100 border-4 border-transparent relative overflow-hidden flex flex-col items-center justify-between p-4 cursor-pointer">
-                                <span class="absolute top-2 left-2 bg-slate-900/80 backdrop-blur-sm text-white font-bold text-[10px] py-0.5 px-2 rounded-full">PANEL 3</span>
-                                <!-- Speech Bubble -->
-                                <div id="bubble-2" class="bg-white text-slate-800 border-2 border-slate-800 py-1.5 px-3 rounded-2xl text-xs font-bold max-w-full text-center shadow-md relative mt-4 transform -rotate-2">
-                                    <span>Let's build comics!</span>
-                                    <div class="absolute w-2 h-2 bg-white border-r-2 border-b-2 border-slate-800 rotate-45 -bottom-1.5 left-1/2 transform -translate-x-1/2"></div>
-                                </div>
-                                <!-- Character -->
-                                <div id="char-2" class="text-7xl mb-4">🤖</div>
+                            <div class="bg-white p-4 rounded-2xl border border-slate-100">
+                                <h5 class="font-bold text-xs text-amber-700 mb-1">🛑 Rotating Ads & Safety</h5>
+                                <p class="text-slate-500 text-[11px] leading-relaxed">
+                                    These sites are hosted on third-party domains. Some utilize rotating ads that we cannot filter. We strongly recommend installing an aggressive ad blocker like <a href="https://ublockorigin.com/" target="_blank" class="font-bold underline text-amber-800">uBlock Origin</a> on your child's browser.
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-3xl border border-slate-100">
-                        <h4 class="font-display font-bold text-slate-800 mb-2">🎨 Learning Concept: Sequences</h4>
-                        <p class="text-slate-500 text-sm leading-relaxed">
-                            Sequencing is the fundamental core of both comic writing and web design layout systems! By organizing your frames sequentially from left to right, you create structural pacing, direct user eyes, and craft active visual loops.
-                        </p>
-                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- ================= PAGE 4: LEGOMANIA ================= -->
-    <section id="page-lego" class="page-view hidden">
-        <header class="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
-            <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
-                <span class="bg-orange-500/30 text-white font-bold text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Makerspace Lab</span>
-                <h1 class="font-display font-bold text-3xl md:text-5xl tracking-wide mb-3">
-                    Legomania Design Studio 🧱
-                </h1>
-                <p class="text-violet-100 text-sm md:text-base font-medium max-w-2xl">
-                    Bring blueprints to life! Select colors and click individual grid coordinates to position 3D LEGO brick studs, building creative pixel art models.
-                </p>
-            </div>
-        </header>
-
-        <div class="max-w-5xl mx-auto px-4 md:px-8 py-10">
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                <!-- Color Palette -->
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 space-y-6">
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-slate-800 mb-1">Brick Colors</h3>
-                        <p class="text-xs text-slate-400">Select a brick color to paint with.</p>
-                    </div>
-
-                    <!-- Color Selector Blocks -->
-                    <div class="grid grid-cols-2 gap-3" id="lego-palette">
-                        <!-- Dynamic JS Generated Colors -->
-                    </div>
-
-                    <div class="pt-4 border-t border-slate-100">
-                        <button onclick="clearLegoGrid()" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold text-sm py-3 rounded-xl transition-colors">
-                            🧹 Clear Grid
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 10x10 Building Board -->
-                <div class="lg:col-span-3 space-y-6">
-                    <div class="bg-white p-4 md:p-8 rounded-[36px] shadow-md border border-slate-100 flex flex-col items-center">
-                        <!-- LEGO Building Grid (10x10) -->
-                        <div id="lego-grid" class="grid grid-cols-10 gap-1 bg-slate-200 p-2 rounded-2xl w-full max-w-lg aspect-square">
-                            <!-- Rendered programmatically by JS -->
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- ================= PAGE 5: ADMIN PORTAL ================= -->
     <section id="page-admin" class="page-view hidden">
-        <header class="bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
+        <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-800 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
             <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
-                <span class="bg-amber-400/30 text-white font-bold text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Teacher Control Room</span>
+                <span class="bg-teal-500/30 text-white font-bold text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Teacher Control Room</span>
                 <h1 class="font-display font-bold text-3xl md:text-4xl tracking-wide mb-2">
-                    Kids College CMS Panel 🔑
+                    Arcade CMS Panel 🔑
                 </h1>
-                <p class="text-amber-100 text-xs md:text-sm font-medium max-w-xl">
-                    Password secure dashboard to update games, add YouTube lessons, and generate fully compiled code updates for GitHub!
+                <p class="text-teal-100 text-xs md:text-sm font-medium max-w-xl">
+                    Password secure dashboard to update games and generate fully compiled code updates for GitHub!
                 </p>
             </div>
         </header>
@@ -598,19 +284,19 @@
                 <div class="text-center mb-6">
                     <span class="text-4xl">🔐</span>
                     <h3 class="font-display font-bold text-2xl text-slate-800 mt-2">Login Required</h3>
-                    <p class="text-xs text-slate-400 mt-1">Stark State Kids College Credentials Only</p>
+                    <p class="text-xs text-slate-400 mt-1">Teacher Security Credentials Only</p>
                 </div>
                 
                 <form onsubmit="handleAdminLogin(event)" class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Username</label>
-                        <input type="text" id="admin-user" required placeholder="e.g., admin" class="w-full bg-slate-50 px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-500 focus:outline-none focus:bg-white text-sm font-semibold text-slate-700">
+                        <input type="text" id="admin-user" required placeholder="e.g., admin" class="w-full bg-slate-50 px-4 py-3 rounded-xl border border-slate-200 focus:border-teal-500 focus:outline-none focus:bg-white text-sm font-semibold text-slate-700">
                     </div>
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Password</label>
-                        <input type="password" id="admin-pass" required placeholder="e.g., password" class="w-full bg-slate-50 px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-500 focus:outline-none focus:bg-white text-sm font-semibold text-slate-700">
+                        <input type="password" id="admin-pass" required placeholder="e.g., password" class="w-full bg-slate-50 px-4 py-3 rounded-xl border border-slate-200 focus:border-teal-500 focus:outline-none focus:bg-white text-sm font-semibold text-slate-700">
                     </div>
-                    <button type="submit" class="w-full bg-slate-900 hover:bg-amber-600 text-white font-bold text-sm py-3.5 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2">
+                    <button type="submit" class="w-full bg-slate-900 hover:bg-teal-600 text-white font-bold text-sm py-3.5 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2">
                         <span>Access CMS Dashboard</span>
                     </button>
                 </form>
@@ -621,11 +307,8 @@
                 <!-- Sidebar Tools Navigation -->
                 <div class="lg:col-span-1 space-y-4">
                     <div class="bg-white p-4 rounded-3xl shadow-sm border border-slate-100 flex flex-col gap-2">
-                        <button onclick="switchAdminTab('games')" id="btn-adm-games" class="admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-white shadow-sm">
+                        <button onclick="switchAdminTab('games')" id="btn-adm-games" class="admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all bg-teal-600 text-white shadow-sm">
                             🎮 Manage Games
-                        </button>
-                        <button onclick="switchAdminTab('videos')" id="btn-adm-videos" class="admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all text-slate-600 hover:bg-slate-50">
-                            🎵 Manage Videos
                         </button>
                         <button onclick="switchAdminTab('export')" id="btn-adm-export" class="admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all text-slate-600 hover:bg-slate-50">
                             💾 Export Code for GitHub
@@ -673,19 +356,39 @@
                                     <input type="text" id="add-game-players" required placeholder="e.g., 20 Players Max" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tags (Comma-separated)</label>
-                                    <input type="text" id="add-game-tags" placeholder="e.g., Arcade, Platformer, Logic" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Violence Safety Rating</label>
+                                    <select id="add-game-violence" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none font-semibold">
+                                        <option value="none">No Violence (🟢 Safe Play)</option>
+                                        <option value="cartoon">Cartoon Action (💥 No Blood)</option>
+                                    </select>
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Emoji Badge</label>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Chat Status Badge</label>
+                                    <select id="add-game-chat" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none font-semibold">
+                                        <option value="none">No Chat Features (📴 Safe)</option>
+                                        <option value="private">Private / Custom Lobbies (🔒 Monitored)</option>
+                                        <option value="public">Public Multiplayer Chat (⚠️ Home Risk)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Emoji Badge</label>
+                                        <a href="https://emojicopy.com/" target="_blank" class="text-[10px] text-teal-600 hover:text-teal-700 font-bold underline flex items-center gap-0.5">
+                                            🔗 Emoji Copy
+                                        </a>
+                                    </div>
                                     <input type="text" id="add-game-emoji" required placeholder="e.g., 🕹️" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tags (Comma-separated)</label>
+                                    <input type="text" id="add-game-tags" placeholder="e.g., Arcade, Platformer, Logic" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
                                 </div>
                                 <div class="sm:col-span-2">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Kid-Friendly Description</label>
                                     <textarea id="add-game-desc" required rows="2" placeholder="Explain how the game is played..." class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none resize-none"></textarea>
                                 </div>
                                 <div class="sm:col-span-2 flex gap-3">
-                                    <button type="submit" id="add-game-submit-btn" class="flex-1 bg-amber-500 hover:bg-slate-900 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
+                                    <button type="submit" id="add-game-submit-btn" class="flex-1 bg-teal-600 hover:bg-slate-900 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
                                         ➕ Insert Game into Database
                                     </button>
                                     <button type="button" id="cancel-edit-btn" onclick="cancelEditGame()" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 px-4 rounded-lg transition-colors">
@@ -704,38 +407,6 @@
                         </div>
                     </div>
 
-                    <!-- TAB 2: VIDEOS MANAGER -->
-                    <div id="adm-view-videos" class="admin-view-panel hidden space-y-6">
-                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Add Approved YouTube Video</h3>
-                            <form onsubmit="handleNewVideoSubmit(event)" class="space-y-4">
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Video Title</label>
-                                    <input type="text" id="add-vid-title" required placeholder="e.g., Chill Beats Lofi Remix" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">YouTube Link / Playlist URL</label>
-                                    <input type="url" id="add-vid-url" required placeholder="e.g., https://www.youtube.com/watch?v=..." class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <input type="checkbox" id="add-vid-playlist" class="rounded border-slate-300 text-amber-500 focus:ring-amber-500">
-                                    <label class="text-xs font-bold text-slate-600">This link is a YouTube Playlist series</label>
-                                </div>
-                                <button type="submit" class="w-full bg-amber-500 hover:bg-slate-900 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
-                                    ➕ Insert Video into Database
-                                </button>
-                            </form>
-                        </div>
-
-                        <!-- Videos List Table -->
-                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Current Classroom Videos</h3>
-                            <div class="overflow-y-auto max-h-96 space-y-2" id="adm-videos-table-list">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- TAB 3: CODE EXPORT -->
                     <div id="adm-view-export" class="admin-view-panel hidden space-y-6">
                         <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
@@ -744,7 +415,7 @@
                                 Since GitHub Pages runs statically, changes to your local running script don't save permanently on your deployment repository. Click the compiler button below, copy the updated website source code, and overwrite your <code>index.html</code> inside GitHub to make your changes static and permanent!
                             </p>
 
-                            <button onclick="generateStaticSource()" class="w-full bg-slate-900 hover:bg-amber-500 text-white font-bold text-xs py-3 rounded-xl transition-all shadow-md mb-6 flex items-center justify-center gap-2">
+                            <button onclick="generateStaticSource()" class="w-full bg-slate-900 hover:bg-teal-600 text-white font-bold text-xs py-3 rounded-xl transition-all shadow-md mb-6 flex items-center justify-center gap-2">
                                 <span>🛠️ Compile Source Code Block</span>
                             </button>
 
@@ -768,8 +439,8 @@
     <!-- Footer (Universal Footer connected to all pages) -->
     <footer class="bg-white border-t border-slate-100 mt-auto py-8 px-4 text-center">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-sm">
-            <p>&copy; <span id="copyright-year">2026</span> Eugene Starr | Stark State Kid's College Classes</p>
-            <p class="font-medium text-slate-500">Legos, Games, and Comics!</p>
+            <p>&copy; <span id="copyright-year">2026</span> Eugene Starr | Browser Arcade</p>
+            <p class="font-medium text-slate-500">Fast, safe browser games!</p>
         </div>
     </footer>
 
@@ -784,7 +455,9 @@
                     "url": "https://shellshock.io",
                     "category": "multiplayer",
                     "desc": "First person shooter using egg-cellent weaponry and customizable eggs. PRIVATE ROOM and SUPERVISION REQUIRED",
-                    "players": "10 Players Max",
+                    "players": "20 Players Max",
+                    "violence": "cartoon",
+                    "chat": "public",
                     "tags": [
                               "Shooter",
                               "Eggs",
@@ -793,26 +466,14 @@
                     "emoji": "🥚"
           },
           {
-                    "id": "kartbros",
-                    "title": "Kartbros",
-                    "url": "https://kartbros.io/",
-                    "category": "multiplayer",
-                    "desc": "Speed through vibrant tracks and complete races with up to 8 racers online. NO CHAT=ZERO RISK GAME",
-                    "players": "8 Players Max",
-                    "tags": [
-                              "Racing",
-                              "Karting",
-                              "Action"
-                    ],
-                    "emoji": "🏎️"
-          },
-          {
                     "id": "stumbleguys",
                     "title": "Stumble Guys",
                     "url": "https://stumbleguys.com",
                     "category": "multiplayer",
                     "desc": "Run, dash, and slide past obstacles in this massively multiplayer knockout party game. \nNO CHAT=ZERO RISK GAME",
                     "players": "32 Players Max",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Party",
                               "Physics",
@@ -827,6 +488,8 @@
                     "category": "multiplayer",
                     "desc": "Fast-paced online multiplayer go-kart battle game in beautiful arenas. PRIVATE ROOM and SUPERVISION REQUIRED",
                     "players": "8 Players Max",
+                    "violence": "cartoon",
+                    "chat": "public",
                     "tags": [
                               "Battle Arena",
                               "Karts",
@@ -835,18 +498,180 @@
                     "emoji": "🛒"
           },
           {
-                    "id": "1v1-lol",
-                    "title": "1v1.lol",
-                    "url": "https://1v1.lol",
+                    "id": "minecraft",
+                    "title": "Classic Minecraft",
+                    "url": "https://classic.minecraft.net/",
+                    "category": "1player",
+                    "desc": "Play the original creative block builder straight in your browser window. DISCONNECTED CHAT=ZERO RISK GAME",
+                    "players": "Single Player",
+                    "violence": "cartoon",
+                    "chat": "public",
+                    "tags": [
+                              "Creative Sandbox",
+                              "Building",
+                              "Blocks"
+                    ],
+                    "emoji": "⛏️"
+          },
+          {
+                    "id": "nealfun",
+                    "title": "Neal.fun",
+                    "url": "https://neal.fun",
+                    "category": "learning",
+                    "desc": "An incredible vault of dynamic scientific experiments, quizzes, and cool curiosities. NO CHAT=ZERO RISK GAMES",
+                    "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
+                    "tags": [
+                              "Cyber Science",
+                              "Science Sandbox",
+                              "Interactive"
+                    ],
+                    "emoji": "🧪"
+          },
+          {
+                    "id": "dinosaurgame",
+                    "title": "Dinosaur Game",
+                    "url": "https://offline-dino-game.firebaseapp.com/",
+                    "category": "clicker",
+                    "desc": "Help T-Rex leap over cactus obstacles and pterodactyls in this browser classic. NO CHAT=ZERO RISK GAME",
+                    "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
+                    "tags": [
+                              "Chrome Classic",
+                              "Endless Run",
+                              "Offline Game"
+                    ],
+                    "emoji": "🦖"
+          },
+          {
+                    "id": "twovstwo",
+                    "title": "2v2.io",
+                    "url": "https://2v2.io/",
                     "category": "multiplayer",
-                    "desc": "Dynamic building and shooting simulator game with multi-mode arenas. PRIVATE ROOM and SUPERVISION REQUIRED",
-                    "players": "8 Players Max",
+                    "desc": "Fast-paced building and shooting 2v2 tactical arena. Team up with a classmate to out-build and defeat your opponents. PRIVATE ROOM and SUPERVISION REQUIRED",
+                    "players": "4 Players Max",
+                    "violence": "cartoon",
+                    "chat": "none",
                     "tags": [
                               "Shooter",
                               "Building",
-                              "Fort-like"
+                              "Tactical"
                     ],
-                    "emoji": "🧱"
+                    "emoji": "⚔️"
+          },
+          {
+                    "id": "kartbros",
+                    "title": "Kartbros",
+                    "url": "https://kartbros.io/",
+                    "category": "multiplayer",
+                    "desc": "Speed through vibrant tracks and complete races with up to 8 racers online. NO CHAT=ZERO RISK GAME",
+                    "players": "8 Players Max",
+                    "violence": "none",
+                    "chat": "none",
+                    "tags": [
+                              "Racing",
+                              "Karting",
+                              "Action"
+                    ],
+                    "emoji": "🏎️"
+          },
+          {
+                    "id": "buildnowgg",
+                    "title": "BuildNow GG",
+                    "url": "https://www.crazygames.com/game/buildnow-gg",
+                    "category": "multiplayer",
+                    "desc": "An intense 3D building and shooting battle arena game. Replaced 1v1.lol. PRIVATE ROOM and SUPERVISION REQUIRED",
+                    "players": "8 Players Max",
+                    "violence": "cartoon",
+                    "chat": "public",
+                    "tags": [
+                              "Fortnite Alt",
+                              "Building",
+                              "Survival"
+                    ],
+                    "emoji": "⛏️"
+          },
+          {
+                    "id": "wrestlebros",
+                    "title": "Wrestle Bros",
+                    "url": "https://freegames.io/game/wrestle-bros",
+                    "category": "multiplayer",
+                    "desc": "A hilarious browser physics wrestling game. Smash buttons, perform wild jumps, and slam your classmates!",
+                    "players": "8 Players Max",
+                    "violence": "cartoon",
+                    "chat": "none",
+                    "tags": [
+                              "Wrestling",
+                              "Combat",
+                              "Sports"
+                    ],
+                    "emoji": "🤼"
+          },
+          {
+                    "id": "badegg",
+                    "title": "Bad Egg",
+                    "url": "https://freegames.io/game/bad-egg",
+                    "category": "multiplayer",
+                    "desc": "Survive waves of zombie eggs as a heavily armed egg in this intense battle arena. PRIVATE ROOM and SUPERVISION REQUIRED",
+                    "players": "8 Players Max",
+                    "violence": "cartoon",
+                    "chat": "none",
+                    "tags": [
+                              "Shooter",
+                              "Survival",
+                              "Zombies"
+                    ],
+                    "emoji": "🍳"
+          },
+          {
+                    "id": "soccerbros",
+                    "title": "Soccer Bros",
+                    "url": "https://freegames.io/game/soccer-bros",
+                    "category": "multiplayer",
+                    "desc": "Fast-paced browser soccer game. Dribble, pass, tackle, and shoot to score goals against your classmates! NO CHAT=ZERO RISK GAME",
+                    "players": "8 Players Max",
+                    "violence": "none",
+                    "chat": "none",
+                    "tags": [
+                              "Sports",
+                              "Soccer",
+                              "Fun"
+                    ],
+                    "emoji": "⚽"
+          },
+          {
+                    "id": "baseballbros",
+                    "title": "Baseball Bros",
+                    "url": "https://freegames.io/game/baseball-bros",
+                    "category": "multiplayer",
+                    "desc": "A highly competitive browser baseball game. Pitch, swing, and hit home runs against your friends! NO CHAT=ZERO RISK GAME",
+                    "players": "2 Players Max",
+                    "violence": "none",
+                    "chat": "none",
+                    "tags": [
+                              "Sports",
+                              "Baseball",
+                              "PvP"
+                    ],
+                    "emoji": "⚾"
+          },
+          {
+                    "id": "footballbros",
+                    "title": "Football Bros",
+                    "url": "https://freegames.io/game/football-bros",
+                    "category": "multiplayer",
+                    "desc": "An exciting browser American football game. Throw passes, execute tackles, and score touchdowns with simple controls! NO CHAT=ZERO RISK GAME",
+                    "players": "8 Players Max",
+                    "violence": "none",
+                    "chat": "none",
+                    "tags": [
+                              "Sports",
+                              "Football",
+                              "Fun"
+                    ],
+                    "emoji": "🏈"
           },
           {
                     "id": "skribbl",
@@ -855,6 +680,8 @@
                     "category": "multiplayer",
                     "desc": "A fun and highly educational guess-the-word drawing board game. \nPRIVATE ROOM and SUPERVISION REQUIRED",
                     "players": "20 Players Max",
+                    "violence": "none",
+                    "chat": "public",
                     "tags": [
                               "Drawing",
                               "Word Guessing",
@@ -869,6 +696,8 @@
                     "category": "multiplayer",
                     "desc": "The ultimate drawing telephone game. Draw, prompt, and laugh with friends. PRIVATE ROOM and SUPERVISION REQUIRED",
                     "players": "2-30 Players",
+                    "violence": "none",
+                    "chat": "public",
                     "tags": [
                               "Drawing",
                               "Party Game",
@@ -883,6 +712,8 @@
                     "category": "multiplayer",
                     "desc": "A gorgeous classic 8-bit American football manager simulator. Draft, trade, and win! NO CHAT=ZERO RISK GAME",
                     "players": "1-2 Players",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Sports",
                               "Management",
@@ -897,6 +728,8 @@
                     "category": "1player",
                     "desc": "Grow your snake by eating glowing orbs. Simple mouse control, no keyboard needed. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Snake",
                               "Casual",
@@ -911,6 +744,8 @@
                     "category": "clicker",
                     "desc": "Navigate the classic flapping bird safely through green pipeline obstacles. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Retro Classic",
                               "Hard Mode",
@@ -925,6 +760,8 @@
                     "category": "clicker",
                     "desc": "Challenge your raw muscle memory and test how fast you can tap spacebar. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Reaction",
                               "Clicker",
@@ -939,6 +776,8 @@
                     "category": "1player",
                     "desc": "Command your arcade spaceship and defend the planet against incoming aliens. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "cartoon",
+                    "chat": "none",
                     "tags": [
                               "Retro Classic",
                               "Shooter",
@@ -947,26 +786,14 @@
                     "emoji": "👾"
           },
           {
-                    "id": "minecraft",
-                    "title": "Classic Minecraft",
-                    "url": "https://classic.minecraft.net/",
-                    "category": "1player",
-                    "desc": "Play the original creative block builder straight in your browser window. DISCONNECTED CHAT=ZERO RISK GAME",
-                    "players": "Single Player",
-                    "tags": [
-                              "Creative Sandbox",
-                              "Building",
-                              "Blocks"
-                    ],
-                    "emoji": "⛏️"
-          },
-          {
                     "id": "pacman",
                     "title": "Pac-Man",
                     "url": "https://www.google.com/logos/2010/pacman10-i.html",
                     "category": "1player",
                     "desc": "Feed on dots and dodge retro colorful ghosts in the famous Google Doodle maze. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Arcade Classic",
                               "Maze",
@@ -981,6 +808,8 @@
                     "category": "1player",
                     "desc": "Defy gravity and jump over crumbling space tiles in a futuristic 3D cosmic highway. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Cosmic Runner",
                               "Gravity Shift",
@@ -989,26 +818,14 @@
                     "emoji": "🌌"
           },
           {
-                    "id": "nealfun",
-                    "title": "Neal.fun",
-                    "url": "https://neal.fun",
-                    "category": "learning",
-                    "desc": "An incredible vault of dynamic scientific experiments, quizzes, and cool curiosities. NO CHAT=ZERO RISK GAMES",
-                    "players": "Single Player",
-                    "tags": [
-                              "Curiosity",
-                              "Science Sandbox",
-                              "Interactive"
-                    ],
-                    "emoji": "🧪"
-          },
-          {
                     "id": "townscaper",
                     "title": "Townscaper",
                     "url": "https://oskarstalberg.com/Townscaper/",
                     "category": "learning",
                     "desc": "Instantly build beautiful floating sea towns block by block. Beautiful design toy. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Architectural Toy",
                               "Artistic",
@@ -1023,6 +840,8 @@
                     "category": "learning",
                     "desc": "Draw tracks and use interactive physics to guide your sledding rider smoothly. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Physics Simulation",
                               "Creative Canvas"
@@ -1036,6 +855,8 @@
                     "category": "learning",
                     "desc": "Solve the daily five-letter word puzzle using smart logic and process of elimination. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Vocabulary",
                               "Daily Puzzle",
@@ -1050,6 +871,8 @@
                     "category": "learning",
                     "desc": "Doodle prompts in under 20 seconds and see if Google's friendly neural network guesses it. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Artificial Intelligence",
                               "Sketching",
@@ -1064,6 +887,8 @@
                     "category": "learning",
                     "desc": "Synthesize and construct elements from scratch starting with fire, water, earth, and air. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Chemistry Puzzle",
                               "Science Lab",
@@ -1078,6 +903,8 @@
                     "category": "1player",
                     "desc": "Jump, run, collect gold coins, and rescue Princess Peach in this NES classic. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Nintendo Classic",
                               "Platformer",
@@ -1092,6 +919,8 @@
                     "category": "1player",
                     "desc": "Rhythm-based platformer. Dodge dangerous spikes and obstacles to upbeat music. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Rhythm",
                               "Music Platformer",
@@ -1106,43 +935,48 @@
                     "category": "1player",
                     "desc": "Super Mario but everything—from Mario to the enemies—behaves like dynamic jelly. NO CHAT=ZERO RISK GAME",
                     "players": "Single Player",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Physics Sandbox",
                               "Absurd",
                               "Humorous"
                     ],
                     "emoji": "🍮"
-          },
-          {
-                    "id": "dinosaurgame",
-                    "title": "Dinosaur Game",
-                    "url": "https://offline-dino-game.firebaseapp.com/",
-                    "category": "clicker",
-                    "desc": "Help T-Rex leap over cactus obstacles and pterodactyls in this browser classic. NO CHAT=ZERO RISK GAME",
-                    "players": "Single Player",
-                    "tags": [
-                              "Chrome Classic",
-                              "Endless Run",
-                              "Offline Game"
-                    ],
-                    "emoji": "🦖"
           }
 ];
         /* END_GAMES_DATA */
 
-        /* BEGIN_VIDEOS_DATA */
-        let videosDataset = [
-          {
-                    "id": "v2",
-                    "title": "Dance/Singing Break Videos",
-                    "url": "https://www.youtube.com/embed/videoseries?list=PLeXXvjso9ZVq3wZKdPlG-5ksau_gBwobA",
-                    "isPlaylist": false
-          }
-];
-        /* END_VIDEOS_DATA */
+        // Category Detail Definitions
+        const categoryDetails = {
+            all: {
+                title: "🎮 All Vetted Games",
+                desc: "Browse our complete catalog of safe, classroom-vetted browser games. Use the filter tabs above to view specific types of challenges suited for different skill levels!"
+            },
+            multiplayer: {
+                title: "👥 Multiplayer Arenas",
+                desc: "Multiplayer is a way for classes to create private rooms, play together, and compete! It is our most complex method of play because it involves creating a safe custom lobby and entering matching room credentials or passwords to connect with friends in the same physical room."
+            },
+            "1player": {
+                title: "🕹️ 1 Player Adventures",
+                desc: "This category is for players who understand the basics of playing games on a PC. These challenges require manipulating a mouse, using the directional arrows, or utilizing the classic W-A-S-D key layouts in combination with the spacebar to explore and solve puzzles."
+            },
+            clicker: {
+                title: "🖱️ Clicker Games",
+                desc: "Clicker games are perfect for younger players who are just beginning to learn how to use a keyboard. They rely on simple physical actions, primarily using the mouse button or hitting the spacebar, making them accessible, immediate, and extremely fun!"
+            },
+            learning: {
+                title: "🧪 Learning & Science Sandbox",
+                desc: "Perfect for younger gamers and sandbox explorers alike! These games require very basic technical skills, making them accessible and low-stress. Most activities are open-ended and non-competitive, allowing kids to learn logic, chemistry, and physics safely at their own pace."
+            },
+            favorites: {
+                title: "❤️ My Bookmarked Favorites",
+                desc: "Your custom personal library! Keep track of the games you enjoy playing most in the computer lab. Click the heart icon on any arcade card to save or remove it from this private menu."
+            }
+        };
 
         // State Manager
-        let currentPage = 'home';
+        let currentPage = 'gaming';
         let currentFilter = 'all';
         let searchQuery = '';
         let favorites = [];
@@ -1169,20 +1003,15 @@
             const activePage = document.getElementById(`page-${pageId}`);
             if (activePage) activePage.classList.remove('hidden');
 
-            // Toggle Nav Link Highlights
+            // Toggle Nav Link Highlights (Teal Theme updates)
             const navButtons = document.querySelectorAll('.nav-btn');
             navButtons.forEach(btn => {
                 if (btn.id === `nav-${pageId}`) {
-                    btn.className = "nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-violet-600 bg-violet-50 shadow-sm";
+                    btn.className = "nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-teal-600 bg-teal-50 shadow-sm";
                 } else {
-                    btn.className = "nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-violet-600 hover:bg-slate-50";
+                    btn.className = "nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-teal-600 hover:bg-slate-50";
                 }
             });
-
-            // If navigating to home, refresh playlist layout
-            if (pageId === 'home') {
-                renderClassroomPlaylist();
-            }
 
             // Scroll to top automatically on transition
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1191,19 +1020,19 @@
         // Handle direct loads or bookmarks via hash
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.substring(1);
-            if (hash && ['home', 'gaming', 'comics', 'lego', 'admin'].includes(hash)) {
+            if (hash && ['gaming', 'admin'].includes(hash)) {
                 navigateTo(hash);
             }
         });
 
         // Initialize App
         window.onload = function () {
-            // Read URL Hash or fallback to home
+            // Read URL Hash or fallback to gaming
             const initialHash = window.location.hash.substring(1);
-            if (initialHash && ['home', 'gaming', 'comics', 'lego', 'admin'].includes(initialHash)) {
+            if (initialHash && ['gaming', 'admin'].includes(initialHash)) {
                 navigateTo(initialHash);
             } else {
-                navigateTo('home');
+                navigateTo('gaming');
             }
 
             // Load saved favorites
@@ -1221,9 +1050,6 @@
             // Render UI Layers
             updateFavoritesCount();
             renderGames();
-            initComicStudio();
-            initLegoStudio();
-            renderClassroomPlaylist();
 
             // Set up search events
             searchInput.addEventListener('input', (e) => {
@@ -1243,32 +1069,6 @@
                 renderGames();
             });
         };
-
-        // ================= CLASSROOM PLAYLIST RENDERING =================
-        function renderClassroomPlaylist() {
-            const trackGrid = document.getElementById('home-playlist-tracks');
-            trackGrid.innerHTML = '';
-
-            videosDataset.forEach((vid, index) => {
-                trackGrid.innerHTML += `
-                    <div onclick="setMainVideo('${vid.url}')" class="video-card cursor-pointer bg-slate-50 hover:bg-violet-50 border border-slate-200 hover:border-violet-300 p-4 rounded-2xl flex items-center gap-3">
-                        <div class="bg-violet-100 text-violet-700 w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0">
-                            ${vid.isPlaylist ? '📻' : '📹'}
-                        </div>
-                        <div class="overflow-hidden">
-                            <h5 class="text-xs font-bold text-slate-800 truncate">${vid.title}</h5>
-                            <span class="text-[10px] text-slate-400 font-semibold tracking-wide uppercase">${vid.isPlaylist ? 'YouTube Playlist' : 'YouTube Video'}</span>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function setMainVideo(url) {
-            const player = document.getElementById('home-video-player');
-            player.src = url;
-            showToast("Playing updated media track!", "🎵");
-        }
 
         // ================= FAVORITES ENGINE =================
         function toggleFavorite(gameId, event) {
@@ -1304,9 +1104,9 @@
             const tabs = document.querySelectorAll('.filter-tab');
             tabs.forEach(tab => {
                 if (tab.id === `filter-${category}`) {
-                    tab.className = "filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-violet-600 text-white border-2 border-violet-600";
+                    tab.className = "filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-teal-600 text-white border-2 border-teal-600";
                 } else {
-                    tab.className = "filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-slate-800 border-2 border-transparent hover:border-slate-300";
+                    tab.className = "filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300";
                 }
             });
             
@@ -1315,6 +1115,11 @@
 
         // ================= GAME GRID GENERATOR =================
         function renderGames() {
+            // Update the category header and explanation text dynamically based on current filter state
+            const info = categoryDetails[currentFilter] || categoryDetails['all'];
+            document.getElementById('category-title').innerHTML = info.title;
+            document.getElementById('category-description').textContent = info.desc;
+
             gamesGrid.innerHTML = '';
             
             const filtered = gamesDataset.filter(game => {
@@ -1346,9 +1151,29 @@
                     `<span class="bg-slate-100 text-slate-600 font-bold text-[11px] px-2.5 py-1 rounded-md">${tag}</span>`
                 ).join('');
 
+                // Resolve Safety Badge values with safe defaults
+                const violenceVal = game.violence || 'none';
+                const chatVal = game.chat || 'none';
+
+                let violenceBadgeHtml = '';
+                if (violenceVal === 'cartoon') {
+                    violenceBadgeHtml = `<span class="bg-amber-100 text-amber-800 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">💥 Cartoon Combat</span>`;
+                } else {
+                    violenceBadgeHtml = `<span class="bg-emerald-100 text-emerald-800 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">🟢 No Violence</span>`;
+                }
+
+                let chatBadgeHtml = '';
+                if (chatVal === 'public') {
+                    chatBadgeHtml = `<span class="bg-red-100 text-red-700 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm" title="Unmoderated live lobby chat outside class">⚠️ Public Chat</span>`;
+                } else if (chatVal === 'private') {
+                    chatBadgeHtml = `<span class="bg-teal-100 text-teal-800 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm" title="Room controlled by peer codes">🔒 Private Chat</span>`;
+                } else {
+                    chatBadgeHtml = `<span class="bg-slate-100 text-slate-700 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">📴 No Chat</span>`;
+                }
+
                 const cardHtml = `
                     <div class="relative group">
-                        <a href="${game.url}" target="_blank" class="game-card bg-white border border-slate-200 hover:border-violet-400 rounded-3xl p-5 shadow-sm hover:shadow-xl hover:shadow-violet-100 flex flex-col justify-between h-full relative z-10">
+                        <div class="game-card bg-white border border-slate-200 hover:border-teal-400 rounded-3xl p-5 shadow-sm hover:shadow-xl hover:shadow-teal-100 flex flex-col justify-between h-full relative z-10">
                             <div>
                                 <div class="flex items-center justify-between mb-4">
                                     <div class="bg-slate-50 text-2xl w-12 h-12 flex items-center justify-center rounded-2xl shadow-inner border border-slate-100">
@@ -1362,12 +1187,18 @@
                                     </button>
                                 </div>
 
-                                <h3 class="font-display font-bold text-lg text-slate-800 group-hover:text-violet-600 transition-colors mb-2">${game.title}</h3>
-                                <p class="text-slate-500 font-medium text-sm leading-relaxed mb-5">${game.desc}</p>
+                                <h3 class="font-display font-bold text-lg text-slate-800 group-hover:text-teal-600 transition-colors mb-2">${game.title}</h3>
+                                <p class="text-slate-500 font-medium text-xs leading-relaxed mb-4">${game.desc}</p>
                             </div>
 
                             <div>
-                                <div class="flex flex-wrap gap-1.5 mb-5">
+                                <!-- Core Safety Badges -->
+                                <div class="flex flex-wrap gap-1.5 mb-4 pt-3 border-t border-dashed border-slate-100">
+                                    ${violenceBadgeHtml}
+                                    ${chatBadgeHtml}
+                                </div>
+
+                                <div class="flex flex-wrap gap-1 mb-5">
                                     ${tagsMarkup}
                                 </div>
 
@@ -1379,215 +1210,19 @@
                                         ${game.players}
                                     </span>
                                     
-                                    <span class="inline-flex items-center gap-1 text-xs font-extrabold text-white bg-slate-900 group-hover:bg-violet-600 transition-colors py-2 px-4 rounded-xl shadow-sm">
+                                    <a href="${game.url}" target="_blank" class="inline-flex items-center gap-1 text-xs font-extrabold text-white bg-slate-900 hover:bg-orange-500 transition-colors py-2 px-4 rounded-xl shadow-sm">
                                         Play Now 
                                         <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                                         </svg>
-                                    </span>
+                                    </a>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 `;
                 gamesGrid.innerHTML += cardHtml;
             });
-        }
-
-        // ================= COMIC CREATION ENGINE =================
-        let activeComicPanel = 0;
-        let comicData = [
-            { char: '🦸', bg: 'bg-sky-100', text: 'Hello Stark State!' },
-            { char: '👽', bg: 'bg-amber-100', text: 'Is that an alien?!' },
-            { char: '🤖', bg: 'bg-emerald-100', text: "Let's build comics!" }
-        ];
-
-        function initComicStudio() {
-            renderComicStrip();
-        }
-
-        function selectComicPanel(panelIndex) {
-            activeComicPanel = panelIndex;
-            
-            // Highlight active selector buttons
-            for (let i = 0; i < 3; i++) {
-                const btn = document.getElementById(`btn-panel-${i}`);
-                const renderPanel = document.getElementById(`render-panel-${i}`);
-                if (i === panelIndex) {
-                    btn.className = "panel-selector-btn py-2 text-sm font-bold rounded-xl border-2 border-violet-600 bg-violet-50 text-violet-700";
-                    renderPanel.classList.add('border-violet-600');
-                    renderPanel.classList.remove('border-transparent');
-                } else {
-                    btn.className = "panel-selector-btn py-2 text-sm font-bold rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50";
-                    renderPanel.classList.remove('border-violet-600');
-                    renderPanel.classList.add('border-transparent');
-                }
-            }
-
-            // Sync text input with active panel dialogue
-            document.getElementById('comic-bubble-text').value = comicData[panelIndex].text;
-        }
-
-        function setComicCharacter(emoji) {
-            comicData[activeComicPanel].char = emoji;
-            renderComicStrip();
-            showToast("Character updated!", "🎭");
-        }
-
-        function setComicBg(bgClass) {
-            comicData[activeComicPanel].bg = bgClass;
-            renderComicStrip();
-            showToast("Background updated!", "🎨");
-        }
-
-        function updateComicText(text) {
-            comicData[activeComicPanel].text = text;
-            renderComicStrip();
-        }
-
-        function renderComicStrip() {
-            for (let i = 0; i < 3; i++) {
-                const panel = document.getElementById(`render-panel-${i}`);
-                const charEl = document.getElementById(`char-${i}`);
-                const bubbleEl = document.getElementById(`bubble-${i}`);
-
-                // Update character
-                charEl.textContent = comicData[i].char;
-
-                // Update text dialogue bubble (hide if empty)
-                if (comicData[i].text.trim() === '') {
-                    bubbleEl.classList.add('invisible');
-                } else {
-                    bubbleEl.classList.remove('invisible');
-                    bubbleEl.querySelector('span').textContent = comicData[i].text;
-                }
-
-                // Update background classes securely
-                panel.className = `h-64 rounded-2xl ${comicData[i].bg} border-4 ${i === activeComicPanel ? 'border-violet-600' : 'border-transparent'} relative overflow-hidden flex flex-col items-center justify-between p-4 cursor-pointer transition-colors`;
-            }
-        }
-
-        function resetComic() {
-            comicData = [
-                { char: '🦸', bg: 'bg-sky-100', text: 'Hello Stark State!' },
-                { char: '👽', bg: 'bg-amber-100', text: 'Is that an alien?!' },
-                { char: '🤖', bg: 'bg-emerald-100', text: "Let's build comics!" }
-            ];
-            activeComicPanel = 0;
-            selectComicPanel(0);
-            renderComicStrip();
-            showToast("Storyboard reset completely!", "🧹");
-        }
-
-        // ================= LEGOMANIA ENGINE =================
-        let activeLegoColor = '#ef4444'; // default red
-        const legoColorsList = [
-            { hex: '#ef4444', label: 'Classic Red', bg: 'bg-red-500' },
-            { hex: '#3b82f6', label: 'Deep Blue', bg: 'bg-blue-500' },
-            { hex: '#eab308', label: 'Yellow Gold', bg: 'bg-yellow-500' },
-            { hex: '#22c55e', label: 'Power Green', bg: 'bg-green-500' },
-            { hex: '#f97316', label: 'Safety Orange', bg: 'bg-orange-500' },
-            { hex: '#a855f7', label: 'Royal Purple', bg: 'bg-purple-500' },
-            { hex: '#1e293b', label: 'Dark Slate', bg: 'bg-slate-800' },
-            { hex: '#ffffff', label: 'Brick White', bg: 'bg-slate-100' }
-        ];
-
-        function initLegoStudio() {
-            const paletteContainer = document.getElementById('lego-palette');
-            const gridContainer = document.getElementById('lego-grid');
-
-            // Render Palette Choices
-            paletteContainer.innerHTML = '';
-            legoColorsList.forEach(c => {
-                const isSelected = c.hex === activeLegoColor;
-                paletteContainer.innerHTML += `
-                    <button 
-                        type="button"
-                        onclick="setLegoColor('${c.hex}')" 
-                        id="lego-color-${c.hex.replace('#','')}"
-                        class="lego-color-btn flex items-center gap-2 p-2 rounded-xl border-2 transition-all ${isSelected ? 'border-slate-800 scale-105' : 'border-transparent hover:border-slate-200'}"
-                    >
-                        <span class="w-6 h-6 rounded-lg ${c.bg} shadow-inner block"></span>
-                        <span class="text-xs font-bold text-slate-700">${c.label}</span>
-                    </button>
-                `;
-            });
-
-            // Render 10x10 Building Grid (100 cells)
-            gridContainer.innerHTML = '';
-            for (let i = 0; i < 100; i++) {
-                gridContainer.innerHTML += `
-                    <div 
-                        onclick="placeLegoBrick(this)" 
-                        class="bg-slate-100 hover:bg-slate-300 cursor-pointer rounded-md aspect-square transition-colors relative shadow-inner"
-                        data-brick-active="false"
-                        style="background-color: #f1f5f9;"
-                    ></div>
-                `;
-            }
-        }
-
-        function setLegoColor(hexColor) {
-            activeLegoColor = hexColor;
-
-            // Update selector button styles
-            const buttons = document.querySelectorAll('.lego-color-btn');
-            buttons.forEach(btn => {
-                if (btn.id === `lego-color-${hexColor.replace('#','')}`) {
-                    btn.classList.add('border-slate-800', 'scale-105');
-                } else {
-                    btn.classList.remove('border-slate-800', 'scale-105');
-                    btn.classList.add('border-transparent');
-                }
-            });
-        }
-
-        function placeLegoBrick(cellEl) {
-            const isActive = cellEl.getAttribute('data-brick-active') === 'true';
-
-            if (isActive && cellEl.style.backgroundColor === hexToRgb(activeLegoColor)) {
-                // Remove brick if clicking with the exact same active color (Toggle off)
-                cellEl.style.backgroundColor = '#f1f5f9';
-                cellEl.setAttribute('data-brick-active', 'false');
-                cellEl.className = "bg-slate-100 hover:bg-slate-300 cursor-pointer rounded-md aspect-square transition-colors relative shadow-inner";
-            } else {
-                // Place or color overwrite
-                cellEl.style.backgroundColor = activeLegoColor;
-                cellEl.setAttribute('data-brick-active', 'true');
-                cellEl.className = "lego-brick cursor-pointer rounded-lg aspect-square transition-all relative";
-            }
-        }
-
-        function clearLegoGrid() {
-            const cells = document.querySelectorAll('#lego-grid > div');
-            cells.forEach(cell => {
-                cell.style.backgroundColor = '#f1f5f9';
-                cell.setAttribute('data-brick-active', 'false');
-                cell.className = "bg-slate-100 hover:bg-slate-300 cursor-pointer rounded-md aspect-square transition-colors relative shadow-inner";
-            });
-            showToast("Lego Grid completely cleared!", "🧹");
-        }
-
-        // Helper: Convert Hex Color value to standard RGB String
-        function hexToRgb(hex) {
-            const r = parseInt(hex.slice(1, 3), 16);
-            const g = parseInt(hex.slice(3, 5), 16);
-            const b = parseInt(hex.slice(5, 7), 16);
-            return `rgb(${r}, ${g}, ${b})`;
-        }
-
-        // ================= CONTACT FORM UTILITY =================
-        function handleContactSubmit(event) {
-            event.preventDefault();
-
-            // Collect inputs
-            const name = document.getElementById('contact-name').value;
-
-            // Trigger premium success simulation toast
-            showToast(`Thanks ${name}! Sent to Mr. Starr!`, "📧");
-
-            // Reset Form Fields
-            document.getElementById('contact-form').reset();
         }
 
         // Custom, non-disruptive Toast Alerts (replaces generic alert popups)
@@ -1614,7 +1249,7 @@
             const pass = document.getElementById('admin-pass').value.trim();
 
             if (user === 'admin' && pass === 'password') {
-                isAdminLoggedIn = false; 
+                isAdminLoggedIn = true; 
                 document.getElementById('admin-login-card').classList.add('hidden');
                 document.getElementById('admin-dashboard').classList.remove('hidden');
                 
@@ -1623,13 +1258,13 @@
                 
                 // Initial renders
                 renderAdminGamesList();
-                renderAdminVideosList();
                 showToast("Access Granted. Welcome, Eugene!", "🔐");
             } else {
                 showToast("Invalid Credentials. Please try again.", "❌");
             }
         }
 
+        // Logout
         function handleAdminLogout() {
             isAdminLoggedIn = false;
             document.getElementById('admin-login-card').classList.remove('hidden');
@@ -1650,18 +1285,18 @@
             panels.forEach(p => p.classList.add('hidden'));
             document.getElementById(`adm-view-${tabId}`).classList.remove('hidden');
 
-            // Toggle tab active highlights
+            // Toggle tab active highlights (Teal themed buttons)
             const tabButtons = document.querySelectorAll('.admin-tab-btn');
             tabButtons.forEach(btn => {
                 if (btn.id === `btn-adm-${tabId}`) {
-                    btn.className = "admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all bg-amber-500 text-white shadow-sm";
+                    btn.className = "admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all bg-teal-600 text-white shadow-sm";
                 } else {
                     btn.className = "admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all text-slate-600 hover:bg-slate-50";
                 }
             });
         }
 
-        // --- SUB-CMS 1: GAMES MANAGEMENT (With Inline Edit Feature Added) ---
+        // --- SUB-CMS 1: GAMES MANAGEMENT (With Inline Edit Feature) ---
         function renderAdminGamesList() {
             const listContainer = document.getElementById('adm-games-table-list');
             listContainer.innerHTML = '';
@@ -1677,7 +1312,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-1.5">
-                            <button onclick="editGame('${game.id}')" class="bg-violet-50 hover:bg-violet-100 text-violet-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
+                            <button onclick="editGame('${game.id}')" class="bg-teal-50 hover:bg-teal-100 text-teal-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
                                 Edit
                             </button>
                             <button onclick="deleteGame('${game.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
@@ -1707,9 +1342,13 @@
             document.getElementById('add-game-tags').value = game.tags.join(', ');
             document.getElementById('add-game-emoji').value = game.emoji;
             document.getElementById('add-game-desc').value = game.desc;
+            
+            // Set dynamic dropdown values
+            document.getElementById('add-game-violence').value = game.violence || 'none';
+            document.getElementById('add-game-chat').value = game.chat || 'none';
 
             // Transition Form to Edit Mode Visuals
-            document.getElementById('game-form-title').innerHTML = `✏️ Edit Game: <span class="text-violet-600">${game.title}</span>`;
+            document.getElementById('game-form-title').innerHTML = `✏️ Edit Game: <span class="text-teal-600">${game.title}</span>`;
             document.getElementById('add-game-submit-btn').textContent = "💾 Save Changes";
             document.getElementById('cancel-edit-btn').classList.remove('hidden');
 
@@ -1737,6 +1376,8 @@
             const url = document.getElementById('add-game-url').value.trim();
             const category = document.getElementById('add-game-cat').value;
             const players = document.getElementById('add-game-players').value.trim();
+            const violence = document.getElementById('add-game-violence').value;
+            const chat = document.getElementById('add-game-chat').value;
             const tagsInput = document.getElementById('add-game-tags').value;
             const emoji = document.getElementById('add-game-emoji').value.trim();
             const desc = document.getElementById('add-game-desc').value.trim();
@@ -1747,7 +1388,7 @@
                 // Update inside existing database array
                 const gameIndex = gamesDataset.findIndex(g => g.id === editingGameId);
                 if (gameIndex > -1) {
-                    gamesDataset[gameIndex] = { id: editingGameId, title, url, category, desc, players, tags, emoji };
+                    gamesDataset[gameIndex] = { id: editingGameId, title, url, category, desc, players, violence, chat, tags, emoji };
                     showToast(`"${title}" updated successfully!`, "💾");
                 }
                 cancelEditGame();
@@ -1759,7 +1400,7 @@
                 }
                 
                 // Construct and inject game object
-                const newGame = { id, title, url, category, desc, players, tags, emoji };
+                const newGame = { id, title, url, category, desc, players, violence, chat, tags, emoji };
                 gamesDataset.push(newGame);
                 showToast(`"${title}" inserted successfully!`, "🎮");
                 event.target.reset();
@@ -1780,70 +1421,7 @@
             showToast("Game removed from Database.", "🗑️");
         }
 
-        // --- SUB-CMS 2: VIDEOS MANAGEMENT ---
-        function renderAdminVideosList() {
-            const listContainer = document.getElementById('adm-videos-table-list');
-            listContainer.innerHTML = '';
-
-            videosDataset.forEach(vid => {
-                listContainer.innerHTML += `
-                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-100">
-                        <div class="flex items-center gap-3">
-                            <span class="text-xl">${vid.isPlaylist ? '📻' : '📹'}</span>
-                            <div class="max-w-[200px] sm:max-w-xs overflow-hidden">
-                                <h4 class="text-xs font-bold text-slate-800 truncate">${vid.title}</h4>
-                                <span class="text-[9px] text-slate-400 font-bold uppercase">${vid.isPlaylist ? 'YouTube Playlist' : 'YouTube Video'}</span>
-                            </div>
-                        </div>
-                        <button onclick="deleteVideo('${vid.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
-                            Remove
-                        </button>
-                    </div>
-                `;
-            });
-        }
-
-        function handleNewVideoSubmit(event) {
-            event.preventDefault();
-            const title = document.getElementById('add-vid-title').value.trim();
-            const rawUrl = document.getElementById('add-vid-url').value.trim();
-            const isPlaylist = document.getElementById('add-vid-playlist').checked;
-
-            // Transform normal watch urls to embed urls automatically
-            let embedUrl = rawUrl;
-            if (!rawUrl.includes('embed')) {
-                if (rawUrl.includes('list=')) {
-                    const listReg = rawUrl.match(/[&?]list=([^&]+)/);
-                    if (listReg) embedUrl = `https://www.youtube.com/embed/videoseries?list=${listReg[1]}`;
-                } else {
-                    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-                    const match = rawUrl.match(regExp);
-                    if (match && match[2].length === 11) {
-                        embedUrl = `https://www.youtube.com/embed/${match[2]}`;
-                    }
-                }
-            }
-
-            const id = 'v' + (videosDataset.length + 1);
-            const newVideo = { id, title, url: embedUrl, isPlaylist };
-            videosDataset.push(newVideo);
-
-            // Refresh dashboards
-            renderAdminVideosList();
-            renderClassroomPlaylist();
-
-            event.target.reset();
-            showToast(`Video track updated!`, "🎵");
-        }
-
-        function deleteVideo(vidId) {
-            videosDataset = videosDataset.filter(vid => vid.id !== vidId);
-            renderAdminVideosList();
-            renderClassroomPlaylist();
-            showToast("Video removed from Database.", "🗑️");
-        }
-
-        // --- SUB-CMS 3: STATIC EXPORT & DEPLOY CORE ---
+        // --- SUB-CMS 3: STATIC EXPORT & DEPLOY ---
         function generateStaticSource() {
             // Read active document source dynamically
             fetch(window.location.href)
@@ -1869,25 +1447,21 @@
         function buildStaticReplacement(rawHtml) {
             // Regex match the data markers to replace dataset arrays directly with new states
             const serializedGames = JSON.stringify(gamesDataset, null, 12);
-            const serializedVideos = JSON.stringify(videosDataset, null, 12);
 
             let resultHtml = rawHtml;
 
             // Target replacement for games block
-            const gamesRegex = /(\/\*\s*BEGIN_GAMES_DATA\s*\*\/)[\s\S]*?(\/\*\s*END_GAMES_DATA\s*\*\/)/g;
+            const gamesRegex = /(\/\^\s*BEGIN_GAMES_DATA\s*\*\/)[\s\S]*?(\/\*\s*END_GAMES_DATA\s*\*\/)/g;
             resultHtml = resultHtml.replace(gamesRegex, `$1\n        let gamesDataset = ${serializedGames};\n        $2`);
-
-            // Target replacement for videos block
-            const videosRegex = /(\/\*\s*BEGIN_VIDEOS_DATA\s*\*\/)[\s\S]*?(\/\*\s*END_VIDEOS_DATA\s*\*\/)/g;
-            resultHtml = resultHtml.replace(videosRegex, `$1\n        let videosDataset = ${serializedVideos};\n        $2`);
 
             // Clean temporary active styles or credentials so the file builds completely fresh
             resultHtml = resultHtml.replace(/isAdminLoggedIn\s*=\s*true/g, 'isAdminLoggedIn = false');
-            resultHtml = resultHtml.replace(/currentPage\s*=\s*'admin'/g, 'currentPage = \'home\'');
+            resultHtml = resultHtml.replace(/currentPage\s*=\s*'admin'/g, 'currentPage = \'gaming\'');
             
             return resultHtml;
         }
 
+        // Copy Code
         function copyGeneratedCode() {
             const codeBox = document.getElementById('generated-code-box');
             if (!codeBox.value) {
