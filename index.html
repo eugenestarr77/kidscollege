@@ -1258,7 +1258,7 @@
             const pass = document.getElementById('admin-pass').value.trim();
 
             if (user === 'admin' && pass === 'password') {
-                isAdminLoggedIn = true; 
+                isAdminLoggedIn = false; 
                 document.getElementById('admin-login-card').classList.add('hidden');
                 document.getElementById('admin-dashboard').classList.remove('hidden');
                 
