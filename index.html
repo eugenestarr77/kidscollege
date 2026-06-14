@@ -482,6 +482,14 @@
         </div>
     </section>
 
+    <!-- Footer (Universal Footer connected to all pages) -->
+    <footer class="bg-white border-t border-slate-100 mt-auto py-8 px-4 text-center">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-sm">
+            <p>&copy; <span id="copyright-year">2026</span> Eugene Starr | Browser Arcade</p>
+            <p class="font-medium text-slate-500">Fast, safe browser games!</p>
+        </div>
+    </footer>
+
     <!-- Game Database & Connected Multi-Page Core Engine -->
     <script>
         // ================= DATABASE DECLARATIONS (Mutable for Prototype) =================
@@ -528,12 +536,12 @@
                     "title": "SmashKarts",
                     "url": "https://smashkarts.io",
                     "category": "multiplayer",
-                    "safetyRating": "yellow",
+                    "safetyRating": "red",
                     "desc": "Fast-paced online multiplayer go-kart battle game in beautiful arenas.",
-                    "safetyProfile": "No custom keyboard chat features are available in standard browser play, eliminating social risks. The host website runs programmatic banner ads; an ad-blocker is recommended.",
+                    "safetyProfile": "Public rooms feature completely open text boxes. Instructors or parents must select 'Create Private Room' on the splash screen to block public chat tracking entirely.",
                     "players": "8 Players Max",
                     "violence": "cartoon",
-                    "chat": "none",
+                    "chat": "public",
                     "tags": [
                               "Battle Arena",
                               "Karts",
