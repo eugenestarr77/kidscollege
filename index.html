@@ -64,7 +64,7 @@
     <!-- Unified Navigation Bar -->
     <nav class="bg-white border-b border-slate-100 py-3.5 px-4 md:px-8 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <!-- Branding Header -->
+            <!-- Branding Header (With Custom Avatar Image & Fallback Support) -->
             <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('gaming')">
                 <div class="relative w-11 h-11 flex items-center justify-center shrink-0">
                     <!-- Local Custom Avatar -->
@@ -86,8 +86,14 @@
                 </div>
             </div>
             
-            <!-- Navigation Links -->
+            <!-- Navigation Links (With Parents & Safety Toggle) -->
             <div class="flex flex-wrap items-center justify-center gap-1 md:gap-2">
+                <button onclick="navigateTo('gaming')" id="nav-gaming" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-teal-600 bg-teal-50 shadow-sm">
+                    🎮 Arcade Games
+                </button>
+                <button onclick="navigateTo('safety')" id="nav-safety" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-teal-600 hover:bg-slate-50 flex items-center gap-1.5">
+                    🛡️ Safety Matrix
+                </button>
                 <button onclick="navigateTo('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-orange-600 hover:bg-orange-50 flex items-center gap-1.5 border border-dashed border-orange-200">
                     🔑 Teacher Panel
                 </button>
@@ -120,7 +126,7 @@
                     🎮 <span>Browser Arcade</span> 🎮
                 </div>
                 
-                <!-- Welcome Text: Lab-focused and child-monitored copy -->
+                <!-- Welcome Text: Focused on Safe, Adult-Facilitated Play -->
                 <p class="text-teal-50 text-sm md:text-base font-medium max-w-2xl mb-8 leading-relaxed text-center">
                     Welcome to the arcade! This monitored catalog is specifically curated for children ages 7-12 to enjoy a fun mix of single-player challenges and collaborative multiplayer games. Perfect for safe computer labs with an adult present to guide and facilitate the play.
                 </p>
@@ -155,43 +161,25 @@
 
         <!-- Catalog Container -->
         <div class="max-w-7xl mx-auto w-full px-4 md:px-8 py-8">
-            <!-- Navigation Tabs / Category Filters (Updated active colors to Teal) -->
+            <!-- Navigation Tabs / Category Filters (Restored with Clicker Category and without 'other') -->
             <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 pb-2 border-b border-slate-200">
                 <button onclick="setFilter('all')" id="filter-all" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-teal-600 text-white border-2 border-teal-600">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-                    </svg>
-                    <span>All Games</span>
+                    🔍 All Games
                 </button>
                 <button onclick="setFilter('multiplayer')" id="filter-multiplayer" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                    </svg>
-                    <span>Multiplayer</span>
+                    👥 Multiplayer
                 </button>
                 <button onclick="setFilter('1player')" id="filter-1player" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                    </svg>
-                    <span>1 Player</span>
+                    🕹️ 1 Player
                 </button>
                 <button onclick="setFilter('clicker')" id="filter-clicker" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-1.138z" />
-                    </svg>
-                    <span>Clicker Games</span>
+                    🖱️ Clicker Games
                 </button>
                 <button onclick="setFilter('learning')" id="filter-learning" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A5.905 5.905 0 018 3.443m4.26 6.704L12 3m0 0l-4.26 6.704m4.26-6.704a5.905 5.905 0 018 3.443m-2.658.813a50.57 50.57 0 012.658.813M12 13.75a3.25 3.25 0 110-6.5 3.25 3.25 0 010 6.5z" />
-                    </svg>
-                    <span>Learning & Science</span>
+                    🧪 Learning & Science
                 </button>
                 <button onclick="setFilter('favorites')" id="filter-favorites" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    <svg class="w-4 h-4 fill-red-500 text-red-500" viewBox="0 0 24 24">
-                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
-                    </svg>
-                    <span>My Favorites (<span id="fav-count">0</span>)</span>
+                    ❤️ Bookmarked (<span id="fav-count">0</span>)
                 </button>
             </div>
 
@@ -221,55 +209,92 @@
                 <p class="text-slate-500 max-w-sm mx-auto">We couldn't find any games matching your current filter or search criteria. Try a different search term or category!</p>
             </div>
 
-            <!-- ================= SAFETY DISCLAIMER BOARD ================= -->
-            <div class="mt-16 bg-gradient-to-br from-teal-50/50 via-amber-50/40 to-orange-50/40 border-2 border-teal-100 rounded-[32px] p-6 md:p-8 shadow-sm">
-                <div class="flex flex-col md:flex-row gap-5 items-start">
-                    <div class="bg-teal-600 text-white p-3 rounded-2xl shrink-0 shadow-md shadow-teal-100">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.959 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.105-2.582-.307-3.818A11.947 11.947 0 0112 2.714z" />
-                        </svg>
+            <!-- Dynamic Quick Matrix Summary Box -->
+            <div class="mt-16 text-center">
+                <button onclick="navigateTo('safety')" class="inline-flex items-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-800 font-bold text-sm py-3 px-8 rounded-2xl shadow-sm border border-teal-200 transition-colors">
+                    🛡️ Learn more about our Classroom Safety Matrix &rarr;
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================= PAGE 3: PARENTS & SAFETY MATRIX ================= -->
+    <section id="page-safety" class="page-view hidden">
+        <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-800 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
+            <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
+                <span class="bg-teal-500/30 text-white font-bold text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Parents & Guardians</span>
+                <h1 class="font-display font-bold text-3xl md:text-5xl tracking-wide mb-3">
+                    Classroom Safety Matrix 🛡️
+                </h1>
+                <p class="text-teal-50 text-sm md:text-base font-medium max-w-2xl">
+                    Our safety-first philosophy ensures that your child experiences play without compromise. This matrix categorizes browser games into transparent safety tiers.
+                </p>
+            </div>
+        </header>
+
+        <div class="max-w-4xl mx-auto px-4 md:px-8 py-12 space-y-12">
+            <!-- Detailed Tier Cards -->
+            <div class="space-y-6">
+                <h2 class="font-display font-bold text-2xl text-slate-800">Understanding Our Safety Levels</h2>
+                
+                <!-- Green Light Card -->
+                <div class="bg-white border-2 border-emerald-100 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6">
+                    <div class="bg-emerald-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-md shadow-emerald-100">
+                        🟢
                     </div>
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="font-display font-bold text-lg text-slate-800 mb-2">Parent Disclaimer & Lab Safety Notice</h4>
-                            <p class="text-slate-600 text-xs md:text-sm leading-relaxed mb-3">
-                                Welcome, parents! This catalog is curated by Eugene Starr as a safe repository for supervised recreation. Please review our safety notes to understand how the browser games operate:
-                            </p>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-white p-4 rounded-2xl border border-slate-100">
-                                <h5 class="font-bold text-xs text-teal-800 mb-1">🎮 The Core Goal is Play</h5>
-                                <p class="text-slate-500 text-[11px] leading-relaxed">
-                                    While several of our sandbox puzzle games offer deep cognitive, scientific, or mathematical logic, the primary focus of this arcade is **active recreation and playground socialization**.
-                                </p>
-                            </div>
-                            
-                            <div class="bg-white p-4 rounded-2xl border border-slate-100">
-                                <h5 class="font-bold text-xs text-orange-700 mb-1">💥 Cartoon Action (No Blood)</h5>
-                                <p class="text-slate-500 text-[11px] leading-relaxed">
-                                    Certain combat titles (like *Shellshock.io* or *SmashKarts*) feature shooting elements or explosions. All combat experiences are **entirely bloodless, cartoonish, and non-graphic**.
-                                </p>
-                            </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-emerald-800 mb-1">Green Light (Safe & Instant Play)</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            These games are completely safe for instant, independent, and unattended play. They are entirely ad-free, contain no public chat functionality, and require zero setup. They are safe to launch immediately on any device.
+                        </p>
+                        <span class="bg-emerald-50 text-emerald-700 font-bold text-[11px] px-3 py-1 rounded-md uppercase tracking-wider">Zero Risk</span>
+                    </div>
+                </div>
 
-                            <div class="bg-white p-4 rounded-2xl border border-slate-100">
-                                <h5 class="font-bold text-xs text-red-600 mb-1">💬 Classroom Chat vs. Strangers</h5>
-                                <p class="text-slate-500 text-[11px] leading-relaxed">
-                                    During class, kids use **private rooms and password protection** to play safely with their peers. If played at home outside of class, public servers will expose children to public, unmoderated chat lobbies with online strangers.
-                                </p>
-                            </div>
+                <!-- Yellow Light Card -->
+                <div class="bg-white border-2 border-yellow-100 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6">
+                    <div class="bg-yellow-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-md shadow-yellow-100">
+                        🟡
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-yellow-800 mb-1">Yellow Light (Ad-Blocker Recommended)</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            These games contain no open public chat rooms, making them socially safe. However, they are hosted on sites that run commercial, rotating banner advertisements. Utilizing an ad-blocker on your browser makes these completely clean for children.
+                        </p>
+                        <span class="bg-yellow-50 text-yellow-700 font-bold text-[11px] px-3 py-1 rounded-md uppercase tracking-wider">Ad Blocker Advised</span>
+                    </div>
+                </div>
 
-                            <div class="bg-white p-4 rounded-2xl border border-slate-100">
-                                <h5 class="font-bold text-xs text-amber-700 mb-1">🛑 Rotating Ads & Safety</h5>
-                                <p class="text-slate-500 text-[11px] leading-relaxed">
-                                    These sites are hosted on third-party domains. Some utilize rotating ads that we cannot filter. We strongly recommend installing an aggressive ad blocker like <a href="https://ublockorigin.com/" target="_blank" class="font-bold underline text-amber-800">uBlock Origin</a> on your child's browser.
-                                </p>
-                            </div>
-                        </div>
+                <!-- Red Light Card -->
+                <div class="bg-white border-2 border-red-100 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6">
+                    <div class="bg-red-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-md shadow-red-100">
+                        🔴
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-red-800 mb-1">Red Light (Private Lobbies Mandated)</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            These games feature global matchmaking, unmoderated live chat lobbies, custom user-generated names, or aggressive video advertisements. Children should only play these if an instructor or parent has manually generated a <em>Private Game/Party Room</em> and provided the direct invite link, completely isolating them from public servers.
+                        </p>
+                        <span class="bg-red-50 text-red-700 font-bold text-[11px] px-3 py-1 rounded-md uppercase tracking-wider">Supervisor Code Required</span>
                     </div>
                 </div>
             </div>
 
+            <!-- Parental Guide Context -->
+            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8">
+                <h3 class="font-display font-bold text-lg text-slate-800 mb-3">Frequently Asked Questions</h3>
+                <div class="space-y-4 text-sm text-slate-600 leading-relaxed">
+                    <p>
+                        <strong class="text-slate-800 block mb-0.5">Is the primary goal of the arcade educational?</strong>
+                        While many included sandbox builds foster advanced physical or logic skills (like *Neal.fun* or *Line Rider*), this site's ultimate objective is **tactile recreation, coordination building, and safe group play**.
+                    </p>
+                    <p>
+                        <strong class="text-slate-800 block mb-0.5">How do you protect kids from rotating ads?</strong>
+                        These sites are hosted on external networks. Hosts can update ad widgets without our knowledge. Installing an ad-blocker, such as <a href="https://ublockorigin.com/" target="_blank" class="text-teal-600 font-bold underline">uBlock Origin</a>, effectively filters out 99% of loading screens and banners.
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -352,12 +377,20 @@
                                     <input type="url" id="add-game-url" required placeholder="e.g., https://retrobowl.me/" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Category</label>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Arcade Category</label>
                                     <select id="add-game-cat" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none font-semibold">
                                         <option value="multiplayer">Multiplayer</option>
                                         <option value="1player">1 Player</option>
                                         <option value="clicker">Clicker Games</option>
                                         <option value="learning">Learning & Science</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Safety Matrix Level</label>
+                                    <select id="add-game-safety-rating" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none font-semibold">
+                                        <option value="green">🟢 Green Light</option>
+                                        <option value="yellow">🟡 Yellow Light</option>
+                                        <option value="red">🔴 Red Light</option>
                                     </select>
                                 </div>
                                 <div>
@@ -393,6 +426,10 @@
                                     <input type="text" id="add-game-tags" placeholder="e.g., Arcade, Platformer, Logic" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
                                 </div>
                                 <div class="sm:col-span-2">
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Safety Profile Explanation (Parents & Safety Metadata)</label>
+                                    <input type="text" id="add-game-safetyprofile" required placeholder="e.g., Safe offline canvas build. Completely ad-free." class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
+                                </div>
+                                <div class="sm:col-span-2">
                                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Kid-Friendly Description</label>
                                     <textarea id="add-game-desc" required rows="2" placeholder="Explain how the game is played..." class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none resize-none"></textarea>
                                 </div>
@@ -409,9 +446,9 @@
 
                         <!-- Games List Table -->
                         <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Current Games Database</h3>
-                            <div class="overflow-y-auto max-h-96 space-y-2" id="adm-games-table-list">
-                                <!-- Populated dynamically -->
+                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Current Games Database (Grouped & Sortable)</h3>
+                            <div class="overflow-y-auto max-h-96 space-y-6" id="adm-games-table-list">
+                                <!-- Populated dynamically by categories -->
                             </div>
                         </div>
                     </div>
@@ -463,7 +500,9 @@
                     "title": "Shellshock.io",
                     "url": "https://shellshock.io",
                     "category": "multiplayer",
-                    "desc": "First person shooter using egg-cellent weaponry and customizable eggs. PRIVATE ROOM and SUPERVISION REQUIRED",
+                    "safetyRating": "red",
+                    "desc": "First person shooter using egg-cellent weaponry and customizable eggs.",
+                    "safetyProfile": "Public matchmaking places children into live text and voice chats with anonymous players. Parents must click 'Create Private Game' on the main menu to build an isolated room for classmates.",
                     "players": "20 Players Max",
                     "violence": "cartoon",
                     "chat": "public",
@@ -479,7 +518,9 @@
                     "title": "Stumble Guys",
                     "url": "https://stumbleguys.com",
                     "category": "multiplayer",
-                    "desc": "Run, dash, and slide past obstacles in this massively multiplayer knockout party game. \nNO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Run, dash, and slide past obstacles in this massively multiplayer knockout party game.",
+                    "safetyProfile": "No in-game keyboard or voice chat, eliminating unmoderated social risks. Free-to-play page contains rotating ad networks. Ad-blocker recommended.",
                     "players": "32 Players Max",
                     "violence": "none",
                     "chat": "none",
@@ -495,7 +536,9 @@
                     "title": "SmashKarts",
                     "url": "https://smashkarts.io",
                     "category": "multiplayer",
-                    "desc": "Fast-paced online multiplayer go-kart battle game in beautiful arenas. PRIVATE ROOM and SUPERVISION REQUIRED",
+                    "safetyRating": "red",
+                    "desc": "Fast-paced online multiplayer go-kart battle game in beautiful arenas.",
+                    "safetyProfile": "Public rooms feature completely open text boxes. Instructors or parents must select 'Create Private Room' on the splash screen to block public chat tracking entirely.",
                     "players": "8 Players Max",
                     "violence": "cartoon",
                     "chat": "public",
@@ -511,10 +554,12 @@
                     "title": "Classic Minecraft",
                     "url": "https://classic.minecraft.net/",
                     "category": "1player",
-                    "desc": "Play the original creative block builder straight in your browser window. DISCONNECTED CHAT=ZERO RISK GAME",
+                    "safetyRating": "green",
+                    "desc": "Play the original creative block builder straight in your browser window.",
+                    "safetyProfile": "No public servers, tracking, or ad placements. Single-player by default; multiplayer only functions if private link codes are manually generated.",
                     "players": "Single Player",
-                    "violence": "cartoon",
-                    "chat": "public",
+                    "violence": "none",
+                    "chat": "none",
                     "tags": [
                               "Creative Sandbox",
                               "Building",
@@ -527,7 +572,9 @@
                     "title": "Neal.fun",
                     "url": "https://neal.fun",
                     "category": "learning",
-                    "desc": "An incredible vault of dynamic scientific experiments, quizzes, and cool curiosities. NO CHAT=ZERO RISK GAMES",
+                    "safetyRating": "green",
+                    "desc": "An incredible vault of dynamic scientific experiments, quizzes, and cool curiosities.",
+                    "safetyProfile": "Entirely ad-free, secure, and self-contained. Safely open for unattended and self-paced study play.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -543,7 +590,9 @@
                     "title": "Dinosaur Game",
                     "url": "https://offline-dino-game.firebaseapp.com/",
                     "category": "clicker",
-                    "desc": "Help T-Rex leap over cactus obstacles and pterodactyls in this browser classic. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "green",
+                    "desc": "Help T-Rex leap over cactus obstacles and pterodactyls in this browser classic.",
+                    "safetyProfile": "Self-hosted, ad-free standalone browser game. No social chat mechanics or network tracking.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -559,7 +608,9 @@
                     "title": "2v2.io",
                     "url": "https://2v2.io/",
                     "category": "multiplayer",
-                    "desc": "Fast-paced building and shooting 2v2 tactical arena. Team up with a classmate to out-build and defeat your opponents. PRIVATE ROOM and SUPERVISION REQUIRED",
+                    "safetyRating": "red",
+                    "desc": "Fast-paced building and shooting 2v2 tactical arena. Team up with a classmate to out-build and defeat your opponents.",
+                    "safetyProfile": "Requires private lobbies to bypass standard unmoderated matchmaking servers and stranger risk.",
                     "players": "4 Players Max",
                     "violence": "cartoon",
                     "chat": "none",
@@ -575,7 +626,9 @@
                     "title": "Kartbros",
                     "url": "https://kartbros.io/",
                     "category": "multiplayer",
-                    "desc": "Speed through vibrant tracks and complete races with up to 8 racers online. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Speed through vibrant tracks and complete races with up to 8 racers online.",
+                    "safetyProfile": "No in-game text or voice communication, eliminating unmoderated stranger hazards. The host page runs display ads; ad-blocker recommended.",
                     "players": "8 Players Max",
                     "violence": "none",
                     "chat": "none",
@@ -591,7 +644,9 @@
                     "title": "BuildNow GG",
                     "url": "https://www.crazygames.com/game/buildnow-gg",
                     "category": "multiplayer",
-                    "desc": "An intense 3D building and shooting battle arena game. Replaced 1v1.lol. PRIVATE ROOM and SUPERVISION REQUIRED",
+                    "safetyRating": "red",
+                    "desc": "An intense 3D building and shooting battle arena game. Replaced 1v1.lol.",
+                    "safetyProfile": "Requires setting up private custom keys. Public matchmaking contains unmoderated chat risk.",
                     "players": "8 Players Max",
                     "violence": "cartoon",
                     "chat": "public",
@@ -607,7 +662,9 @@
                     "title": "Wrestle Bros",
                     "url": "https://freegames.io/game/wrestle-bros",
                     "category": "multiplayer",
+                    "safetyRating": "yellow",
                     "desc": "A hilarious browser physics wrestling game. Smash buttons, perform wild jumps, and slam your classmates!",
+                    "safetyProfile": "Safe, zero-chat wrestling play. Contains startup ad placements. Ad-blocker recommended.",
                     "players": "8 Players Max",
                     "violence": "cartoon",
                     "chat": "none",
@@ -622,8 +679,10 @@
                     "id": "badegg",
                     "title": "Bad Egg",
                     "url": "https://freegames.io/game/bad-egg",
-                    "category": "multiplayer",
-                    "desc": "Survive waves of zombie eggs as a heavily armed egg in this intense battle arena. PRIVATE ROOM and SUPERVISION REQUIRED",
+                    "category": "1player",
+                    "safetyRating": "yellow",
+                    "desc": "Survive waves of zombie eggs as a heavily armed egg in this intense battle arena.",
+                    "safetyProfile": "Single-player only with no social features. Contains standard pre-roll video ads.",
                     "players": "8 Players Max",
                     "violence": "cartoon",
                     "chat": "none",
@@ -639,7 +698,9 @@
                     "title": "Soccer Bros",
                     "url": "https://freegames.io/game/soccer-bros",
                     "category": "multiplayer",
-                    "desc": "Fast-paced browser soccer game. Dribble, pass, tackle, and shoot to score goals against your classmates! NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Fast-paced browser soccer game. Dribble, pass, tackle, and shoot to score goals against your classmates!",
+                    "safetyProfile": "No built-in chat mechanics. Ad-blocker filters background ad banner placements.",
                     "players": "8 Players Max",
                     "violence": "none",
                     "chat": "none",
@@ -655,7 +716,9 @@
                     "title": "Baseball Bros",
                     "url": "https://freegames.io/game/baseball-bros",
                     "category": "multiplayer",
-                    "desc": "A highly competitive browser baseball game. Pitch, swing, and hit home runs against your friends! NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "A highly competitive browser baseball game. Pitch, swing, and hit home runs against your friends!",
+                    "safetyProfile": "Ad rotations active on host site loader. Zero communication features inside play.",
                     "players": "2 Players Max",
                     "violence": "none",
                     "chat": "none",
@@ -671,7 +734,9 @@
                     "title": "Football Bros",
                     "url": "https://freegames.io/game/football-bros",
                     "category": "multiplayer",
-                    "desc": "An exciting browser American football game. Throw passes, execute tackles, and score touchdowns with simple controls! NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "An exciting browser American football game. Throw passes, execute tackles, and score touchdowns with simple controls!",
+                    "safetyProfile": "Features startup ad-loaders. No multiplayer chat risk. uBlock Origin recommended.",
                     "players": "8 Players Max",
                     "violence": "none",
                     "chat": "none",
@@ -687,7 +752,9 @@
                     "title": "Skribbl.io",
                     "url": "https://skribbl.io",
                     "category": "multiplayer",
-                    "desc": "A fun and highly educational guess-the-word drawing board game. \nPRIVATE ROOM and SUPERVISION REQUIRED",
+                    "safetyRating": "red",
+                    "desc": "A fun and highly educational guess-the-word drawing board game.",
+                    "safetyProfile": "Public lobbies contain unmoderated typed chat. Always play in private, secure password lobbies.",
                     "players": "20 Players Max",
                     "violence": "none",
                     "chat": "public",
@@ -703,7 +770,9 @@
                     "title": "Gartic Phone",
                     "url": "https://garticphone.com/",
                     "category": "multiplayer",
-                    "desc": "The ultimate drawing telephone game. Draw, prompt, and laugh with friends. PRIVATE ROOM and SUPERVISION REQUIRED",
+                    "safetyRating": "red",
+                    "desc": "The ultimate drawing telephone game. Draw, prompt, and laugh with friends.",
+                    "safetyProfile": "Only play with trusted classmates. Public rooms can feature inappropriate prompt submissions.",
                     "players": "2-30 Players",
                     "violence": "none",
                     "chat": "public",
@@ -719,7 +788,9 @@
                     "title": "Retro Bowl",
                     "url": "https://retrobowl.me/",
                     "category": "multiplayer",
-                    "desc": "A gorgeous classic 8-bit American football manager simulator. Draft, trade, and win! NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "A gorgeous classic 8-bit American football manager simulator. Draft, trade, and win!",
+                    "safetyProfile": "Features standard host banner advertisements. No built-in chat mechanisms.",
                     "players": "1-2 Players",
                     "violence": "none",
                     "chat": "none",
@@ -735,7 +806,9 @@
                     "title": "Slither.io",
                     "url": "https://slither.io",
                     "category": "1player",
-                    "desc": "Grow your snake by eating glowing orbs. Simple mouse control, no keyboard needed. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Grow your snake by eating glowing orbs. Simple mouse control, no keyboard needed.",
+                    "safetyProfile": "No chat boxes. Contains localized skin advertising boxes on loading. uBlock filters these.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -751,7 +824,9 @@
                     "title": "Flappy Bird",
                     "url": "https://flappy-bird-web.appspot.com/",
                     "category": "clicker",
-                    "desc": "Navigate the classic flapping bird safely through green pipeline obstacles. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "green",
+                    "desc": "Navigate the classic flapping bird safely through green pipeline obstacles.",
+                    "safetyProfile": "Entirely ad-free, self-contained single-player setup. Safe for immediate, unattended play.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -767,7 +842,9 @@
                     "title": "Spacebar Clicker",
                     "url": "https://js13kgames.com/games/spacebar-clicker/index.html",
                     "category": "clicker",
-                    "desc": "Challenge your raw muscle memory and test how fast you can tap spacebar. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "green",
+                    "desc": "Challenge your raw muscle memory and test how fast you can tap spacebar.",
+                    "safetyProfile": "Self-hosted, static single-page setup. Completely ad-free, chat-free, and tracker-free.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -783,7 +860,9 @@
                     "title": "Space Invaders",
                     "url": "http://www.eugenestarr.com/space-invaders.html",
                     "category": "1player",
-                    "desc": "Command your arcade spaceship and defend the planet against incoming aliens. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "green",
+                    "desc": "Command your arcade spaceship and defend the planet against incoming aliens.",
+                    "safetyProfile": "Ad-free custom HTML5 canvas build. Completely safe for instant, independent play.",
                     "players": "Single Player",
                     "violence": "cartoon",
                     "chat": "none",
@@ -799,7 +878,9 @@
                     "title": "Pac-Man",
                     "url": "https://www.google.com/logos/2010/pacman10-i.html",
                     "category": "1player",
-                    "desc": "Feed on dots and dodge retro colorful ghosts in the famous Google Doodle maze. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "green",
+                    "desc": "Feed on dots and dodge retro colorful ghosts in the famous Google Doodle maze.",
+                    "safetyProfile": "Self-contained Google archive. Completely ad-free, chat-free, and safe for all ages.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -815,7 +896,9 @@
                     "title": "Run 3",
                     "url": "https://run3.io/",
                     "category": "1player",
-                    "desc": "Defy gravity and jump over crumbling space tiles in a futuristic 3D cosmic highway. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Defy gravity and jump over crumbling space tiles in a futuristic 3D cosmic highway.",
+                    "safetyProfile": "No communication risks. Contains startup loading screen ads. uBlock recommended.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -831,7 +914,9 @@
                     "title": "Townscaper",
                     "url": "https://oskarstalberg.com/Townscaper/",
                     "category": "learning",
-                    "desc": "Instantly build beautiful floating sea towns block by block. Beautiful design toy. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "green",
+                    "desc": "Instantly build beautiful floating sea towns block by block. Beautiful design toy.",
+                    "safetyProfile": "Entirely ad-free, creative architectural sandbox toy with zero social chat features.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -847,7 +932,9 @@
                     "title": "Line Rider",
                     "url": "https://linerider.com",
                     "category": "learning",
-                    "desc": "Draw tracks and use interactive physics to guide your sledding rider smoothly. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Draw tracks and use interactive physics to guide your sledding rider smoothly.",
+                    "safetyProfile": "No social chat risks. Background sidebar ad banners recommend an active ad-blocker.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -862,7 +949,9 @@
                     "title": "Wordle",
                     "url": "https://www.nytimes.com/games/wordle/index.html",
                     "category": "learning",
-                    "desc": "Solve the daily five-letter word puzzle using smart logic and process of elimination. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Solve the daily five-letter word puzzle using smart logic and process of elimination.",
+                    "safetyProfile": "NYT hosted. No chat risks; minimal static page tracking cookies. safe and secure.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -878,7 +967,9 @@
                     "title": "Quick, Draw!",
                     "url": "https://quickdraw.withgoogle.com/",
                     "category": "learning",
-                    "desc": "Doodle prompts in under 20 seconds and see if Google's friendly neural network guesses it. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "green",
+                    "desc": "Doodle prompts in under 20 seconds and see if Google's friendly neural network guesses it.",
+                    "safetyProfile": "Google AI experimental educational sandbox. Ad-free, secure, and safe for classroom play.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -894,7 +985,9 @@
                     "title": "Little Alchemy 2",
                     "url": "https://littlealchemy2.com/",
                     "category": "learning",
-                    "desc": "Synthesize and construct elements from scratch starting with fire, water, earth, and air. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Synthesize and construct elements from scratch starting with fire, water, earth, and air.",
+                    "safetyProfile": "Non-competitive educational chemistry puzzle. Ad-blocker recommended to filter page ads.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -910,7 +1003,9 @@
                     "title": "Super Mario",
                     "url": "https://supermarioplay.com/fullscreen",
                     "category": "1player",
-                    "desc": "Jump, run, collect gold coins, and rescue Princess Peach in this NES classic. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Jump, run, collect gold coins, and rescue Princess Peach in this NES classic.",
+                    "safetyProfile": "Contains retro website ad banners. safe keyboard platformer controls with ad blocker.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -926,7 +1021,9 @@
                     "title": "Geometry Dash",
                     "url": "https://www.geometrydash.com/",
                     "category": "1player",
-                    "desc": "Rhythm-based platformer. Dodge dangerous spikes and obstacles to upbeat music. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "yellow",
+                    "desc": "Rhythm-based platformer. Dodge dangerous spikes and obstacles to upbeat music.",
+                    "safetyProfile": "Ad widgets active on startup loader. Zero social chat integration.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -942,7 +1039,9 @@
                     "title": "Jelly Mario",
                     "url": "https://jellymar.io/",
                     "category": "1player",
-                    "desc": "Super Mario but everything—from Mario to the enemies—behaves like dynamic jelly. NO CHAT=ZERO RISK GAME",
+                    "safetyRating": "green",
+                    "desc": "Super Mario but everything—from Mario to the enemies—behaves like dynamic jelly.",
+                    "safetyProfile": "Ad-free classic physics sandbox toy. safe, clean single-player play.",
                     "players": "Single Player",
                     "violence": "none",
                     "chat": "none",
@@ -968,19 +1067,19 @@
             },
             "1player": {
                 title: "🕹️ 1 Player Adventures",
-                desc: "This category is for players who understand the basics of playing games on a PC. These challenges require manipulating a mouse, using the directional arrows, or utilizing the classic W-A-S-D key layouts in combination with the spacebar to explore and solve puzzles."
+                desc: "1 player is for players who understand the basics of playing games on a PC using a mouse, arrows, or W-A-S-D in combination with the spacebar."
             },
             clicker: {
                 title: "🖱️ Clicker Games",
-                desc: "Clicker games are perfect for younger players who are just beginning to learn how to use a keyboard. They rely on simple physical actions, primarily using the mouse button or hitting the spacebar, making them accessible, immediate, and extremely fun!"
+                desc: "Clicker games are for young players who are just learning to use a keyboard. It is primarily using the spacebar."
             },
             learning: {
                 title: "🧪 Learning & Science Sandbox",
-                desc: "Perfect for younger gamers and sandbox explorers alike! These games require very basic technical skills, making them accessible and low-stress. Most activities are open-ended and non-competitive, allowing kids to learn logic, chemistry, and physics safely at their own pace."
+                desc: "Learning and Science is great for younger gamers as well and, for the most part, doesn't require very advanced skill. It is also less stressful because most of the games are not competitive."
             },
             favorites: {
                 title: "❤️ My Bookmarked Favorites",
-                desc: "Your custom personal library! Keep track of the games you enjoy playing most in the computer lab. Click the heart icon on any arcade card to save or remove it from this private menu."
+                desc: "Your customized play list! Click the heart bookmark icon inside any game card above to add or remove it from your personal lab dashboard."
             }
         };
 
@@ -1029,7 +1128,7 @@
         // Handle direct loads or bookmarks via hash
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.substring(1);
-            if (hash && ['gaming', 'admin'].includes(hash)) {
+            if (hash && ['gaming', 'admin', 'safety'].includes(hash)) {
                 navigateTo(hash);
             }
         });
@@ -1038,7 +1137,7 @@
         window.onload = function () {
             // Read URL Hash or fallback to gaming
             const initialHash = window.location.hash.substring(1);
-            if (initialHash && ['gaming', 'admin'].includes(initialHash)) {
+            if (initialHash && ['gaming', 'admin', 'safety'].includes(initialHash)) {
                 navigateTo(initialHash);
             } else {
                 navigateTo('gaming');
@@ -1103,10 +1202,12 @@
             renderGames();
         }
 
+        // update bookmarks count
         function updateFavoritesCount() {
             favCountSpan.textContent = favorites.length;
         }
 
+        // set search category filters
         function setFilter(category) {
             currentFilter = category;
             
@@ -1180,9 +1281,24 @@
                     chatBadgeHtml = `<span class="bg-slate-100 text-slate-700 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">📴 No Chat</span>`;
                 }
 
+                // Resolve border & icon style based on Safety Matrix category
+                let cardBorderTheme = "border-slate-200 hover:border-teal-400";
+                let safetyIndicatorLight = "🟢";
+                let safetyProfileAlertBg = "bg-emerald-50 border-emerald-300 text-emerald-900";
+                
+                if (game.safetyRating === 'yellow') {
+                    cardBorderTheme = "border-slate-200 hover:border-yellow-400 shadow-sm";
+                    safetyIndicatorLight = "🟡";
+                    safetyProfileAlertBg = "bg-yellow-50 border-yellow-300 text-yellow-900";
+                } else if (game.safetyRating === 'red') {
+                    cardBorderTheme = "border-slate-200 hover:border-red-400 shadow-sm";
+                    safetyIndicatorLight = "🔴";
+                    safetyProfileAlertBg = "bg-red-50 border-red-300 text-red-900";
+                }
+
                 const cardHtml = `
                     <div class="relative group">
-                        <div class="game-card bg-white border border-slate-200 hover:border-teal-400 rounded-3xl p-5 shadow-sm hover:shadow-xl hover:shadow-teal-100 flex flex-col justify-between h-full relative z-10">
+                        <div class="game-card bg-white border ${cardBorderTheme} rounded-3xl p-5 shadow-sm hover:shadow-xl hover:shadow-teal-100 flex flex-col justify-between h-full relative z-10 border-l-4 ${game.safetyRating === 'green' ? 'border-l-emerald-500' : game.safetyRating === 'yellow' ? 'border-l-amber-500' : 'border-l-red-500'}">
                             <div>
                                 <div class="flex items-center justify-between mb-4">
                                     <div class="bg-slate-50 text-2xl w-12 h-12 flex items-center justify-center rounded-2xl shadow-inner border border-slate-100">
@@ -1198,6 +1314,12 @@
 
                                 <h3 class="font-display font-bold text-lg text-slate-800 group-hover:text-teal-600 transition-colors mb-2">${game.title}</h3>
                                 <p class="text-slate-500 font-medium text-xs leading-relaxed mb-4">${game.desc}</p>
+                                
+                                <!-- Safety Profile Block -->
+                                <div class="p-3 border rounded-xl text-[11px] leading-relaxed mb-4 ${safetyProfileAlertBg}">
+                                    <span class="font-bold uppercase tracking-wider block mb-0.5">${safetyIndicatorLight} Safety Profile:</span>
+                                    ${game.safetyProfile || "Safe self-contained single-player game."}
+                                </div>
                             </div>
 
                             <div>
@@ -1258,7 +1380,7 @@
             const pass = document.getElementById('admin-pass').value.trim();
 
             if (user === 'admin' && pass === 'password') {
-                isAdminLoggedIn = false; 
+                isAdminLoggedIn = true; 
                 document.getElementById('admin-login-card').classList.add('hidden');
                 document.getElementById('admin-dashboard').classList.remove('hidden');
                 
@@ -1305,32 +1427,112 @@
             });
         }
 
-        // --- SUB-CMS 1: GAMES MANAGEMENT (With Inline Edit Feature) ---
+        // --- SUB-CMS 1: GAMES MANAGEMENT (With Inline Edit Feature and Sort-within-group options) ---
         function renderAdminGamesList() {
             const listContainer = document.getElementById('adm-games-table-list');
             listContainer.innerHTML = '';
 
-            gamesDataset.forEach(game => {
-                listContainer.innerHTML += `
-                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-100">
-                        <div class="flex items-center gap-3">
-                            <span class="text-xl">${game.emoji}</span>
-                            <div>
-                                <h4 class="text-xs font-bold text-slate-800">${game.title}</h4>
-                                <span class="text-[9px] text-slate-400 font-bold uppercase">${game.category}</span>
+            const categories = [
+                { key: 'multiplayer', label: '👥 Multiplayer Games' },
+                { key: '1player', label: '🕹️ 1 Player Games' },
+                { key: 'clicker', label: '🖱️ Clicker Games' },
+                { key: 'learning', label: '🧪 Learning & Science' }
+            ];
+
+            categories.forEach(cat => {
+                const catGames = gamesDataset.filter(g => g.category === cat.key);
+                
+                if (catGames.length === 0) return;
+
+                let categoryHtml = `
+                    <div class="p-4 bg-teal-50/40 rounded-2xl border border-teal-100 space-y-3">
+                        <div class="flex items-center justify-between border-b border-teal-100 pb-2 mb-2">
+                            <h4 class="font-display font-bold text-sm text-teal-900">${cat.label}</h4>
+                            <span class="text-[10px] bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded-full">${catGames.length} Active</span>
+                        </div>
+                        <div class="space-y-2">
+                `;
+
+                catGames.forEach((game, index) => {
+                    categoryHtml += `
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-white rounded-xl border border-slate-100 gap-3">
+                            <div class="flex items-center gap-3">
+                                <span class="text-xl shrink-0">${game.emoji}</span>
+                                <div class="overflow-hidden">
+                                    <h5 class="text-xs font-bold text-slate-800 truncate">${game.title}</h5>
+                                    <span class="text-[10px] font-bold ${game.safetyRating === 'green' ? 'text-emerald-600' : game.safetyRating === 'yellow' ? 'text-amber-500' : 'text-red-500'} capitalize">
+                                        ● ${game.safetyRating} Light
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <!-- Up/Down Sorting Controls & Edit Actions -->
+                            <div class="flex items-center justify-end gap-1.5 shrink-0 self-end sm:self-auto">
+                                <button onclick="moveGame('${game.id}', 'up')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[10px] px-2 py-1 rounded-md transition-colors ${index === 0 ? 'opacity-40 cursor-not-allowed' : ''}" title="Move Up within category">
+                                    ▲
+                                </button>
+                                <button onclick="moveGame('${game.id}', 'down')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[10px] px-2 py-1 rounded-md transition-colors ${index === catGames.length - 1 ? 'opacity-40 cursor-not-allowed' : ''}" title="Move Down within category">
+                                    ▼
+                                </button>
+                                <div class="h-4 w-px bg-slate-200 mx-1"></div>
+                                <button onclick="editGame('${game.id}')" class="bg-teal-50 hover:bg-teal-100 text-teal-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
+                                    Edit
+                                </button>
+                                <button onclick="deleteGame('${game.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
+                                    Remove
+                                </button>
                             </div>
                         </div>
-                        <div class="flex items-center gap-1.5">
-                            <button onclick="editGame('${game.id}')" class="bg-teal-50 hover:bg-teal-100 text-teal-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
-                                Edit
-                            </button>
-                            <button onclick="deleteGame('${game.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
-                                Remove
-                            </button>
+                    `;
+                });
+
+                categoryHtml += `
                         </div>
                     </div>
                 `;
+                listContainer.innerHTML += categoryHtml;
             });
+        }
+
+        // Sorting Engine (re-orders game structures inside unique groups)
+        function moveGame(gameId, direction) {
+            const index = gamesDataset.findIndex(g => g.id === gameId);
+            if (index === -1) return;
+            
+            const game = gamesDataset[index];
+            const cat = game.category;
+
+            // Map same category items with their original index positions
+            const categoryLister = gamesDataset
+                .map((g, i) => ({ game: g, originalIndex: i }))
+                .filter(item => item.game.category === cat);
+
+            const positionInGroup = categoryLister.findIndex(item => item.game.id === gameId);
+
+            if (direction === 'up' && positionInGroup > 0) {
+                // Swap in master array
+                const targetOriginalIndex = categoryLister[positionInGroup - 1].originalIndex;
+                const currentOriginalIndex = categoryLister[positionInGroup].originalIndex;
+
+                const temp = gamesDataset[currentOriginalIndex];
+                gamesDataset[currentOriginalIndex] = gamesDataset[targetOriginalIndex];
+                gamesDataset[targetOriginalIndex] = temp;
+
+                showToast(`Moved ${game.title} up inside category!`, "▲");
+            } else if (direction === 'down' && positionInGroup < categoryLister.length - 1) {
+                // Swap in master array
+                const targetOriginalIndex = categoryLister[positionInGroup + 1].originalIndex;
+                const currentOriginalIndex = categoryLister[positionInGroup].originalIndex;
+
+                const temp = gamesDataset[currentOriginalIndex];
+                gamesDataset[currentOriginalIndex] = gamesDataset[targetOriginalIndex];
+                gamesDataset[targetOriginalIndex] = temp;
+
+                showToast(`Moved ${game.title} down inside category!`, "▼");
+            }
+
+            renderAdminGamesList();
+            renderGames();
         }
 
         function editGame(gameId) {
@@ -1351,6 +1553,8 @@
             document.getElementById('add-game-tags').value = game.tags.join(', ');
             document.getElementById('add-game-emoji').value = game.emoji;
             document.getElementById('add-game-desc').value = game.desc;
+            document.getElementById('add-game-safetyprofile').value = game.safetyProfile || '';
+            document.getElementById('add-game-safety-rating').value = game.safetyRating || 'green';
             
             // Set dynamic dropdown values
             document.getElementById('add-game-violence').value = game.violence || 'none';
@@ -1390,6 +1594,8 @@
             const tagsInput = document.getElementById('add-game-tags').value;
             const emoji = document.getElementById('add-game-emoji').value.trim();
             const desc = document.getElementById('add-game-desc').value.trim();
+            const safetyProfile = document.getElementById('add-game-safetyprofile').value.trim();
+            const safetyRating = document.getElementById('add-game-safety-rating').value;
 
             const tags = tagsInput.split(',').map(t => t.trim()).filter(t => t !== '');
 
@@ -1397,7 +1603,7 @@
                 // Update inside existing database array
                 const gameIndex = gamesDataset.findIndex(g => g.id === editingGameId);
                 if (gameIndex > -1) {
-                    gamesDataset[gameIndex] = { id: editingGameId, title, url, category, desc, players, violence, chat, tags, emoji };
+                    gamesDataset[gameIndex] = { id: editingGameId, title, url, category, safetyRating, desc, safetyProfile, players, violence, chat, tags, emoji };
                     showToast(`"${title}" updated successfully!`, "💾");
                 }
                 cancelEditGame();
@@ -1409,7 +1615,7 @@
                 }
                 
                 // Construct and inject game object
-                const newGame = { id, title, url, category, desc, players, violence, chat, tags, emoji };
+                const newGame = { id, title, url, category, safetyRating, desc, safetyProfile, players, violence, chat, tags, emoji };
                 gamesDataset.push(newGame);
                 showToast(`"${title}" inserted successfully!`, "🎮");
                 event.target.reset();
@@ -1460,7 +1666,7 @@
             let resultHtml = rawHtml;
 
             // Target replacement for games block
-            const gamesRegex = /(\/\^\s*BEGIN_GAMES_DATA\s*\*\/)[\s\S]*?(\/\*\s*END_GAMES_DATA\s*\*\/)/g;
+            const gamesRegex = /(\/\s*BEGIN_GAMES_DATA\s*\*\/)[\s\S]*?(\/\s*END_GAMES_DATA\s*\*\/)/g;
             resultHtml = resultHtml.replace(gamesRegex, `$1\n        let gamesDataset = ${serializedGames};\n        $2`);
 
             // Clean temporary active styles or credentials so the file builds completely fresh
