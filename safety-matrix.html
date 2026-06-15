@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classroom Safety Matrix | EUGENESTARR.COM</title>
+    <!-- Injects Tailwind and typography back into your separate page -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <script>
@@ -21,12 +22,29 @@
 </head>
 <body class="bg-slate-50 min-h-screen flex flex-col font-sans antialiased">
 
+    <!-- Navbar Container -->
     <nav class="bg-white border-b border-slate-100 py-3.5 px-4 md:px-8 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <span class="font-display font-bold text-xl tracking-wide text-slate-800">EUGENESTARR.COM</span>
-                <span class="inline-block bg-teal-50 text-teal-700 font-bold text-xs px-2.5 py-0.5 rounded-full">Browser Arcade</span>
-            </div>
+            
+            <!-- Branding Header (Both Image and Name link to index.html) -->
+            <a href="index.html" class="flex items-center gap-3 group transition-all hover:opacity-90">
+                <div class="relative w-11 h-11 flex items-center justify-center shrink-0">
+                    <!-- Native HTML Fallback Object (with pointer-events-none to let clicks pass to anchor link) -->
+                    <object data="images/profile_pic.png" type="image/png" class="w-11 h-11 rounded-2xl object-cover border border-slate-200 shadow-md shadow-teal-50 bg-white pointer-events-none">
+                        <div class="bg-teal-600 text-white p-2.5 rounded-2xl shadow-md shadow-teal-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-6.75a1.125 1.125 0 00-1.125 1.125v3.375m9 0h-9M9 10.125h.008v.008H9v-.008zm6 0h.008v.008H15v-.008zm0-3h.008v.008H15V7.125zm-6 0h.008v.008H9V7.125z" />
+                            </svg>
+                        </div>
+                    </object>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-xl tracking-wide text-slate-800 group-hover:text-teal-600 transition-colors">EUGENESTARR.COM</span>
+                    <span class="inline-block ml-2 bg-teal-50 text-teal-700 font-bold text-xs px-2.5 py-0.5 rounded-full">Browser Arcade</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
             <div class="flex gap-2">
                 <a href="index.html" class="px-4 py-2 rounded-xl font-bold text-sm text-slate-600 hover:text-teal-600 hover:bg-slate-50 flex items-center gap-1.5">🎮 Arcade Games</a>
                 <a href="safety-matrix.html" class="px-4 py-2 rounded-xl font-bold text-sm text-teal-600 bg-teal-50 shadow-sm">🛡️ Safety Matrix</a>
@@ -34,6 +52,7 @@
         </div>
     </nav>
 
+    <!-- Main Content Area -->
     <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-800 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
         <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
             <span class="bg-teal-500/30 text-white font-bold text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Parents & Guardians Reference</span>
@@ -46,6 +65,7 @@
         <div class="space-y-6">
             <h2 class="font-display font-bold text-2xl text-slate-800">Understanding Our Safety Levels</h2>
             
+            <!-- Green Tier -->
             <div class="bg-white border border-emerald-100 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6">
                 <div class="bg-emerald-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-md">🟢</div>
                 <div>
@@ -55,28 +75,31 @@
                 </div>
             </div>
 
+            <!-- Yellow Tier -->
             <div class="bg-white border border-yellow-100 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6">
                 <div class="bg-yellow-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-md">🟡</div>
                 <div>
-                    <h3 class="font-display font-bold text-lg text-yellow-800 mb-1">Yellow Light (Ad-Supported / Closed Rooms)</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-3">These games contain no open public keyboard or voice chat rooms, making them entirely safe from interaction risk vectors. However, they rely on commercial third-party web domains that deploy rotating layout ad boxes. Running an active browser ad-blocker filters these completely.</p>
+                    <h3 class="font-display font-bold text-lg text-yellow-800 mb-1">Yellow Light (Ad-Blocker Recommended)</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-3">These games contain no open public keyboard or voice chat rooms, making them socially safe. However, they are hosted on sites that run commercial, rotating banner advertisements. Utilizing an ad-blocker on your browser makes these completely clean for children.</p>
                     <span class="bg-yellow-50 text-yellow-700 font-bold text-[10px] px-3 py-1 rounded-md uppercase tracking-wide">Ad-Blocker Recommended</span>
                 </div>
             </div>
 
+            <!-- Red Tier -->
             <div class="bg-white border border-red-100 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6">
                 <div class="bg-red-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-md">🔴</div>
                 <div>
                     <h3 class="font-display font-bold text-lg text-red-800 mb-1">Red Light (Private Lobbies Mandated)</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-3">These competitive arena matches feature unmoderated global matchmaking strings, text overlays, or aggressive video placements outside school profiles. In lab sessions, we strictly mandate that an instructor creates password-protected custom parties, completely isolating players from stranger entries.</p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-3">These competitive arena matches feature unmoderated global matchmaking strings, text overlays, or aggressive video placements. In lab sessions, we strictly mandate that an instructor creates password-protected custom parties, completely isolating players from stranger entries.</p>
                     <span class="bg-red-50 text-red-700 font-bold text-[10px] px-3 py-1 rounded-md uppercase tracking-wide">Instructor Oversight Required</span>
                 </div>
             </div>
         </div>
 
+        <!-- FAQ Footer Information -->
         <div class="bg-slate-100 border rounded-3xl p-6 md:p-8 text-sm text-slate-600 leading-relaxed">
             <h3 class="font-display font-bold text-slate-800 text-base mb-2">Lab Filtering Guidelines</h3>
-            <p>External web game hosts can alter ad distribution tracking networks without warning. For the best security performance during recreational blocks, we recommend utilizing an active enterprise filter utility or local browser extension such as <a href="https://ublockorigin.com/" target="_blank" class="text-teal-600 font-bold underline">uBlock Origin</a> to maintain clean canvas surfaces.</p>
+            <p>External web game hosts can alter ad distribution tracking networks without warning. For the best security performance during recreational blocks, we recommend utilizing an active enterprise filter utility or local browser extension such as <a href="https://ublockorigin.com/" target="_blank" class="text-teal-600 font-bold underline text-teal-700 hover:text-teal-800 transition-colors">uBlock Origin</a> to maintain clean canvas surfaces.</p>
         </div>
     </div>
 
