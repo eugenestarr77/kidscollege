@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUGENESTARR.COM Browser Arcade</title>
+    <!-- Tailwind CSS CDN for premium layout and modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     
@@ -47,8 +48,10 @@
 </head>
 <body class="flex flex-col min-h-screen">
 
+    <!-- Unified Navigation Bar -->
     <nav class="bg-white border-b border-slate-100 py-3.5 px-4 md:px-8 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Branding Header (With Native Fallback Object) -->
             <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('gaming')">
                 <div class="relative w-11 h-11 flex items-center justify-center shrink-0">
                     <object data="images/profile_pic.png" type="image/png" class="w-11 h-11 rounded-2xl object-cover border border-slate-200 shadow-md shadow-teal-50 bg-white">
@@ -73,10 +76,13 @@
         </div>
     </nav>
 
+    <!-- Custom Notification Toast -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 text-white font-semibold text-sm py-3 px-6 rounded-2xl shadow-xl flex items-center gap-2">
-        <span id="toast-emoji">✨</span><span id="toast-msg">Success!</span>
+        <span id="toast-emoji">✨</span>
+        <span id="toast-msg">Success!</span>
     </div>
 
+    <!-- ARCADE GAMING DASHBOARD -->
     <section id="page-gaming" class="page-view">
         <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-800 text-white py-14 px-4 md:px-8 text-center relative overflow-hidden flex flex-col items-center">
             <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center w-full">
@@ -98,11 +104,11 @@
         <div class="max-w-7xl mx-auto w-full px-4 md:px-8 py-8">
             <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 pb-2 border-b border-slate-200">
                 <button onclick="setFilter('all')" id="filter-all" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-teal-600 text-white border-2 border-teal-600">🔍 All Games</button>
-                <button onclick="setFilter('multiplayer')" id="filter-multiplayer" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">👥 Multiplayer</button>
-                <button onclick="setFilter('1player')" id="filter-1player" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">🕹️ 1 Player</button>
-                <button onclick="setFilter('clicker')" id="filter-clicker" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">🖱️ Clicker Games</button>
-                <button onclick="setFilter('learning')" id="filter-learning" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">🧪 Learning & Science</button>
-                <button onclick="setFilter('favorites')" id="filter-favorites" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">❤️ Bookmarked (<span id="fav-count">0</span>)</button>
+                <button onclick="setFilter('multiplayer')" id="filter-multiplayer" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent hover:border-slate-300">👥 Multiplayer</button>
+                <button onclick="setFilter('1player')" id="filter-1player" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent hover:border-slate-300">🕹️ 1 Player</button>
+                <button onclick="setFilter('clicker')" id="filter-clicker" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent hover:border-slate-300">🖱️ Clicker Games</button>
+                <button onclick="setFilter('learning')" id="filter-learning" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent hover:border-slate-300">🧪 Learning & Science</button>
+                <button onclick="setFilter('favorites')" id="filter-favorites" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent hover:border-slate-300">❤️ Bookmarked (<span id="fav-count">0</span>)</button>
             </div>
 
             <div id="category-intro" class="mb-8 p-6 bg-white border-l-4 border-teal-500 rounded-r-2xl shadow-sm">
@@ -121,6 +127,7 @@
         </div>
     </section>
 
+    <!-- CMS TEACHER PANEL -->
     <section id="page-admin" class="page-view hidden">
         <div class="max-w-5xl mx-auto px-4 md:px-8 py-10">
             <div id="admin-login-card" class="max-w-md mx-auto bg-white p-8 rounded-[32px] shadow-xl border border-slate-100">
@@ -134,7 +141,7 @@
 
             <div id="admin-dashboard" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-1 bg-white p-4 rounded-3xl border shadow-sm flex flex-col gap-2">
-                    <button onclick="switchAdminTab('games')" id="btn-adm-games" class="admin-tab-btn text-left px-4 py-3 rounded-2xl font-bold text-sm bg-teal-600 text-white">🎮 Manage Games</button>
+                    <button onclick="switchAdminTab('games')" id="btn-adm-games" class="admin-tab-btn text-left px-4 py-3 rounded-2xl font-bold text-sm bg-teal-600 text-white shadow-sm">🎮 Manage Games</button>
                     <button onclick="switchAdminTab('export')" id="btn-adm-export" class="admin-tab-btn text-left px-4 py-3 rounded-2xl font-bold text-sm text-slate-600">💾 Export Code for GitHub</button>
                     <button onclick="handleAdminLogout()" class="text-left px-4 py-3 rounded-2xl font-bold text-sm text-red-500 hover:bg-red-50">🚪 Logout</button>
                 </div>
@@ -193,23 +200,32 @@
         <p>&copy; <span id="copyright-year">2026</span> Eugene Starr | Browser Arcade</p>
     </footer>
 
+    <!-- LINK THE EXTERNAL REFACTOR DATABASE -->
     <script src="games-data.js"></script>
 
     <script>
-        // Fallback safety assignment if network configuration file drops or runs asynchronous
-        let gamesDataset = window.gamesDataset || [];
+        // GLOBAL APP STATE DECLARATIONS
+        let gamesDataset = [];
+        let currentPage = 'gaming';
+        let currentFilter = 'all';
+        let searchQuery = '';
+        let favorites = [];
+        let isAdminLoggedIn = false;
+        let currentAdminTab = 'games';
+        let editingGameId = null;
 
         const categoryDetails = {
-            all: { title: "All Curated Catalog", desc: "Browse our classroom-vetted library modules safely managed by the safety light spectrum criteria filters." },
-            multiplayer: { title: "👥 Multiplayer Arenas", desc: "Multiplayer paths allow students inside the physical lab room to establish closed peer sessions together using clean invites." },
-            "1player": { title: "🕹️ 1 Player Adventures", desc: "Single player options designed to train cognitive mouse routing and custom key command parameters." },
-            clicker: { title: "鼠标 Clicker Modules", desc: "Clean input loops perfectly tailored for introduction coordinates and motor reflex alignment tutorials." },
-            learning: { title: "🧪 Learning & Science Lab", desc: "Stress-free strategy components and architectural toys focused entirely on solo creation methods." },
-            favorites: { title: "❤️ Your Bookmarked Dashboard", desc: "Your tailored lab selection! Click the profile heart asset on any item to pin it here permanently." }
+            all: { title: "All Vetted Games", desc: "Browse our complete catalog of safe, classroom-vetted browser games. Use the filter tabs above to view specific types of challenges suited for different skill levels!" },
+            multiplayer: { title: "👥 Multiplayer Arenas", desc: "Multiplayer is a way for classes to create private rooms, play together, and compete! It is our most complex method of play because it involves creating a safe custom lobby and entering matching room credentials or passwords to connect with friends in the same physical room." },
+            "1player": { title: "🕹️ 1 Player Adventures", desc: "1 player is for players who understand the basics of playing games on a PC using a mouse, arrows, or W-A-S-D in combination with the spacebar." },
+            clicker: { title: "🖱️ Clicker Games", desc: "Clicker games are for young players who are just learning to use a keyboard. It is primarily using the spacebar." },
+            learning: { title: "🧪 Learning & Science Sandbox", desc: "Learning and Science is great for younger gamers as well and, for the most part, doesn't require very advanced skill. It is also less stressful because most of the games are not competitive." },
+            favorites: { title: "❤️ My Bookmarked Favorites", desc: "Your customized play list! Click the heart bookmark icon inside any game card above to add or remove it from your personal lab dashboard." }
         };
 
         let gamesGrid, emptyState, searchInput, searchResetBtn, favCountSpan;
 
+        // SAFE APP STATE INITIALIZER
         function initApp() {
             gamesGrid = document.getElementById('games-grid');
             emptyState = document.getElementById('empty-state');
@@ -222,8 +238,23 @@
                 return;
             }
 
-            // Sync database from runtime definitions
-            gamesDataset = window.gamesDataset || [];
+            // Sync dynamic database array directly from your decoupled games-data.js script
+            if (window.gamesDataset && window.gamesDataset.length > 0) {
+                gamesDataset = window.gamesDataset;
+            } else {
+                // If games-data.js hasn't loaded yet (because GitHub is rebuilding), show a loading skeleton
+                gamesGrid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white rounded-[32px] border border-dashed border-slate-200 p-8 shadow-sm">
+                        <div class="animate-spin inline-block w-8 h-8 border-4 border-teal-600 border-t-transparent rounded-full mb-4"></div>
+                        <h3 class="font-display font-bold text-lg text-slate-700">Connecting to Arcade Database...</h3>
+                        <p class="text-xs text-slate-400 mt-2 max-w-sm mx-auto leading-relaxed">
+                            If this screen stays blank, GitHub is currently deploying your latest updates. This usually takes less than a minute!
+                        </p>
+                        <button onclick="window.location.reload()" class="mt-5 bg-teal-600 hover:bg-slate-900 text-white font-bold text-xs py-2 px-5 rounded-xl shadow-md transition-all">🔄 Force Refresh Page</button>
+                    </div>
+                `;
+                return;
+            }
 
             const initialHash = window.location.hash.substring(1);
             navigateTo(['gaming', 'admin'].includes(initialHash) ? initialHash : 'gaming');
@@ -283,8 +314,8 @@
         function toggleFavorite(gameId, event) {
             event.preventDefault(); event.stopPropagation();
             const idx = favorites.indexOf(gameId);
-            if (idx > -1) { favorites.splice(idx, 1); showToast("Removed bookmark", "🤍"); }
-            else { favorites.push(gameId); showToast("Bookmarked game", "❤️"); }
+            if (idx > -1) { favorites.splice(idx, 1); showToast("Removed from Bookmarks!", "🤍"); }
+            else { favorites.push(gameId); showToast("Added to Bookmarks!", "❤️"); }
             localStorage.setItem('kids_college_favorites', JSON.stringify(favorites));
             updateFavoritesCount(); renderGames();
         }
@@ -323,6 +354,8 @@
             filtered.forEach(game => {
                 const isFav = favorites.includes(game.id);
                 const safetyProfileAlertBg = game.safetyRating === 'green' ? 'bg-emerald-50 border-emerald-300 text-emerald-900' : game.safetyRating === 'yellow' ? 'bg-yellow-50 border-yellow-300 text-yellow-900' : 'bg-red-50 border-red-300 text-red-900';
+                const safetyIndicatorLight = game.safetyRating === 'green' ? '🟢' : game.safetyRating === 'yellow' ? '🟡' : '🔴';
+                const tagsMarkup = game.tags.map(tag => `<span class="bg-slate-100 text-slate-600 font-bold text-[11px] px-2.5 py-1 rounded-md">${tag}</span>`).join('');
                 
                 gamesGrid.innerHTML += `
                     <div class="game-card bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl border-l-4 ${game.safetyRating === 'green' ? 'border-l-emerald-500' : game.safetyRating === 'yellow' ? 'border-l-amber-500' : 'border-l-red-500'} flex flex-col justify-between h-full">
@@ -336,22 +369,28 @@
                             <h3 class="font-display font-bold text-slate-800 mb-1">${game.title}</h3>
                             <p class="text-slate-500 text-xs leading-relaxed mb-4">${game.desc}</p>
                             <div class="p-3 border rounded-xl text-[11px] leading-relaxed mb-4 ${safetyProfileAlertBg}">
-                                <span class="font-bold block uppercase tracking-wider mb-0.5">${game.safetyRating === 'green' ? '🟢 Green' : game.safetyRating === 'yellow' ? '🟡 Yellow' : '🔴 Red'} Profile:</span>
+                                <span class="font-bold block uppercase tracking-wider mb-0.5">${safetyIndicatorLight} ${game.safetyRating.toUpperCase()} Light Profile:</span>
                                 ${game.safetyProfile}
                             </div>
                         </div>
-                        <div class="flex items-center justify-between pt-3 border-t">
-                            <span class="text-slate-400 font-bold text-[10px] uppercase">${game.players}</span>
-                            <a href="${game.url}" target="_blank" class="bg-slate-900 hover:bg-orange-500 text-white font-extrabold text-xs py-2 px-4 rounded-xl shadow-sm transition-colors">Play Now &rarr;</a>
+                        <div>
+                            <div class="flex flex-wrap gap-1 mb-4">
+                                ${tagsMarkup}
+                            </div>
+                            <div class="flex items-center justify-between pt-3 border-t">
+                                <span class="text-slate-400 font-bold text-[10px] uppercase">${game.players}</span>
+                                <a href="${game.url}" target="_blank" class="bg-slate-900 hover:bg-orange-500 text-white font-extrabold text-xs py-2 px-4 rounded-xl shadow-sm transition-colors">Play Now &rarr;</a>
+                            </div>
                         </div>
                     </div>`;
             });
         }
 
-        // CONTROL CONTROL STATE DRIVERS
+        // CMS LOGIC HANDLERS
         function handleAdminLogin(event) {
             event.preventDefault();
             if (document.getElementById('admin-user').value === 'admin' && document.getElementById('admin-pass').value === 'password') {
+                isAdminLoggedIn = true;
                 document.getElementById('admin-login-card').classList.add('hidden');
                 document.getElementById('admin-dashboard').classList.remove('hidden');
                 document.getElementById('nav-admin').textContent = "🔓 Teacher Dashboard";
@@ -359,6 +398,7 @@
             } else { showToast("Invalid login credentials", "❌"); }
         }
         function handleAdminLogout() {
+            isAdminLoggedIn = false;
             document.getElementById('admin-login-card').classList.remove('hidden');
             document.getElementById('admin-dashboard').classList.add('hidden');
             document.getElementById('nav-admin').textContent = "🔑 Teacher Panel";
@@ -450,7 +490,7 @@
             document.getElementById('add-game-desc').value = g.desc;
             document.getElementById('add-game-emoji').value = g.emoji;
             document.getElementById('add-game-tags').value = g.tags.join(', ');
-            document.getElementById('add-game-submit-btn').textContent = "💾 Save Document Changes";
+            document.getElementById('add-game-submit-btn').textContent = "💾 Save Changes";
             document.getElementById('cancel-edit-btn').classList.remove('hidden');
         }
 
@@ -465,11 +505,10 @@
             renderAdminGamesList(); renderGames();
         }
 
-        // REFACTORED CLEAN OUTPUT EMITTER (Compiles *only* the database javascript data packet!)
         function generateStaticSource() {
             const out = JSON.stringify(gamesDataset, null, 2);
             document.getElementById('generated-code-box').value = `// games-data.js\nwindow.gamesDataset = ${out};`;
-            showToast("Database architecture data packet generated!", "💻");
+            showToast("Database update generated!", "💻");
         }
     </script>
 </body>
