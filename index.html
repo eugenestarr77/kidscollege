@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUGENESTARR.COM Browser Arcade</title>
-    <!-- Tailwind CSS CDN for premium layout and modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     
@@ -37,48 +36,28 @@
             font-family: 'Quicksand', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-        
-        /* Smooth, bouncy transitions */
         .game-card, .menu-card {
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
         }
-        
-        /* Custom scrollbar matching brand theme */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <!-- Unified Navigation Bar -->
     <nav class="bg-white border-b border-slate-100 py-3.5 px-4 md:px-8 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <!-- Branding Header (With Custom Avatar Image & Fallback Support) -->
             <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('gaming')">
                 <div class="relative w-11 h-11 flex items-center justify-center shrink-0">
-                    <!-- Local Custom Avatar -->
-                    <img src="images/profile_pic.png" 
-                         onerror="this.style.display='none'; document.getElementById('nav-generic-icon').classList.remove('hidden')" 
-                         class="w-11 h-11 rounded-2xl object-cover border border-slate-200 shadow-md shadow-teal-50 bg-white" 
-                         alt="Eugene Starr">
-                    
-                    <!-- Fallback Generic Icon (Displays if local file is missing/loading) -->
-                    <div id="nav-generic-icon" class="hidden bg-teal-600 text-white p-2.5 rounded-2xl shadow-md shadow-teal-100">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-6.75a1.125 1.125 0 00-1.125 1.125v3.375m9 0h-9M9 10.125h.008v.008H9v-.008zm6 0h.008v.008H15v-.008zm0-3h.008v.008H15V7.125zm-6 0h.008v.008H9V7.125z" />
-                        </svg>
-                    </div>
+                    <object data="images/profile_pic.png" type="image/png" class="w-11 h-11 rounded-2xl object-cover border border-slate-200 shadow-md shadow-teal-50 bg-white">
+                        <div class="bg-teal-600 text-white p-2.5 rounded-2xl shadow-md shadow-teal-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-6.75a1.125 1.125 0 00-1.125 1.125v3.375m9 0h-9M9 10.125h.008v.008H9v-.008zm6 0h.008v.008H15v-.008zm0-3h.008v.008H15V7.125zm-6 0h.008v.008H9V7.125z" />
+                            </svg>
+                        </div>
+                    </object>
                 </div>
                 <div>
                     <span class="font-display font-bold text-xl tracking-wide text-slate-800">EUGENESTARR.COM</span>
@@ -86,1032 +65,210 @@
                 </div>
             </div>
             
-            <!-- Navigation Links (With Parents & Safety Toggle) -->
             <div class="flex flex-wrap items-center justify-center gap-1 md:gap-2">
-                <button onclick="navigateTo('gaming')" id="nav-gaming" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-teal-600 bg-teal-50 shadow-sm">
-                    🎮 Arcade Games
-                </button>
-                <button onclick="navigateTo('safety')" id="nav-safety" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-teal-600 hover:bg-slate-50 flex items-center gap-1.5">
-                    🛡️ Safety Matrix
-                </button>
-                <button onclick="navigateTo('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-orange-600 hover:bg-orange-50 flex items-center gap-1.5 border border-dashed border-orange-200">
-                    🔑 Teacher Panel
-                </button>
+                <button onclick="navigateTo('gaming')" id="nav-gaming" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-teal-600 bg-teal-50 shadow-sm">🎮 Arcade Games</button>
+                <a href="safety-matrix.html" class="px-4 py-2 rounded-xl font-bold text-sm text-slate-600 hover:text-teal-600 hover:bg-slate-50 flex items-center gap-1.5">🛡️ Safety Matrix</a>
+                <button onclick="navigateTo('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-orange-600 hover:bg-orange-50 flex items-center gap-1.5 border border-dashed border-orange-200">🔑 Teacher Panel</button>
             </div>
         </div>
     </nav>
 
-    <!-- Custom Notification Toast -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 text-white font-semibold text-sm py-3 px-6 rounded-2xl shadow-xl flex items-center gap-2">
-        <span id="toast-emoji">✨</span>
-        <span id="toast-msg">Success!</span>
+        <span id="toast-emoji">✨</span><span id="toast-msg">Success!</span>
     </div>
 
-    <!-- ================= PAGE 2: GAMING LAB (MAIN ARCADE LANDING) ================= -->
     <section id="page-gaming" class="page-view">
-        <!-- Hero Header with Blue-Green to Dark Cyan Gradient -->
         <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-800 text-white py-14 px-4 md:px-8 text-center relative overflow-hidden flex flex-col items-center">
-            <!-- Subtle background lighting decoration -->
-            <div class="absolute inset-0 opacity-10">
-                <div class="absolute w-72 h-72 bg-white rounded-full -top-12 -left-12 filter blur-2xl"></div>
-                <div class="absolute w-80 h-80 bg-white rounded-full -bottom-20 -right-20 filter blur-3xl"></div>
-            </div>
-            
             <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center w-full">
-                <!-- Arcade Typography -->
-                <h1 class="font-display font-bold text-3xl md:text-5xl tracking-wide text-center mb-1">
-                    EUGENESTARR.COM
-                </h1>
-                <div class="font-display font-light text-2xl md:text-4xl tracking-wide mb-5 text-teal-100 flex items-center justify-center gap-2.5">
-                    🎮 <span>Browser Arcade</span> 🎮
-                </div>
+                <h1 class="font-display font-bold text-3xl md:text-5xl tracking-wide text-center mb-1">EUGENESTARR.COM</h1>
+                <div class="font-display font-light text-2xl md:text-4xl tracking-wide mb-5 text-teal-100 flex items-center justify-center gap-2.5">🎮 <span>Browser Arcade</span> 🎮</div>
+                <p class="text-teal-50 text-sm md:text-base font-medium max-w-2xl mb-8 leading-relaxed text-center">Welcome to the arcade! This catalog is curated for children ages 7-12 to enjoy single-player logic puzzles and collaborative multiplayer labs under monitoring.</p>
                 
-                <!-- Welcome Text: Focused on Safe, Adult-Facilitated Play -->
-                <p class="text-teal-50 text-sm md:text-base font-medium max-w-2xl mb-8 leading-relaxed text-center">
-                    Welcome to the arcade! This monitored catalog is specifically curated for children ages 7-12 to enjoy a fun mix of single-player challenges and collaborative multiplayer games. Perfect for safe computer labs with an adult present to guide and facilitate the play.
-                </p>
-                
-                <!-- Dynamic Search Bar -->
                 <div class="w-full max-w-lg bg-white p-2 rounded-2xl shadow-xl shadow-teal-950/20 flex items-center gap-2 mb-6">
                     <div class="pl-3 text-slate-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.604 10.604z" />
-                        </svg>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.604 10.604z" /></svg>
                     </div>
-                    <input 
-                        type="text" 
-                        id="search-input" 
-                        placeholder="Search for games (e.g., Pac-Man, Space, AI)..." 
-                        class="w-full text-slate-700 placeholder-slate-400 focus:outline-none font-medium py-1 text-sm bg-transparent"
-                    >
-                    <button 
-                        id="search-reset-btn" 
-                        class="hidden bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 font-bold px-3.5 py-1.5 rounded-xl text-xs transition-colors flex items-center gap-1"
-                    >
-                        ✕ Reset
-                    </button>
+                    <input type="text" id="search-input" placeholder="Search for games (e.g., Pac-Man, Space, AI)..." class="w-full text-slate-700 placeholder-slate-400 focus:outline-none font-medium py-1 text-sm bg-transparent">
+                    <button id="search-reset-btn" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 font-bold px-3.5 py-1.5 rounded-xl text-xs transition-colors">✕ Reset</button>
                 </div>
-
-                <!-- Live Class Document Button -->
-                <a href="https://docs.google.com/document/d/14WLR8rk_CjPnmvttPybxI3r8Z806UaLiyP7sYA2mFrk/edit?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-white/10 hover:bg-orange-500 hover:border-orange-600 text-white font-bold text-sm px-6 py-2.5 rounded-full border border-white/20 tracking-wide transition-all shadow-md backdrop-blur-md transform hover:scale-105 active:scale-95">
-                    📖 Live Class Document
-                </a>
+                <a href="https://docs.google.com/document/d/14WLR8rk_CjPnmvttPybxI3r8Z806UaLiyP7sYA2mFrk/edit?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 bg-white/10 hover:bg-orange-500 text-white font-bold text-sm px-6 py-2.5 rounded-full border border-white/20 tracking-wide transition-all shadow-md backdrop-blur-md">📖 Live Class Document</a>
             </div>
         </header>
 
-        <!-- Catalog Container -->
         <div class="max-w-7xl mx-auto w-full px-4 md:px-8 py-8">
-            <!-- Navigation Tabs / Category Filters (Restored with Clicker Category and without 'other') -->
             <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 pb-2 border-b border-slate-200">
-                <button onclick="setFilter('all')" id="filter-all" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-teal-600 text-white border-2 border-teal-600">
-                    🔍 All Games
-                </button>
-                <button onclick="setFilter('multiplayer')" id="filter-multiplayer" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    👥 Multiplayer
-                </button>
-                <button onclick="setFilter('1player')" id="filter-1player" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    🕹️ 1 Player
-                </button>
-                <button onclick="setFilter('clicker')" id="filter-clicker" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    🖱️ Clicker Games
-                </button>
-                <button onclick="setFilter('learning')" id="filter-learning" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    🧪 Learning & Science
-                </button>
-                <button onclick="setFilter('favorites')" id="filter-favorites" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300">
-                    ❤️ Bookmarked (<span id="fav-count">0</span>)
-                </button>
+                <button onclick="setFilter('all')" id="filter-all" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-teal-600 text-white border-2 border-teal-600">🔍 All Games</button>
+                <button onclick="setFilter('multiplayer')" id="filter-multiplayer" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">👥 Multiplayer</button>
+                <button onclick="setFilter('1player')" id="filter-1player" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">🕹️ 1 Player</button>
+                <button onclick="setFilter('clicker')" id="filter-clicker" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">🖱️ Clicker Games</button>
+                <button onclick="setFilter('learning')" id="filter-learning" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">🧪 Learning & Science</button>
+                <button onclick="setFilter('favorites')" id="filter-favorites" class="filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 border-2 border-transparent">❤️ Bookmarked (<span id="fav-count">0</span>)</button>
             </div>
 
-            <!-- Dynamic Category Header and Description -->
-            <div id="category-intro" class="mb-8 p-6 bg-white border-l-4 border-teal-500 rounded-r-2xl shadow-sm transition-all duration-300">
-                <h2 id="category-title" class="font-display font-bold text-xl md:text-2xl text-teal-800 mb-2 flex items-center gap-2">
-                    <!-- Title injected dynamically -->
-                </h2>
-                <p id="category-description" class="text-slate-600 text-sm leading-relaxed">
-                    <!-- Description injected dynamically -->
-                </p>
+            <div id="category-intro" class="mb-8 p-6 bg-white border-l-4 border-teal-500 rounded-r-2xl shadow-sm">
+                <h2 id="category-title" class="font-display font-bold text-xl md:text-2xl text-teal-800 mb-2 flex items-center gap-2"></h2>
+                <p id="category-description" class="text-slate-600 text-sm leading-relaxed"></p>
             </div>
 
-            <!-- Dynamic Game Grid -->
-            <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Rendered dynamically by JavaScript -->
-            </div>
-
-            <!-- Empty State Container -->
+            <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
             <div id="empty-state" class="hidden text-center py-16 px-4">
-                <div class="inline-flex bg-slate-100 p-6 rounded-full mb-4 text-slate-400">
-                    <svg class="w-12 h-12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 16.318A4.486 4.486 0 0012.016 15a4.486 4.486 0 00-3.198 1.318M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
-                    </svg>
-                </div>
                 <h3 class="font-display font-bold text-xl text-slate-800 mb-2">No Games Found</h3>
-                <p class="text-slate-500 max-w-sm mx-auto">We couldn't find any games matching your current filter or search criteria. Try a different search term or category!</p>
             </div>
-
-            <!-- Dynamic Quick Matrix Summary Box -->
+            
             <div class="mt-16 text-center">
-                <button onclick="navigateTo('safety')" class="inline-flex items-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-800 font-bold text-sm py-3 px-8 rounded-2xl shadow-sm border border-teal-200 transition-colors">
-                    🛡️ Learn more about our Classroom Safety Matrix &rarr;
-                </button>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ================= PAGE 3: PARENTS & SAFETY MATRIX ================= -->
-    <section id="page-safety" class="page-view hidden">
-        <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-800 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
-            <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
-                <span class="bg-teal-500/30 text-white font-bold text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Parents & Guardians</span>
-                <h1 class="font-display font-bold text-3xl md:text-5xl tracking-wide mb-3">
-                    Classroom Safety Matrix 🛡️
-                </h1>
-                <p class="text-teal-50 text-sm md:text-base font-medium max-w-2xl">
-                    Our safety-first philosophy ensures that your child experiences play without compromise. This matrix categorizes browser games into transparent safety tiers.
-                </p>
-            </div>
-        </header>
-
-        <div class="max-w-4xl mx-auto px-4 md:px-8 py-12 space-y-12">
-            <!-- Detailed Tier Cards -->
-            <div class="space-y-6">
-                <h2 class="font-display font-bold text-2xl text-slate-800">Understanding Our Safety Levels</h2>
-                
-                <!-- Green Light Card -->
-                <div class="bg-white border-2 border-emerald-100 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6">
-                    <div class="bg-emerald-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-md shadow-emerald-100">
-                        🟢
-                    </div>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-emerald-800 mb-1">Green Light (Safe & Instant Play)</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
-                            These games are completely safe for instant, independent, and unattended play. They are entirely ad-free, contain no public chat functionality, and require zero setup. They are safe to launch immediately on any device.
-                        </p>
-                        <span class="bg-emerald-50 text-emerald-700 font-bold text-[11px] px-3 py-1 rounded-md uppercase tracking-wider">Zero Risk</span>
-                    </div>
-                </div>
-
-                <!-- Yellow Light Card -->
-                <div class="bg-white border-2 border-yellow-100 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6">
-                    <div class="bg-yellow-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-md shadow-yellow-100">
-                        🟡
-                    </div>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-yellow-800 mb-1">Yellow Light (Ad-Blocker Recommended)</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
-                            These games contain no open public chat rooms, making them socially safe. However, they are hosted on sites that run commercial, rotating banner advertisements. Utilizing an ad-blocker on your browser makes these completely clean for children.
-                        </p>
-                        <span class="bg-yellow-50 text-yellow-700 font-bold text-[11px] px-3 py-1 rounded-md uppercase tracking-wider">Ad Blocker Advised</span>
-                    </div>
-                </div>
-
-                <!-- Red Light Card -->
-                <div class="bg-white border-2 border-red-100 rounded-3xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row gap-6">
-                    <div class="bg-red-500 text-white w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 shadow-md shadow-red-100">
-                        🔴
-                    </div>
-                    <div>
-                        <h3 class="font-display font-bold text-lg text-red-800 mb-1">Red Light (Private Lobbies Mandated)</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
-                            These games feature global matchmaking, unmoderated live chat lobbies, custom user-generated names, or aggressive video advertisements. Children should only play these if an instructor or parent has manually generated a <em>Private Game/Party Room</em> and provided the direct invite link, completely isolating them from public servers.
-                        </p>
-                        <span class="bg-red-50 text-red-700 font-bold text-[11px] px-3 py-1 rounded-md uppercase tracking-wider">Supervisor Code Required</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Parental Guide Context -->
-            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8">
-                <h3 class="font-display font-bold text-lg text-slate-800 mb-3">Frequently Asked Questions</h3>
-                <div class="space-y-4 text-sm text-slate-600 leading-relaxed">
-                    <p>
-                        <strong class="text-slate-800 block mb-0.5">Is the primary goal of the arcade educational?</strong>
-                        While many included sandbox builds foster advanced physical or logic skills (like *Neal.fun* or *Line Rider*), this site's ultimate objective is **tactile recreation, coordination building, and safe group play**.
-                    </p>
-                    <p>
-                        <strong class="text-slate-800 block mb-0.5">How do you protect kids from rotating ads?</strong>
-                        These sites are hosted on external networks. Hosts can update ad widgets without our knowledge. Installing an ad-blocker, such as <a href="https://ublockorigin.com/" target="_blank" class="text-teal-600 font-bold underline">uBlock Origin</a>, effectively filters out 99% of loading screens and banners.
-                    </p>
-                </div>
+                <a href="safety-matrix.html" class="inline-flex items-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-800 font-bold text-sm py-3 px-8 rounded-2xl border border-teal-200 shadow-sm transition-colors">🛡️ Learn more about our Classroom Safety Matrix &rarr;</a>
             </div>
         </div>
     </section>
 
-    <!-- ================= PAGE 5: ADMIN PORTAL ================= -->
     <section id="page-admin" class="page-view hidden">
-        <header class="bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-800 text-white py-12 px-4 md:px-8 text-center relative overflow-hidden">
-            <div class="max-w-3xl mx-auto relative z-10 flex flex-col items-center">
-                <span class="bg-teal-500/30 text-white font-bold text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-wider">Teacher Control Room</span>
-                <h1 class="font-display font-bold text-3xl md:text-4xl tracking-wide mb-2">
-                    Arcade CMS Panel 🔑
-                </h1>
-                <p class="text-teal-100 text-xs md:text-sm font-medium max-w-xl">
-                    Password secure dashboard to update games and generate fully compiled code updates for GitHub!
-                </p>
-            </div>
-        </header>
-
         <div class="max-w-5xl mx-auto px-4 md:px-8 py-10">
-            <!-- LOCK SCREEN VIEW -->
             <div id="admin-login-card" class="max-w-md mx-auto bg-white p-8 rounded-[32px] shadow-xl border border-slate-100">
-                <div class="text-center mb-6">
-                    <span class="text-4xl">🔐</span>
-                    <h3 class="font-display font-bold text-2xl text-slate-800 mt-2">Login Required</h3>
-                    <p class="text-xs text-slate-400 mt-1">Teacher Security Credentials Only</p>
-                </div>
-                
                 <form onsubmit="handleAdminLogin(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Username</label>
-                        <input type="text" id="admin-user" required placeholder="e.g., admin" class="w-full bg-slate-50 px-4 py-3 rounded-xl border border-slate-200 focus:border-teal-500 focus:outline-none focus:bg-white text-sm font-semibold text-slate-700">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Password</label>
-                        <input type="password" id="admin-pass" required placeholder="e.g., password" class="w-full bg-slate-50 px-4 py-3 rounded-xl border border-slate-200 focus:border-teal-500 focus:outline-none focus:bg-white text-sm font-semibold text-slate-700">
-                    </div>
-                    <button type="submit" class="w-full bg-slate-900 hover:bg-teal-600 text-white font-bold text-sm py-3.5 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2">
-                        <span>Access CMS Dashboard</span>
-                    </button>
+                    <h3 class="font-display font-bold text-2xl text-slate-800 text-center">Login Required</h3>
+                    <input type="text" id="admin-user" required placeholder="Username" class="w-full bg-slate-50 px-4 py-3 rounded-xl border text-sm font-semibold">
+                    <input type="password" id="admin-pass" required placeholder="Password" class="w-full bg-slate-50 px-4 py-3 rounded-xl border text-sm font-semibold">
+                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-3.5 rounded-xl">Access Dashboard</button>
                 </form>
             </div>
 
-            <!-- DASHBOARD CONTENT VIEW (HIDDEN BY DEFAULT) -->
             <div id="admin-dashboard" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Sidebar Tools Navigation -->
-                <div class="lg:col-span-1 space-y-4">
-                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-slate-100 flex flex-col gap-2">
-                        <button onclick="switchAdminTab('games')" id="btn-adm-games" class="admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all bg-teal-600 text-white shadow-sm">
-                            🎮 Manage Games
-                        </button>
-                        <button onclick="switchAdminTab('export')" id="btn-adm-export" class="admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all text-slate-600 hover:bg-slate-50">
-                            💾 Export Code for GitHub
-                        </button>
-                        
-                        <div class="border-t border-slate-100 my-2"></div>
-                        
-                        <button onclick="handleAdminLogout()" class="flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm text-red-500 hover:bg-red-50 transition-all">
-                            🚪 Logout
-                        </button>
-                    </div>
+                <div class="lg:col-span-1 bg-white p-4 rounded-3xl border shadow-sm flex flex-col gap-2">
+                    <button onclick="switchAdminTab('games')" id="btn-adm-games" class="admin-tab-btn text-left px-4 py-3 rounded-2xl font-bold text-sm bg-teal-600 text-white">🎮 Manage Games</button>
+                    <button onclick="switchAdminTab('export')" id="btn-adm-export" class="admin-tab-btn text-left px-4 py-3 rounded-2xl font-bold text-sm text-slate-600">💾 Export Code for GitHub</button>
+                    <button onclick="handleAdminLogout()" class="text-left px-4 py-3 rounded-2xl font-bold text-sm text-red-500 hover:bg-red-50">🚪 Logout</button>
                 </div>
 
-                <!-- Central Config Dashboard Workspace -->
                 <div class="lg:col-span-2 space-y-6">
-                    
-                    <!-- TAB 1: GAMES MANAGER -->
                     <div id="adm-view-games" class="admin-view-panel space-y-6">
-                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                        <div class="bg-white p-6 rounded-3xl border shadow-sm">
                             <h3 id="game-form-title" class="font-display font-bold text-lg text-slate-800 mb-4">Add Approved Game</h3>
                             <form id="add-game-form" onsubmit="handleNewGameSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="sm:col-span-2">
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Game ID (Unique, lowercase, no spaces)</label>
-                                    <input type="text" id="add-game-id" required placeholder="e.g., retrobowl" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Game Title</label>
-                                    <input type="text" id="add-game-title" required placeholder="e.g., Retro Bowl" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Game URL (Browser Play Link)</label>
-                                    <input type="url" id="add-game-url" required placeholder="e.g., https://retrobowl.me/" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Arcade Category</label>
-                                    <select id="add-game-cat" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none font-semibold">
-                                        <option value="multiplayer">Multiplayer</option>
-                                        <option value="1player">1 Player</option>
-                                        <option value="clicker">Clicker Games</option>
-                                        <option value="learning">Learning & Science</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Safety Matrix Level</label>
-                                    <select id="add-game-safety-rating" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none font-semibold">
-                                        <option value="green">🟢 Green Light</option>
-                                        <option value="yellow">🟡 Yellow Light</option>
-                                        <option value="red">🔴 Red Light</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Players Descriptor</label>
-                                    <input type="text" id="add-game-players" required placeholder="e.g., 20 Players Max" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Violence Safety Rating</label>
-                                    <select id="add-game-violence" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none font-semibold">
-                                        <option value="none">No Violence (🟢 Safe Play)</option>
-                                        <option value="cartoon">Cartoon Action (💥 No Blood)</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Chat Status Badge</label>
-                                    <select id="add-game-chat" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none font-semibold">
-                                        <option value="none">No Chat Features (📴 Safe)</option>
-                                        <option value="private">Private / Custom Lobbies (🔒 Monitored)</option>
-                                        <option value="public">Public Multiplayer Chat (⚠️ Home Risk)</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <div class="flex justify-between items-center mb-1">
-                                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Emoji Badge</label>
-                                        <a href="https://emojicopy.com/" target="_blank" class="text-[10px] text-teal-600 hover:text-teal-700 font-bold underline flex items-center gap-0.5">
-                                            🔗 Emoji Copy
-                                        </a>
-                                    </div>
-                                    <input type="text" id="add-game-emoji" required placeholder="e.g., 🕹️" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tags (Comma-separated)</label>
-                                    <input type="text" id="add-game-tags" placeholder="e.g., Arcade, Platformer, Logic" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Safety Profile Explanation (Parents & Safety Metadata)</label>
-                                    <input type="text" id="add-game-safetyprofile" required placeholder="e.g., Safe offline canvas build. Completely ad-free." class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none">
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Kid-Friendly Description</label>
-                                    <textarea id="add-game-desc" required rows="2" placeholder="Explain how the game is played..." class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs focus:outline-none resize-none"></textarea>
-                                </div>
+                                <input type="text" id="add-game-id" required placeholder="Game ID (lowercase, unique)" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs">
+                                <input type="text" id="add-game-title" required placeholder="Game Title" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs">
+                                <input type="url" id="add-game-url" required placeholder="Game URL" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs">
+                                <select id="add-game-cat" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs font-semibold">
+                                    <option value="multiplayer">Multiplayer</option><option value="1player">1 Player</option><option value="clicker">Clicker Games</option><option value="learning">Learning & Science</option>
+                                </select>
+                                <select id="add-game-safety-rating" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs font-semibold">
+                                    <option value="green">🟢 Green Light</option><option value="yellow">🟡 Yellow Light</option><option value="red">🔴 Red Light</option>
+                                </select>
+                                <input type="text" id="add-game-players" required placeholder="Players Descriptor" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs">
+                                <select id="add-game-violence" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs">
+                                    <option value="none">No Violence</option><option value="cartoon">Cartoon Action</option>
+                                </select>
+                                <select id="add-game-chat" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs">
+                                    <option value="none">No Chat Features</option><option value="private">Private Lobbies</option><option value="public">Public Chat</option>
+                                </select>
+                                <input type="text" id="add-game-emoji" required placeholder="Emoji Badge (e.g. 🕹️)" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs">
+                                <input type="text" id="add-game-tags" placeholder="Tags (comma separated)" class="w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs">
+                                <input type="text" id="add-game-safetyprofile" required placeholder="Safety Profile Explanation" class="sm:col-span-2 w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs">
+                                <textarea id="add-game-desc" required rows="2" placeholder="Kid-Friendly Gameplay Description" class="sm:col-span-2 w-full bg-slate-50 px-3 py-2 rounded-lg border text-xs resize-none"></textarea>
                                 <div class="sm:col-span-2 flex gap-3">
-                                    <button type="submit" id="add-game-submit-btn" class="flex-1 bg-teal-600 hover:bg-slate-900 text-white font-bold text-xs py-2.5 rounded-lg transition-colors">
-                                        ➕ Insert Game into Database
-                                    </button>
-                                    <button type="button" id="cancel-edit-btn" onclick="cancelEditGame()" class="hidden bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 px-4 rounded-lg transition-colors">
-                                        ✕ Cancel Edit
-                                    </button>
+                                    <button type="submit" id="add-game-submit-btn" class="flex-1 bg-teal-600 text-white font-bold py-2.5 rounded-lg text-xs">➕ Insert Game into Database</button>
+                                    <button type="button" id="cancel-edit-btn" onclick="cancelEditGame()" class="hidden bg-slate-100 text-slate-700 font-bold py-2.5 px-4 rounded-lg text-xs">✕ Cancel</button>
                                 </div>
                             </form>
                         </div>
-
-                        <!-- Games List Table -->
-                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Current Games Database (Grouped & Sortable)</h3>
-                            <div class="overflow-y-auto max-h-96 space-y-6" id="adm-games-table-list">
-                                <!-- Populated dynamically by categories -->
-                            </div>
+                        <div class="bg-white p-6 rounded-3xl border shadow-sm">
+                            <h3 class="font-display font-bold text-lg text-slate-800 mb-4">Current Database Ordering (Grouped by Tab)</h3>
+                            <div class="overflow-y-auto max-h-96 space-y-6" id="adm-games-table-list"></div>
                         </div>
                     </div>
 
-                    <!-- TAB 3: CODE EXPORT -->
                     <div id="adm-view-export" class="admin-view-panel hidden space-y-6">
-                        <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                            <h3 class="font-display font-bold text-lg text-slate-800 mb-2">💾 Generate GitHub Build Code</h3>
-                            <p class="text-xs text-slate-500 leading-relaxed mb-6">
-                                Since GitHub Pages runs statically, changes to your local running script don't save permanently on your deployment repository. Click the compiler button below, copy the updated website source code, and overwrite your <code>index.html</code> inside GitHub to make your changes static and permanent!
-                            </p>
-
-                            <button onclick="generateStaticSource()" class="w-full bg-slate-900 hover:bg-teal-600 text-white font-bold text-xs py-3 rounded-xl transition-all shadow-md mb-6 flex items-center justify-center gap-2">
-                                <span>🛠️ Compile Source Code Block</span>
-                            </button>
-
-                            <div class="space-y-2">
-                                <div class="flex items-center justify-between">
-                                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Deploy Source Code</label>
-                                    <button onclick="copyGeneratedCode()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[10px] py-1 px-3 rounded-md transition-colors">
-                                        📋 Copy Code
-                                    </button>
-                                </div>
-                                <textarea id="generated-code-box" readonly rows="12" class="w-full bg-slate-950 font-mono text-[10px] leading-tight text-emerald-400 p-4 rounded-xl border border-slate-800 focus:outline-none" placeholder="Compiled code will output here..."></textarea>
-                            </div>
+                        <div class="bg-white p-6 rounded-3xl border shadow-sm">
+                            <h3 class="font-display font-bold text-lg text-slate-800 mb-2">💾 Generate Data Updates</h3>
+                            <p class="text-xs text-slate-500 mb-4">Click Compile below, then copy the output text and completely overwrite your <strong>games-data.js</strong> file inside GitHub.</p>
+                            <button onclick="generateStaticSource()" class="w-full bg-slate-900 hover:bg-teal-600 text-white font-bold text-xs py-3 rounded-xl shadow-md mb-4">🛠️ Compile Database JavaScript Block</button>
+                            <textarea id="generated-code-box" readonly rows="12" class="w-full bg-slate-950 font-mono text-[10px] text-emerald-400 p-4 rounded-xl border border-slate-800 focus:outline-none" placeholder="Data package will compile here..."></textarea>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer (Universal Footer connected to all pages) -->
-    <footer class="bg-white border-t border-slate-100 mt-auto py-8 px-4 text-center">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 text-sm">
-            <p>&copy; <span id="copyright-year">2026</span> Eugene Starr | Browser Arcade</p>
-            <p class="font-medium text-slate-500">Fast, safe browser games!</p>
-        </div>
+    <footer class="bg-white border-t mt-auto py-8 text-center text-slate-400 text-sm">
+        <p>&copy; <span id="copyright-year">2026</span> Eugene Starr | Browser Arcade</p>
     </footer>
 
-    <!-- Game Database & Connected Multi-Page Core Engine -->
-    <script>
-        // ================= DATABASE DECLARATIONS (Mutable for Prototype) =================
-        /* BEGIN_GAMES_DATA */
-        let gamesDataset = [
-          {
-                    "id": "shellshock",
-                    "title": "Shellshock.io",
-                    "url": "https://shellshock.io",
-                    "category": "multiplayer",
-                    "safetyRating": "red",
-                    "desc": "First person shooter using egg-cellent weaponry and customizable eggs.",
-                    "safetyProfile": "Public matchmaking places children into live text and voice chats with anonymous players. Parents must click 'Create Private Game' on the main menu to build an isolated room for classmates.",
-                    "players": "20 Players Max",
-                    "violence": "cartoon",
-                    "chat": "public",
-                    "tags": [
-                              "Shooter",
-                              "Eggs",
-                              "3D"
-                    ],
-                    "emoji": "🥚"
-          },
-          {
-                    "id": "stumbleguys",
-                    "title": "Stumble Guys",
-                    "url": "https://stumbleguys.com",
-                    "category": "multiplayer",
-                    "safetyRating": "yellow",
-                    "desc": "Run, dash, and slide past obstacles in this massively multiplayer knockout party game.",
-                    "safetyProfile": "No in-game keyboard or voice chat, eliminating unmoderated social risks. Free-to-play page contains rotating ad networks. Ad-blocker recommended.",
-                    "players": "32 Players Max",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Party",
-                              "Physics",
-                              "Survival"
-                    ],
-                    "emoji": "🏃"
-          },
-          {
-                    "id": "smashkarts",
-                    "title": "SmashKarts",
-                    "url": "https://smashkarts.io",
-                    "category": "multiplayer",
-                    "safetyRating": "red",
-                    "desc": "Fast-paced online multiplayer go-kart battle game in beautiful arenas.",
-                    "safetyProfile": "Public rooms feature completely open text boxes. Instructors or parents must select 'Create Private Room' on the splash screen to block public chat tracking entirely.",
-                    "players": "8 Players Max",
-                    "violence": "cartoon",
-                    "chat": "public",
-                    "tags": [
-                              "Battle Arena",
-                              "Karts",
-                              "Combat"
-                    ],
-                    "emoji": "🛒"
-          },
-          {
-                    "id": "minecraft",
-                    "title": "Classic Minecraft",
-                    "url": "https://classic.minecraft.net/",
-                    "category": "1player",
-                    "safetyRating": "green",
-                    "desc": "Play the original creative block builder straight in your browser window.",
-                    "safetyProfile": "No public servers, tracking, or ad placements. Single-player by default; multiplayer only functions if private link codes are manually generated.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Creative Sandbox",
-                              "Building",
-                              "Blocks"
-                    ],
-                    "emoji": "⛏️"
-          },
-          {
-                    "id": "nealfun",
-                    "title": "Neal.fun",
-                    "url": "https://neal.fun",
-                    "category": "learning",
-                    "safetyRating": "green",
-                    "desc": "An incredible vault of dynamic scientific experiments, quizzes, and cool curiosities.",
-                    "safetyProfile": "Entirely ad-free, secure, and self-contained. Safely open for unattended and self-paced study play.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Cyber Science",
-                              "Science Sandbox",
-                              "Interactive"
-                    ],
-                    "emoji": "🧪"
-          },
-          {
-                    "id": "dinosaurgame",
-                    "title": "Dinosaur Game",
-                    "url": "https://offline-dino-game.firebaseapp.com/",
-                    "category": "clicker",
-                    "safetyRating": "green",
-                    "desc": "Help T-Rex leap over cactus obstacles and pterodactyls in this browser classic.",
-                    "safetyProfile": "Self-hosted, ad-free standalone browser game. No social chat mechanics or network tracking.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Chrome Classic",
-                              "Endless Run",
-                              "Offline Game"
-                    ],
-                    "emoji": "🦖"
-          },
-          {
-                    "id": "twovstwo",
-                    "title": "2v2.io",
-                    "url": "https://2v2.io/",
-                    "category": "multiplayer",
-                    "safetyRating": "red",
-                    "desc": "Fast-paced building and shooting 2v2 tactical arena. Team up with a classmate to out-build and defeat your opponents.",
-                    "safetyProfile": "Requires private lobbies to bypass standard unmoderated matchmaking servers and stranger risk.",
-                    "players": "4 Players Max",
-                    "violence": "cartoon",
-                    "chat": "none",
-                    "tags": [
-                              "Shooter",
-                              "Building",
-                              "Tactical"
-                    ],
-                    "emoji": "⚔️"
-          },
-          {
-                    "id": "kartbros",
-                    "title": "Kartbros",
-                    "url": "https://kartbros.io/",
-                    "category": "multiplayer",
-                    "safetyRating": "yellow",
-                    "desc": "Speed through vibrant tracks and complete races with up to 8 racers online.",
-                    "safetyProfile": "No in-game text or voice communication, eliminating unmoderated stranger hazards. The host page runs display ads; ad-blocker recommended.",
-                    "players": "8 Players Max",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Racing",
-                              "Karting",
-                              "Action"
-                    ],
-                    "emoji": "🏎️"
-          },
-          {
-                    "id": "buildnowgg",
-                    "title": "BuildNow GG",
-                    "url": "https://www.crazygames.com/game/buildnow-gg",
-                    "category": "multiplayer",
-                    "safetyRating": "red",
-                    "desc": "An intense 3D building and shooting battle arena game. Replaced 1v1.lol.",
-                    "safetyProfile": "Requires setting up private custom keys. Public matchmaking contains unmoderated chat risk.",
-                    "players": "8 Players Max",
-                    "violence": "cartoon",
-                    "chat": "public",
-                    "tags": [
-                              "Fortnite Alt",
-                              "Building",
-                              "Survival"
-                    ],
-                    "emoji": "⛏️"
-          },
-          {
-                    "id": "wrestlebros",
-                    "title": "Wrestle Bros",
-                    "url": "https://freegames.io/game/wrestle-bros",
-                    "category": "multiplayer",
-                    "safetyRating": "yellow",
-                    "desc": "A hilarious browser physics wrestling game. Smash buttons, perform wild jumps, and slam your classmates!",
-                    "safetyProfile": "Safe, zero-chat wrestling play. Contains startup ad placements. Ad-blocker recommended.",
-                    "players": "8 Players Max",
-                    "violence": "cartoon",
-                    "chat": "none",
-                    "tags": [
-                              "Wrestling",
-                              "Combat",
-                              "Sports"
-                    ],
-                    "emoji": "🤼"
-          },
-          {
-                    "id": "badegg",
-                    "title": "Bad Egg",
-                    "url": "https://freegames.io/game/bad-egg",
-                    "category": "1player",
-                    "safetyRating": "yellow",
-                    "desc": "Survive waves of zombie eggs as a heavily armed egg in this intense battle arena.",
-                    "safetyProfile": "Single-player only with no social features. Contains standard pre-roll video ads.",
-                    "players": "8 Players Max",
-                    "violence": "cartoon",
-                    "chat": "none",
-                    "tags": [
-                              "Shooter",
-                              "Survival",
-                              "Zombies"
-                    ],
-                    "emoji": "🍳"
-          },
-          {
-                    "id": "soccerbros",
-                    "title": "Soccer Bros",
-                    "url": "https://freegames.io/game/soccer-bros",
-                    "category": "multiplayer",
-                    "safetyRating": "yellow",
-                    "desc": "Fast-paced browser soccer game. Dribble, pass, tackle, and shoot to score goals against your classmates!",
-                    "safetyProfile": "No built-in chat mechanics. Ad-blocker filters background ad banner placements.",
-                    "players": "8 Players Max",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Sports",
-                              "Soccer",
-                              "Fun"
-                    ],
-                    "emoji": "⚽"
-          },
-          {
-                    "id": "baseballbros",
-                    "title": "Baseball Bros",
-                    "url": "https://freegames.io/game/baseball-bros",
-                    "category": "multiplayer",
-                    "safetyRating": "yellow",
-                    "desc": "A highly competitive browser baseball game. Pitch, swing, and hit home runs against your friends!",
-                    "safetyProfile": "Ad rotations active on host site loader. Zero communication features inside play.",
-                    "players": "2 Players Max",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Sports",
-                              "Baseball",
-                              "PvP"
-                    ],
-                    "emoji": "⚾"
-          },
-          {
-                    "id": "footballbros",
-                    "title": "Football Bros",
-                    "url": "https://freegames.io/game/football-bros",
-                    "category": "multiplayer",
-                    "safetyRating": "yellow",
-                    "desc": "An exciting browser American football game. Throw passes, execute tackles, and score touchdowns with simple controls!",
-                    "safetyProfile": "Features startup ad-loaders. No multiplayer chat risk. uBlock Origin recommended.",
-                    "players": "8 Players Max",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Sports",
-                              "Football",
-                              "Fun"
-                    ],
-                    "emoji": "🏈"
-          },
-          {
-                    "id": "skribbl",
-                    "title": "Skribbl.io",
-                    "url": "https://skribbl.io",
-                    "category": "multiplayer",
-                    "safetyRating": "red",
-                    "desc": "A fun and highly educational guess-the-word drawing board game.",
-                    "safetyProfile": "Public lobbies contain unmoderated typed chat. Always play in private, secure password lobbies.",
-                    "players": "20 Players Max",
-                    "violence": "none",
-                    "chat": "public",
-                    "tags": [
-                              "Drawing",
-                              "Word Guessing",
-                              "Party"
-                    ],
-                    "emoji": "✏️"
-          },
-          {
-                    "id": "garticphone",
-                    "title": "Gartic Phone",
-                    "url": "https://garticphone.com/",
-                    "category": "multiplayer",
-                    "safetyRating": "red",
-                    "desc": "The ultimate drawing telephone game. Draw, prompt, and laugh with friends.",
-                    "safetyProfile": "Only play with trusted classmates. Public rooms can feature inappropriate prompt submissions.",
-                    "players": "2-30 Players",
-                    "violence": "none",
-                    "chat": "public",
-                    "tags": [
-                              "Drawing",
-                              "Party Game",
-                              "Creative"
-                    ],
-                    "emoji": "🎨"
-          },
-          {
-                    "id": "retrobowl",
-                    "title": "Retro Bowl",
-                    "url": "https://retrobowl.me/",
-                    "category": "multiplayer",
-                    "safetyRating": "yellow",
-                    "desc": "A gorgeous classic 8-bit American football manager simulator. Draft, trade, and win!",
-                    "safetyProfile": "Features standard host banner advertisements. No built-in chat mechanisms.",
-                    "players": "1-2 Players",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Sports",
-                              "Management",
-                              "Retro Grid"
-                    ],
-                    "emoji": "🏈"
-          },
-          {
-                    "id": "slither",
-                    "title": "Slither.io",
-                    "url": "https://slither.io",
-                    "category": "1player",
-                    "safetyRating": "yellow",
-                    "desc": "Grow your snake by eating glowing orbs. Simple mouse control, no keyboard needed.",
-                    "safetyProfile": "No chat boxes. Contains localized skin advertising boxes on loading. uBlock filters these.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Snake",
-                              "Casual",
-                              "No Keyboard"
-                    ],
-                    "emoji": "🐍"
-          },
-          {
-                    "id": "flappybird",
-                    "title": "Flappy Bird",
-                    "url": "https://flappy-bird-web.appspot.com/",
-                    "category": "clicker",
-                    "safetyRating": "green",
-                    "desc": "Navigate the classic flapping bird safely through green pipeline obstacles.",
-                    "safetyProfile": "Entirely ad-free, self-contained single-player setup. Safe for immediate, unattended play.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Retro Classic",
-                              "Hard Mode",
-                              "Arcade"
-                    ],
-                    "emoji": "🐦"
-          },
-          {
-                    "id": "spacebarclicker",
-                    "title": "Spacebar Clicker",
-                    "url": "https://js13kgames.com/games/spacebar-clicker/index.html",
-                    "category": "clicker",
-                    "safetyRating": "green",
-                    "desc": "Challenge your raw muscle memory and test how fast you can tap spacebar.",
-                    "safetyProfile": "Self-hosted, static single-page setup. Completely ad-free, chat-free, and tracker-free.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Reaction",
-                              "Clicker",
-                              "Minigame"
-                    ],
-                    "emoji": "⌨️"
-          },
-          {
-                    "id": "spaceinvaders",
-                    "title": "Space Invaders",
-                    "url": "http://www.eugenestarr.com/space-invaders.html",
-                    "category": "1player",
-                    "safetyRating": "green",
-                    "desc": "Command your arcade spaceship and defend the planet against incoming aliens.",
-                    "safetyProfile": "Ad-free custom HTML5 canvas build. Completely safe for instant, independent play.",
-                    "players": "Single Player",
-                    "violence": "cartoon",
-                    "chat": "none",
-                    "tags": [
-                              "Retro Classic",
-                              "Shooter",
-                              "Vintage"
-                    ],
-                    "emoji": "👾"
-          },
-          {
-                    "id": "pacman",
-                    "title": "Pac-Man",
-                    "url": "https://www.google.com/logos/2010/pacman10-i.html",
-                    "category": "1player",
-                    "safetyRating": "green",
-                    "desc": "Feed on dots and dodge retro colorful ghosts in the famous Google Doodle maze.",
-                    "safetyProfile": "Self-contained Google archive. Completely ad-free, chat-free, and safe for all ages.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Arcade Classic",
-                              "Maze",
-                              "Doodle"
-                    ],
-                    "emoji": "🍋"
-          },
-          {
-                    "id": "run3",
-                    "title": "Run 3",
-                    "url": "https://run3.io/",
-                    "category": "1player",
-                    "safetyRating": "yellow",
-                    "desc": "Defy gravity and jump over crumbling space tiles in a futuristic 3D cosmic highway.",
-                    "safetyProfile": "No communication risks. Contains startup loading screen ads. uBlock recommended.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Cosmic Runner",
-                              "Gravity Shift",
-                              "3D"
-                    ],
-                    "emoji": "🌌"
-          },
-          {
-                    "id": "townscaper",
-                    "title": "Townscaper",
-                    "url": "https://oskarstalberg.com/Townscaper/",
-                    "category": "learning",
-                    "safetyRating": "green",
-                    "desc": "Instantly build beautiful floating sea towns block by block. Beautiful design toy.",
-                    "safetyProfile": "Entirely ad-free, creative architectural sandbox toy with zero social chat features.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Architectural Toy",
-                              "Artistic",
-                              "Sandbox"
-                    ],
-                    "emoji": "⛵"
-          },
-          {
-                    "id": "linerider",
-                    "title": "Line Rider",
-                    "url": "https://linerider.com",
-                    "category": "learning",
-                    "safetyRating": "yellow",
-                    "desc": "Draw tracks and use interactive physics to guide your sledding rider smoothly.",
-                    "safetyProfile": "No social chat risks. Background sidebar ad banners recommend an active ad-blocker.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Physics Simulation",
-                              "Creative Canvas"
-                    ],
-                    "emoji": "🛹"
-          },
-          {
-                    "id": "wordle",
-                    "title": "Wordle",
-                    "url": "https://www.nytimes.com/games/wordle/index.html",
-                    "category": "learning",
-                    "safetyRating": "yellow",
-                    "desc": "Solve the daily five-letter word puzzle using smart logic and process of elimination.",
-                    "safetyProfile": "NYT hosted. No chat risks; minimal static page tracking cookies. safe and secure.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Vocabulary",
-                              "Daily Puzzle",
-                              "Logic"
-                    ],
-                    "emoji": "📝"
-          },
-          {
-                    "id": "quickdraw",
-                    "title": "Quick, Draw!",
-                    "url": "https://quickdraw.withgoogle.com/",
-                    "category": "learning",
-                    "safetyRating": "green",
-                    "desc": "Doodle prompts in under 20 seconds and see if Google's friendly neural network guesses it.",
-                    "safetyProfile": "Google AI experimental educational sandbox. Ad-free, secure, and safe for classroom play.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Artificial Intelligence",
-                              "Sketching",
-                              "Educational"
-                    ],
-                    "emoji": "🧠"
-          },
-          {
-                    "id": "littlealchemy",
-                    "title": "Little Alchemy 2",
-                    "url": "https://littlealchemy2.com/",
-                    "category": "learning",
-                    "safetyRating": "yellow",
-                    "desc": "Synthesize and construct elements from scratch starting with fire, water, earth, and air.",
-                    "safetyProfile": "Non-competitive educational chemistry puzzle. Ad-blocker recommended to filter page ads.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Chemistry Puzzle",
-                              "Science Lab",
-                              "Logic"
-                    ],
-                    "emoji": "⚗️"
-          },
-          {
-                    "id": "supermario",
-                    "title": "Super Mario",
-                    "url": "https://supermarioplay.com/fullscreen",
-                    "category": "1player",
-                    "safetyRating": "yellow",
-                    "desc": "Jump, run, collect gold coins, and rescue Princess Peach in this NES classic.",
-                    "safetyProfile": "Contains retro website ad banners. safe keyboard platformer controls with ad blocker.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Nintendo Classic",
-                              "Platformer",
-                              "Retro"
-                    ],
-                    "emoji": "🍄"
-          },
-          {
-                    "id": "geometrydash",
-                    "title": "Geometry Dash",
-                    "url": "https://www.geometrydash.com/",
-                    "category": "1player",
-                    "safetyRating": "yellow",
-                    "desc": "Rhythm-based platformer. Dodge dangerous spikes and obstacles to upbeat music.",
-                    "safetyProfile": "Ad widgets active on startup loader. Zero social chat integration.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Rhythm",
-                              "Music Platformer",
-                              "Skill"
-                    ],
-                    "emoji": "📐"
-          },
-          {
-                    "id": "jellymario",
-                    "title": "Jelly Mario",
-                    "url": "https://jellymar.io/",
-                    "category": "1player",
-                    "safetyRating": "green",
-                    "desc": "Super Mario but everything—from Mario to the enemies—behaves like dynamic jelly.",
-                    "safetyProfile": "Ad-free classic physics sandbox toy. safe, clean single-player play.",
-                    "players": "Single Player",
-                    "violence": "none",
-                    "chat": "none",
-                    "tags": [
-                              "Physics Sandbox",
-                              "Absurd",
-                              "Humorous"
-                    ],
-                    "emoji": "🍮"
-          }
-];
-        /* END_GAMES_DATA */
+    <script src="games-data.js"></script>
 
-        // Category Detail Definitions
+    <script>
+        // Fallback safety assignment if network configuration file drops or runs asynchronous
+        let gamesDataset = window.gamesDataset || [];
+
         const categoryDetails = {
-            all: {
-                title: "🎮 All Vetted Games",
-                desc: "Browse our complete catalog of safe, classroom-vetted browser games. Use the filter tabs above to view specific types of challenges suited for different skill levels!"
-            },
-            multiplayer: {
-                title: "👥 Multiplayer Arenas",
-                desc: "Multiplayer is a way for classes to create private rooms, play together, and compete! It is our most complex method of play because it involves creating a safe custom lobby and entering matching room credentials or passwords to connect with friends in the same physical room."
-            },
-            "1player": {
-                title: "🕹️ 1 Player Adventures",
-                desc: "1 player is for players who understand the basics of playing games on a PC using a mouse, arrows, or W-A-S-D in combination with the spacebar."
-            },
-            clicker: {
-                title: "🖱️ Clicker Games",
-                desc: "Clicker games are for young players who are just learning to use a keyboard. It is primarily using the spacebar."
-            },
-            learning: {
-                title: "🧪 Learning & Science Sandbox",
-                desc: "Learning and Science is great for younger gamers as well and, for the most part, doesn't require very advanced skill. It is also less stressful because most of the games are not competitive."
-            },
-            favorites: {
-                title: "❤️ My Bookmarked Favorites",
-                desc: "Your customized play list! Click the heart bookmark icon inside any game card above to add or remove it from your personal lab dashboard."
-            }
+            all: { title: "All Curated Catalog", desc: "Browse our classroom-vetted library modules safely managed by the safety light spectrum criteria filters." },
+            multiplayer: { title: "👥 Multiplayer Arenas", desc: "Multiplayer paths allow students inside the physical lab room to establish closed peer sessions together using clean invites." },
+            "1player": { title: "🕹️ 1 Player Adventures", desc: "Single player options designed to train cognitive mouse routing and custom key command parameters." },
+            clicker: { title: "鼠标 Clicker Modules", desc: "Clean input loops perfectly tailored for introduction coordinates and motor reflex alignment tutorials." },
+            learning: { title: "🧪 Learning & Science Lab", desc: "Stress-free strategy components and architectural toys focused entirely on solo creation methods." },
+            favorites: { title: "❤️ Your Bookmarked Dashboard", desc: "Your tailored lab selection! Click the profile heart asset on any item to pin it here permanently." }
         };
 
-        // State Manager
-        let currentPage = 'gaming';
-        let currentFilter = 'all';
-        let searchQuery = '';
-        let favorites = [];
-        let isAdminLoggedIn = false;
-        let currentAdminTab = 'games';
-        let editingGameId = null; // Tracked ID for active game edits
+        let gamesGrid, emptyState, searchInput, searchResetBtn, favCountSpan;
 
-        // Dynamic elements
-        const gamesGrid = document.getElementById('games-grid');
-        const emptyState = document.getElementById('empty-state');
-        const searchInput = document.getElementById('search-input');
-        const searchResetBtn = document.getElementById('search-reset-btn');
-        const favCountSpan = document.getElementById('fav-count');
+        function initApp() {
+            gamesGrid = document.getElementById('games-grid');
+            emptyState = document.getElementById('empty-state');
+            searchInput = document.getElementById('search-input');
+            searchResetBtn = document.getElementById('search-reset-btn');
+            favCountSpan = document.getElementById('fav-count');
 
-        // ================= SPA NAVIGATION ENGINE =================
+            if (!gamesGrid) {
+                document.addEventListener('DOMContentLoaded', initApp);
+                return;
+            }
+
+            // Sync database from runtime definitions
+            gamesDataset = window.gamesDataset || [];
+
+            const initialHash = window.location.hash.substring(1);
+            navigateTo(['gaming', 'admin'].includes(initialHash) ? initialHash : 'gaming');
+
+            try {
+                const savedFavs = localStorage.getItem('kids_college_favorites');
+                if (savedFavs) favorites = JSON.parse(savedFavs);
+            } catch (e) { console.warn(e); }
+
+            const copyYearEl = document.getElementById('copyright-year');
+            if (copyYearEl) copyYearEl.textContent = new Date().getFullYear();
+
+            updateFavoritesCount();
+            renderGames();
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    searchQuery = e.target.value.toLowerCase().trim();
+                    if (searchResetBtn) searchResetBtn.classList.toggle('hidden', searchQuery.length === 0);
+                    renderGames();
+                });
+            }
+            if (searchResetBtn) {
+                searchResetBtn.addEventListener('click', () => {
+                    if (searchInput) searchInput.value = '';
+                    searchQuery = '';
+                    searchResetBtn.classList.add('hidden');
+                    renderGames();
+                });
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+
         function navigateTo(pageId) {
             currentPage = pageId;
-            window.location.hash = pageId; // Update browser address hash
-
-            // Hide all pages, then display target
-            const pages = document.querySelectorAll('.page-view');
-            pages.forEach(p => p.classList.add('hidden'));
-            
+            window.location.hash = pageId;
+            document.querySelectorAll('.page-view').forEach(p => p.classList.add('hidden'));
             const activePage = document.getElementById(`page-${pageId}`);
             if (activePage) activePage.classList.remove('hidden');
 
-            // Toggle Nav Link Highlights (Teal Theme updates)
             const navButtons = document.querySelectorAll('.nav-btn');
             navButtons.forEach(btn => {
                 if (btn.id === `nav-${pageId}`) {
@@ -1120,466 +277,140 @@
                     btn.className = "nav-btn px-4 py-2 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-teal-600 hover:bg-slate-50";
                 }
             });
-
-            // Scroll to top automatically on transition
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Handle direct loads or bookmarks via hash
-        window.addEventListener('hashchange', () => {
-            const hash = window.location.hash.substring(1);
-            if (hash && ['gaming', 'admin', 'safety'].includes(hash)) {
-                navigateTo(hash);
-            }
-        });
-
-        // Initialize App
-        window.onload = function () {
-            // Read URL Hash or fallback to gaming
-            const initialHash = window.location.hash.substring(1);
-            if (initialHash && ['gaming', 'admin', 'safety'].includes(initialHash)) {
-                navigateTo(initialHash);
-            } else {
-                navigateTo('gaming');
-            }
-
-            // Load saved favorites
-            try {
-                const savedFavs = localStorage.getItem('kids_college_favorites');
-                if (savedFavs) favorites = JSON.parse(savedFavs);
-            } catch (e) {
-                console.warn(e);
-            }
-
-            // Set copyright dates
-            const currentYear = new Date().getFullYear();
-            document.getElementById('copyright-year').textContent = currentYear;
-
-            // Render UI Layers
-            updateFavoritesCount();
-            renderGames();
-
-            // Set up search events
-            searchInput.addEventListener('input', (e) => {
-                searchQuery = e.target.value.toLowerCase().trim();
-                if (searchQuery.length > 0) {
-                    searchResetBtn.classList.remove('hidden');
-                } else {
-                    searchResetBtn.classList.add('hidden');
-                }
-                renderGames();
-            });
-
-            searchResetBtn.addEventListener('click', () => {
-                searchInput.value = '';
-                searchQuery = '';
-                searchResetBtn.classList.add('hidden');
-                renderGames();
-            });
-        };
-
-        // ================= FAVORITES ENGINE =================
         function toggleFavorite(gameId, event) {
-            event.preventDefault();
-            event.stopPropagation();
-            
-            const index = favorites.indexOf(gameId);
-            if (index > -1) {
-                favorites.splice(index, 1);
-                showToast("Removed from Favorites!", "🤍");
-            } else {
-                favorites.push(gameId);
-                showToast("Added to Favorites!", "❤️");
-            }
-            
-            try {
-                localStorage.setItem('kids_college_favorites', JSON.stringify(favorites));
-            } catch (e) {
-                console.warn(e);
-            }
-
-            updateFavoritesCount();
-            renderGames();
+            event.preventDefault(); event.stopPropagation();
+            const idx = favorites.indexOf(gameId);
+            if (idx > -1) { favorites.splice(idx, 1); showToast("Removed bookmark", "🤍"); }
+            else { favorites.push(gameId); showToast("Bookmarked game", "❤️"); }
+            localStorage.setItem('kids_college_favorites', JSON.stringify(favorites));
+            updateFavoritesCount(); renderGames();
         }
 
-        // update bookmarks count
-        function updateFavoritesCount() {
-            favCountSpan.textContent = favorites.length;
-        }
+        function updateFavoritesCount() { if (favCountSpan) favCountSpan.textContent = favorites.length; }
 
-        // set search category filters
         function setFilter(category) {
             currentFilter = category;
-            
-            const tabs = document.querySelectorAll('.filter-tab');
-            tabs.forEach(tab => {
+            document.querySelectorAll('.filter-tab').forEach(tab => {
                 if (tab.id === `filter-${category}`) {
                     tab.className = "filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-teal-600 text-white border-2 border-teal-600";
                 } else {
                     tab.className = "filter-tab flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm shadow-sm transition-all bg-white text-slate-600 hover:text-teal-600 border-2 border-transparent hover:border-slate-300";
                 }
             });
-            
             renderGames();
         }
 
-        // ================= GAME GRID GENERATOR =================
         function renderGames() {
-            // Update the category header and explanation text dynamically based on current filter state
             const info = categoryDetails[currentFilter] || categoryDetails['all'];
-            document.getElementById('category-title').innerHTML = info.title;
-            document.getElementById('category-description').textContent = info.desc;
-
+            const t = document.getElementById('category-title');
+            const d = document.getElementById('category-description');
+            if (t) t.innerHTML = info.title; if (d) d.textContent = info.desc;
+            if (!gamesGrid) return;
             gamesGrid.innerHTML = '';
-            
-            const filtered = gamesDataset.filter(game => {
-                const matchesCategory = 
-                    currentFilter === 'all' || 
-                    (currentFilter === 'favorites' && favorites.includes(game.id)) ||
-                    game.category === currentFilter;
-                
-                const matchesSearch = 
-                    game.title.toLowerCase().includes(searchQuery) ||
-                    game.desc.toLowerCase().includes(searchQuery) ||
-                    game.tags.some(tag => tag.toLowerCase().includes(searchQuery));
-                
-                return matchesCategory && matchesSearch;
+
+            const filtered = gamesDataset.filter(g => {
+                const mc = currentFilter === 'all' || (currentFilter === 'favorites' && favorites.includes(g.id)) || g.category === currentFilter;
+                const ms = g.title.toLowerCase().includes(searchQuery) || g.desc.toLowerCase().includes(searchQuery);
+                return mc && ms;
             });
 
-            if (filtered.length === 0) {
-                emptyState.classList.remove('hidden');
-                gamesGrid.classList.add('hidden');
-                return;
-            } else {
-                emptyState.classList.add('hidden');
-                gamesGrid.classList.remove('hidden');
-            }
+            emptyState.classList.toggle('hidden', filtered.length > 0);
+            gamesGrid.classList.toggle('hidden', filtered.length === 0);
 
             filtered.forEach(game => {
                 const isFav = favorites.includes(game.id);
-                const tagsMarkup = game.tags.map(tag => 
-                    `<span class="bg-slate-100 text-slate-600 font-bold text-[11px] px-2.5 py-1 rounded-md">${tag}</span>`
-                ).join('');
-
-                // Resolve Safety Badge values with safe defaults
-                const violenceVal = game.violence || 'none';
-                const chatVal = game.chat || 'none';
-
-                let violenceBadgeHtml = '';
-                if (violenceVal === 'cartoon') {
-                    violenceBadgeHtml = `<span class="bg-amber-100 text-amber-800 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">💥 Cartoon Combat</span>`;
-                } else {
-                    violenceBadgeHtml = `<span class="bg-emerald-100 text-emerald-800 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">🟢 No Violence</span>`;
-                }
-
-                let chatBadgeHtml = '';
-                if (chatVal === 'public') {
-                    chatBadgeHtml = `<span class="bg-red-100 text-red-700 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm" title="Unmoderated live lobby chat outside class">⚠️ Public Chat</span>`;
-                } else if (chatVal === 'private') {
-                    chatBadgeHtml = `<span class="bg-teal-100 text-teal-800 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm" title="Room controlled by peer codes">🔒 Private Chat</span>`;
-                } else {
-                    chatBadgeHtml = `<span class="bg-slate-100 text-slate-700 font-bold text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">📴 No Chat</span>`;
-                }
-
-                // Resolve border & icon style based on Safety Matrix category
-                let cardBorderTheme = "border-slate-200 hover:border-teal-400";
-                let safetyIndicatorLight = "🟢";
-                let safetyProfileAlertBg = "bg-emerald-50 border-emerald-300 text-emerald-900";
+                const safetyProfileAlertBg = game.safetyRating === 'green' ? 'bg-emerald-50 border-emerald-300 text-emerald-900' : game.safetyRating === 'yellow' ? 'bg-yellow-50 border-yellow-300 text-yellow-900' : 'bg-red-50 border-red-300 text-red-900';
                 
-                if (game.safetyRating === 'yellow') {
-                    cardBorderTheme = "border-slate-200 hover:border-yellow-400 shadow-sm";
-                    safetyIndicatorLight = "🟡";
-                    safetyProfileAlertBg = "bg-yellow-50 border-yellow-300 text-yellow-900";
-                } else if (game.safetyRating === 'red') {
-                    cardBorderTheme = "border-slate-200 hover:border-red-400 shadow-sm";
-                    safetyIndicatorLight = "🔴";
-                    safetyProfileAlertBg = "bg-red-50 border-red-300 text-red-900";
-                }
-
-                const cardHtml = `
-                    <div class="relative group">
-                        <div class="game-card bg-white border ${cardBorderTheme} rounded-3xl p-5 shadow-sm hover:shadow-xl hover:shadow-teal-100 flex flex-col justify-between h-full relative z-10 border-l-4 ${game.safetyRating === 'green' ? 'border-l-emerald-500' : game.safetyRating === 'yellow' ? 'border-l-amber-500' : 'border-l-red-500'}">
-                            <div>
-                                <div class="flex items-center justify-between mb-4">
-                                    <div class="bg-slate-50 text-2xl w-12 h-12 flex items-center justify-center rounded-2xl shadow-inner border border-slate-100">
-                                        ${game.emoji}
-                                    </div>
-                                    
-                                    <button onclick="toggleFavorite('${game.id}', event)" class="p-2.5 rounded-full hover:bg-slate-50 text-slate-300 hover:text-red-500 transition-colors duration-200" title="Add to Favorites">
-                                        <svg class="w-5 h-5 ${isFav ? 'fill-red-500 text-red-500' : 'fill-none text-slate-400'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                                        </svg>
-                                    </button>
-                                </div>
-
-                                <h3 class="font-display font-bold text-lg text-slate-800 group-hover:text-teal-600 transition-colors mb-2">${game.title}</h3>
-                                <p class="text-slate-500 font-medium text-xs leading-relaxed mb-4">${game.desc}</p>
-                                
-                                <!-- Safety Profile Block -->
-                                <div class="p-3 border rounded-xl text-[11px] leading-relaxed mb-4 ${safetyProfileAlertBg}">
-                                    <span class="font-bold uppercase tracking-wider block mb-0.5">${safetyIndicatorLight} Safety Profile:</span>
-                                    ${game.safetyProfile || "Safe self-contained single-player game."}
-                                </div>
+                gamesGrid.innerHTML += `
+                    <div class="game-card bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl border-l-4 ${game.safetyRating === 'green' ? 'border-l-emerald-500' : game.safetyRating === 'yellow' ? 'border-l-amber-500' : 'border-l-red-500'} flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="text-2xl bg-slate-50 w-12 h-12 flex items-center justify-center rounded-2xl border">${game.emoji}</div>
+                                <button onclick="toggleFavorite('${game.id}', event)" class="text-slate-300 hover:text-red-500 transition-colors">
+                                    <svg class="w-5 h-5 ${isFav ? 'fill-red-500 text-red-500' : 'fill-none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+                                </button>
                             </div>
-
-                            <div>
-                                <!-- Core Safety Badges -->
-                                <div class="flex flex-wrap gap-1.5 mb-4 pt-3 border-t border-dashed border-slate-100">
-                                    ${violenceBadgeHtml}
-                                    ${chatBadgeHtml}
-                                </div>
-
-                                <div class="flex flex-wrap gap-1 mb-5">
-                                    ${tagsMarkup}
-                                </div>
-
-                                <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                                    <span class="flex items-center gap-1.5 text-slate-400 font-bold text-[11px] uppercase tracking-wider">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.109A11.386 11.386 0 0112 19.5a11.385 11.385 0 01-3-1.128v-.109m0-6.107a4.5 4.5 0 119 0M9 10.5a3 3 0 11-6 0 3 3 0 016 0zm-3 8.25a8.967 8.967 0 012.212-3.13C7.434 16.01 7.14 15.6 7 15.196M9 10.5a5.996 5.996 0 001.041 3.29M9 10.5a5.996 5.996 0 01-1.041 3.29m7.532 2.622a3 3 0 01-4.001-4.001M12 19.5a8.959 8.959 0 01-3.13-2.212A8.959 8.959 0 016 14.25" />
-                                        </svg>
-                                        ${game.players}
-                                    </span>
-                                    
-                                    <a href="${game.url}" target="_blank" class="inline-flex items-center gap-1 text-xs font-extrabold text-white bg-slate-900 hover:bg-orange-500 transition-colors py-2 px-4 rounded-xl shadow-sm">
-                                        Play Now 
-                                        <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                                        </svg>
-                                    </a>
-                                </div>
+                            <h3 class="font-display font-bold text-slate-800 mb-1">${game.title}</h3>
+                            <p class="text-slate-500 text-xs leading-relaxed mb-4">${game.desc}</p>
+                            <div class="p-3 border rounded-xl text-[11px] leading-relaxed mb-4 ${safetyProfileAlertBg}">
+                                <span class="font-bold block uppercase tracking-wider mb-0.5">${game.safetyRating === 'green' ? '🟢 Green' : game.safetyRating === 'yellow' ? '🟡 Yellow' : '🔴 Red'} Profile:</span>
+                                ${game.safetyProfile}
                             </div>
                         </div>
-                    </div>
-                `;
-                gamesGrid.innerHTML += cardHtml;
+                        <div class="flex items-center justify-between pt-3 border-t">
+                            <span class="text-slate-400 font-bold text-[10px] uppercase">${game.players}</span>
+                            <a href="${game.url}" target="_blank" class="bg-slate-900 hover:bg-orange-500 text-white font-extrabold text-xs py-2 px-4 rounded-xl shadow-sm transition-colors">Play Now &rarr;</a>
+                        </div>
+                    </div>`;
             });
         }
 
-        // Custom, non-disruptive Toast Alerts (replaces generic alert popups)
-        function showToast(message, emoji) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-emoji').textContent = emoji;
-            document.getElementById('toast-msg').textContent = message;
-
-            // Animate In
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            toast.classList.add('translate-y-0', 'opacity-100');
-
-            // Fade out after delay
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-                toast.classList.remove('translate-y-0', 'opacity-100');
-            }, 3000);
-        }
-
-        // ================= TEACHER ADMIN CORE CMS ENGINE =================
+        // CONTROL CONTROL STATE DRIVERS
         function handleAdminLogin(event) {
             event.preventDefault();
-            const user = document.getElementById('admin-user').value.trim();
-            const pass = document.getElementById('admin-pass').value.trim();
-
-            if (user === 'admin' && pass === 'password') {
-                isAdminLoggedIn = false; 
+            if (document.getElementById('admin-user').value === 'admin' && document.getElementById('admin-pass').value === 'password') {
                 document.getElementById('admin-login-card').classList.add('hidden');
                 document.getElementById('admin-dashboard').classList.remove('hidden');
-                
-                // Update Nav Label to indicate active session
-                document.getElementById('nav-admin').innerHTML = "🔓 Teacher Dashboard";
-                
-                // Initial renders
+                document.getElementById('nav-admin').textContent = "🔓 Teacher Dashboard";
                 renderAdminGamesList();
-                showToast("Access Granted. Welcome, Eugene!", "🔐");
-            } else {
-                showToast("Invalid Credentials. Please try again.", "❌");
-            }
+            } else { showToast("Invalid login credentials", "❌"); }
         }
-
-        // Logout
         function handleAdminLogout() {
-            isAdminLoggedIn = false;
             document.getElementById('admin-login-card').classList.remove('hidden');
             document.getElementById('admin-dashboard').classList.add('hidden');
-            document.getElementById('nav-admin').innerHTML = "🔑 Teacher Panel";
-            
-            // Wipe forms
-            document.getElementById('admin-user').value = '';
-            document.getElementById('admin-pass').value = '';
-            showToast("Logged out successfully.", "🚪");
+            document.getElementById('nav-admin').textContent = "🔑 Teacher Panel";
         }
-
         function switchAdminTab(tabId) {
-            currentAdminTab = tabId;
-            
-            // Update panel visibility
-            const panels = document.querySelectorAll('.admin-view-panel');
-            panels.forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.admin-view-panel').forEach(p => p.classList.add('hidden'));
             document.getElementById(`adm-view-${tabId}`).classList.remove('hidden');
-
-            // Toggle tab active highlights (Teal themed buttons)
-            const tabButtons = document.querySelectorAll('.admin-tab-btn');
-            tabButtons.forEach(btn => {
-                if (btn.id === `btn-adm-${tabId}`) {
-                    btn.className = "admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all bg-teal-600 text-white shadow-sm";
-                } else {
-                    btn.className = "admin-tab-btn flex items-center gap-2 w-full text-left px-4 py-3 rounded-2xl font-bold text-sm transition-all text-slate-600 hover:bg-slate-50";
-                }
-            });
         }
 
-        // --- SUB-CMS 1: GAMES MANAGEMENT (With Inline Edit Feature and Sort-within-group options) ---
         function renderAdminGamesList() {
-            const listContainer = document.getElementById('adm-games-table-list');
-            listContainer.innerHTML = '';
-
-            const categories = [
-                { key: 'multiplayer', label: '👥 Multiplayer Games' },
-                { key: '1player', label: '🕹️ 1 Player Games' },
-                { key: 'clicker', label: '🖱️ Clicker Games' },
-                { key: 'learning', label: '🧪 Learning & Science' }
-            ];
-
-            categories.forEach(cat => {
-                const catGames = gamesDataset.filter(g => g.category === cat.key);
-                
-                if (catGames.length === 0) return;
-
-                let categoryHtml = `
-                    <div class="p-4 bg-teal-50/40 rounded-2xl border border-teal-100 space-y-3">
-                        <div class="flex items-center justify-between border-b border-teal-100 pb-2 mb-2">
-                            <h4 class="font-display font-bold text-sm text-teal-900">${cat.label}</h4>
-                            <span class="text-[10px] bg-teal-100 text-teal-800 font-bold px-2 py-0.5 rounded-full">${catGames.length} Active</span>
-                        </div>
-                        <div class="space-y-2">
-                `;
-
-                catGames.forEach((game, index) => {
-                    categoryHtml += `
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-white rounded-xl border border-slate-100 gap-3">
-                            <div class="flex items-center gap-3">
-                                <span class="text-xl shrink-0">${game.emoji}</span>
-                                <div class="overflow-hidden">
-                                    <h5 class="text-xs font-bold text-slate-800 truncate">${game.title}</h5>
-                                    <span class="text-[10px] font-bold ${game.safetyRating === 'green' ? 'text-emerald-600' : game.safetyRating === 'yellow' ? 'text-amber-500' : 'text-red-500'} capitalize">
-                                        ● ${game.safetyRating} Light
-                                    </span>
-                                </div>
+            const list = document.getElementById('adm-games-table-list');
+            if (!list) return; list.innerHTML = '';
+            const cats = [{k:'multiplayer',l:'👥 Multiplayer'},{k:'1player',l:'🕹️ 1 Player'},{k:'clicker',l:'🖱️ Clicker'},{k:'learning',l:'🧪 Learning'}];
+            cats.forEach(c => {
+                const sub = gamesDataset.filter(g => g.category === c.k);
+                if (sub.length === 0) return;
+                let h = `<div class="p-4 bg-slate-50 rounded-2xl border space-y-2"><h4 class="font-bold text-xs text-slate-700">${c.l}</h4>`;
+                sub.forEach((g, idx) => {
+                    h += `
+                        <div class="flex items-center justify-between bg-white p-2.5 rounded-xl border text-xs">
+                            <div class="flex items-center gap-2"><span>${g.emoji}</span><span class="font-bold">${g.title}</span></div>
+                            <div class="flex gap-1">
+                                <button onclick="moveGame('${g.id}', 'up')" class="bg-slate-100 p-1 rounded font-bold ${idx===0?'opacity-30':''}">▲</button>
+                                <button onclick="moveGame('${g.id}', 'down')" class="bg-slate-100 p-1 rounded font-bold ${idx===sub.length-1?'opacity-30':''}">▼</button>
+                                <button onclick="editGame('${g.id}')" class="bg-teal-50 text-teal-700 px-2 rounded font-bold">Edit</button>
+                                <button onclick="deleteGame('${g.id}')" class="bg-red-50 text-red-600 px-2 rounded font-bold">✕</button>
                             </div>
-                            
-                            <!-- Up/Down Sorting Controls & Edit Actions -->
-                            <div class="flex items-center justify-end gap-1.5 shrink-0 self-end sm:self-auto">
-                                <button onclick="moveGame('${game.id}', 'up')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[10px] px-2 py-1 rounded-md transition-colors ${index === 0 ? 'opacity-40 cursor-not-allowed' : ''}" title="Move Up within category">
-                                    ▲
-                                </button>
-                                <button onclick="moveGame('${game.id}', 'down')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[10px] px-2 py-1 rounded-md transition-colors ${index === catGames.length - 1 ? 'opacity-40 cursor-not-allowed' : ''}" title="Move Down within category">
-                                    ▼
-                                </button>
-                                <div class="h-4 w-px bg-slate-200 mx-1"></div>
-                                <button onclick="editGame('${game.id}')" class="bg-teal-50 hover:bg-teal-100 text-teal-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
-                                    Edit
-                                </button>
-                                <button onclick="deleteGame('${game.id}')" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold text-[10px] px-2.5 py-1.5 rounded-lg transition-colors">
-                                    Remove
-                                </button>
-                            </div>
-                        </div>
-                    `;
+                        </div>`;
                 });
-
-                categoryHtml += `
-                        </div>
-                    </div>
-                `;
-                listContainer.innerHTML += categoryHtml;
+                list.innerHTML += h + `</div>`;
             });
         }
 
-        // Sorting Engine (re-orders game structures inside unique groups)
-        function moveGame(gameId, direction) {
-            const index = gamesDataset.findIndex(g => g.id === gameId);
-            if (index === -1) return;
+        function moveGame(id, dir) {
+            const currentIdx = gamesDataset.findIndex(g => g.id === id);
+            if (currentIdx === -1) return;
+            const targetCat = gamesDataset[currentIdx].category;
+            const matches = gamesDataset.map((g, i) => ({g, i})).filter(item => item.g.category === targetCat);
+            const groupPos = matches.findIndex(item => item.g.id === id);
             
-            const game = gamesDataset[index];
-            const cat = game.category;
-
-            // Map same category items with their original index positions
-            const categoryLister = gamesDataset
-                .map((g, i) => ({ game: g, originalIndex: i }))
-                .filter(item => item.game.category === cat);
-
-            const positionInGroup = categoryLister.findIndex(item => item.game.id === gameId);
-
-            if (direction === 'up' && positionInGroup > 0) {
-                // Swap in master array
-                const targetOriginalIndex = categoryLister[positionInGroup - 1].originalIndex;
-                const currentOriginalIndex = categoryLister[positionInGroup].originalIndex;
-
-                const temp = gamesDataset[currentOriginalIndex];
-                gamesDataset[currentOriginalIndex] = gamesDataset[targetOriginalIndex];
-                gamesDataset[targetOriginalIndex] = temp;
-
-                showToast(`Moved ${game.title} up inside category!`, "▲");
-            } else if (direction === 'down' && positionInGroup < categoryLister.length - 1) {
-                // Swap in master array
-                const targetOriginalIndex = categoryLister[positionInGroup + 1].originalIndex;
-                const currentOriginalIndex = categoryLister[positionInGroup].originalIndex;
-
-                const temp = gamesDataset[currentOriginalIndex];
-                gamesDataset[currentOriginalIndex] = gamesDataset[targetOriginalIndex];
-                gamesDataset[targetOriginalIndex] = temp;
-
-                showToast(`Moved ${game.title} down inside category!`, "▼");
+            if (dir === 'up' && groupPos > 0) {
+                const swapIdx = matches[groupPos - 1].i;
+                const temp = gamesDataset[currentIdx];
+                gamesDataset[currentIdx] = gamesDataset[swapIdx];
+                gamesDataset[swapIdx] = temp;
+            } else if (dir === 'down' && groupPos < matches.length - 1) {
+                const swapIdx = matches[groupPos + 1].i;
+                const temp = gamesDataset[currentIdx];
+                gamesDataset[currentIdx] = gamesDataset[swapIdx];
+                gamesDataset[swapIdx] = temp;
             }
-
-            renderAdminGamesList();
-            renderGames();
-        }
-
-        function editGame(gameId) {
-            const game = gamesDataset.find(g => g.id === gameId);
-            if (!game) return;
-
-            editingGameId = gameId;
-
-            // Populate form fields with current values
-            document.getElementById('add-game-id').value = game.id;
-            document.getElementById('add-game-id').readOnly = true; // Prevent key/ID breakage
-            document.getElementById('add-game-id').classList.add('opacity-60', 'bg-slate-200');
-            
-            document.getElementById('add-game-title').value = game.title;
-            document.getElementById('add-game-url').value = game.url;
-            document.getElementById('add-game-cat').value = game.category;
-            document.getElementById('add-game-players').value = game.players;
-            document.getElementById('add-game-tags').value = game.tags.join(', ');
-            document.getElementById('add-game-emoji').value = game.emoji;
-            document.getElementById('add-game-desc').value = game.desc;
-            document.getElementById('add-game-safetyprofile').value = game.safetyProfile || '';
-            document.getElementById('add-game-safety-rating').value = game.safetyRating || 'green';
-            
-            // Set dynamic dropdown values
-            document.getElementById('add-game-violence').value = game.violence || 'none';
-            document.getElementById('add-game-chat').value = game.chat || 'none';
-
-            // Transition Form to Edit Mode Visuals
-            document.getElementById('game-form-title').innerHTML = `✏️ Edit Game: <span class="text-teal-600">${game.title}</span>`;
-            document.getElementById('add-game-submit-btn').textContent = "💾 Save Changes";
-            document.getElementById('cancel-edit-btn').classList.remove('hidden');
-
-            // Scroll to form cleanly
-            document.getElementById('game-form-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        function cancelEditGame() {
-            editingGameId = null;
-            document.getElementById('add-game-form').reset();
-            
-            const idField = document.getElementById('add-game-id');
-            idField.readOnly = false;
-            idField.classList.remove('opacity-60', 'bg-slate-200');
-
-            document.getElementById('game-form-title').textContent = "Add Approved Game";
-            document.getElementById('add-game-submit-btn').textContent = "➕ Insert Game into Database";
-            document.getElementById('cancel-edit-btn').classList.add('hidden');
+            renderAdminGamesList(); renderGames();
         }
 
         function handleNewGameSubmit(event) {
@@ -1588,104 +419,57 @@
             const title = document.getElementById('add-game-title').value.trim();
             const url = document.getElementById('add-game-url').value.trim();
             const category = document.getElementById('add-game-cat').value;
-            const players = document.getElementById('add-game-players').value.trim();
-            const violence = document.getElementById('add-game-violence').value;
-            const chat = document.getElementById('add-game-chat').value;
-            const tagsInput = document.getElementById('add-game-tags').value;
-            const emoji = document.getElementById('add-game-emoji').value.trim();
-            const desc = document.getElementById('add-game-desc').value.trim();
-            const safetyProfile = document.getElementById('add-game-safetyprofile').value.trim();
             const safetyRating = document.getElementById('add-game-safety-rating').value;
-
-            const tags = tagsInput.split(',').map(t => t.trim()).filter(t => t !== '');
+            const players = document.getElementById('add-game-players').value.trim();
+            const safetyProfile = document.getElementById('add-game-safetyprofile').value.trim();
+            const desc = document.getElementById('add-game-desc').value.trim();
+            const emoji = document.getElementById('add-game-emoji').value.trim();
+            const tags = document.getElementById('add-game-tags').value.split(',').map(t=>t.trim());
 
             if (editingGameId) {
-                // Update inside existing database array
-                const gameIndex = gamesDataset.findIndex(g => g.id === editingGameId);
-                if (gameIndex > -1) {
-                    gamesDataset[gameIndex] = { id: editingGameId, title, url, category, safetyRating, desc, safetyProfile, players, violence, chat, tags, emoji };
-                    showToast(`"${title}" updated successfully!`, "💾");
-                }
+                const idx = gamesDataset.findIndex(g => g.id === editingGameId);
+                if (idx > -1) gamesDataset[idx] = { id, title, url, category, safetyRating, players, safetyProfile, desc, emoji, tags };
                 cancelEditGame();
             } else {
-                // Prevent duplicate IDs
-                if (gamesDataset.some(g => g.id === id)) {
-                    showToast("Game ID already exists! Please pick a unique key.", "⚠️");
-                    return;
-                }
-                
-                // Construct and inject game object
-                const newGame = { id, title, url, category, safetyRating, desc, safetyProfile, players, violence, chat, tags, emoji };
-                gamesDataset.push(newGame);
-                showToast(`"${title}" inserted successfully!`, "🎮");
+                gamesDataset.push({ id, title, url, category, safetyRating, players, safetyProfile, desc, emoji, tags });
                 event.target.reset();
             }
-
-            // Refresh UI grids
-            renderAdminGamesList();
-            renderGames(); 
+            renderAdminGamesList(); renderGames();
         }
 
-        function deleteGame(gameId) {
-            gamesDataset = gamesDataset.filter(game => game.id !== gameId);
-            if (editingGameId === gameId) {
-                cancelEditGame();
-            }
-            renderAdminGamesList();
-            renderGames();
-            showToast("Game removed from Database.", "🗑️");
+        function editGame(id) {
+            const g = gamesDataset.find(x => x.id === id);
+            if (!g) return; editingGameId = id;
+            document.getElementById('add-game-id').value = g.id;
+            document.getElementById('add-game-title').value = g.title;
+            document.getElementById('add-game-url').value = g.url;
+            document.getElementById('add-game-cat').value = g.category;
+            document.getElementById('add-game-safety-rating').value = g.safetyRating;
+            document.getElementById('add-game-players').value = g.players;
+            document.getElementById('add-game-safetyprofile').value = g.safetyProfile;
+            document.getElementById('add-game-desc').value = g.desc;
+            document.getElementById('add-game-emoji').value = g.emoji;
+            document.getElementById('add-game-tags').value = g.tags.join(', ');
+            document.getElementById('add-game-submit-btn').textContent = "💾 Save Document Changes";
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
         }
 
-        // --- SUB-CMS 3: STATIC EXPORT & DEPLOY ---
+        function cancelEditGame() {
+            editingGameId = null; document.getElementById('add-game-form').reset();
+            document.getElementById('add-game-submit-btn').textContent = "➕ Insert Game into Database";
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+        }
+
+        function deleteGame(id) {
+            gamesDataset = gamesDataset.filter(x => x.id !== id);
+            renderAdminGamesList(); renderGames();
+        }
+
+        // REFACTORED CLEAN OUTPUT EMITTER (Compiles *only* the database javascript data packet!)
         function generateStaticSource() {
-            // Read active document source dynamically
-            fetch(window.location.href)
-                .then(response => {
-                    if (!response.ok) throw new Error("Network offline or direct file scheme");
-                    return response.text();
-                })
-                .then(htmlContent => {
-                    const compiledOutput = buildStaticReplacement(htmlContent);
-                    document.getElementById('generated-code-box').value = compiledOutput;
-                    showToast("Static source generated successfully!", "💻");
-                })
-                .catch(err => {
-                    console.warn("Falling back to client-side DOM compiler:", err);
-                    // Standard robust fallback to document outerHTML if CORS/local scheme restricts fetch
-                    let rawHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-                    const compiledOutput = buildStaticReplacement(rawHtml);
-                    document.getElementById('generated-code-box').value = compiledOutput;
-                    showToast("Static source compiled!", "💻");
-                });
-        }
-
-        function buildStaticReplacement(rawHtml) {
-            // Regex match the data markers to replace dataset arrays directly with new states
-            const serializedGames = JSON.stringify(gamesDataset, null, 12);
-
-            let resultHtml = rawHtml;
-
-            // Target replacement for games block
-            const gamesRegex = /(\/\s*BEGIN_GAMES_DATA\s*\*\/)[\s\S]*?(\/\s*END_GAMES_DATA\s*\*\/)/g;
-            resultHtml = resultHtml.replace(gamesRegex, `$1\n        let gamesDataset = ${serializedGames};\n        $2`);
-
-            // Clean temporary active styles or credentials so the file builds completely fresh
-            resultHtml = resultHtml.replace(/isAdminLoggedIn\s*=\s*true/g, 'isAdminLoggedIn = false');
-            resultHtml = resultHtml.replace(/currentPage\s*=\s*'admin'/g, 'currentPage = \'gaming\'');
-            
-            return resultHtml;
-        }
-
-        // Copy Code
-        function copyGeneratedCode() {
-            const codeBox = document.getElementById('generated-code-box');
-            if (!codeBox.value) {
-                showToast("Please compile the code block first!", "⚠️");
-                return;
-            }
-            codeBox.select();
-            document.execCommand('copy');
-            showToast("Copied to clipboard. Paste into GitHub!", "📋");
+            const out = JSON.stringify(gamesDataset, null, 2);
+            document.getElementById('generated-code-box').value = `// games-data.js\nwindow.gamesDataset = ${out};`;
+            showToast("Database architecture data packet generated!", "💻");
         }
     </script>
 </body>
