@@ -107,9 +107,9 @@ window.gamesDataset = [
     "title": "Dinosaur Game",
     "url": "https://trex-runner.com/",
     "category": "clicker",
-    "safetyRating": "yellow",
+    "safetyRating": "green",
     "players": "Single Player",
-    "safetyProfile": "Ad Blocker Highly Suggested",
+    "safetyProfile": "No ads reported",
     "desc": "Help T-Rex leap over cactus obstacles and pterodactyls in this browser classic.",
     "emoji": "🦖",
     "tags": [
