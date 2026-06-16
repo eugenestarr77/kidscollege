@@ -73,56 +73,50 @@ window.gamesDataset = [
   {
     "id": "crossyroad",
     "title": "Crossy Road",
-    "url": "https://crossyroad.github.io/",
+    "url": "https://crossyroadgame.io/",
     "category": "1player",
     "safetyRating": "green",
-    "desc": "A vibrant, endless-runner take on the classic arcade game Frogger.",
-    "safetyProfile": "Completely local, single-player arcade game. Hosted on a clean, open-source mirror with zero networking capabilities.",
     "players": "Single Player",
-    "violence": "none",
-    "chat": "none",
+    "safetyProfile": "Completely local, single-player arcade game. Hosted on a clean, open-source mirror with zero networking capabilities.",
+    "desc": "A vibrant, endless-runner take on the classic arcade game Frogger.",
+    "emoji": "🐔",
     "tags": [
       "Frogger Alt",
       "Endless Run",
       "Retro"
-    ],
-    "emoji": "🐔"
+    ]
   },
   {
     "id": "nealfun",
     "title": "Neal.fun",
     "url": "http://neal.fun",
     "category": "learning",
-    "safetyRating": "green",
-    "desc": "An incredible vault of dynamic scientific experiments, quizzes, and cool curiosities.",
-    "safetyProfile": "A highly curated, non-commercial educational portfolio. No comments, no accounts, and no advertising networks.",
+    "safetyRating": "yellow",
     "players": "Single Player",
-    "violence": "none",
-    "chat": "none",
+    "safetyProfile": "Ad Blocker Suggested",
+    "desc": "An incredible vault of dynamic scientific experiments, quizzes, and cool curiosities.",
+    "emoji": "🧪",
     "tags": [
       "Cyber Science",
       "Science Sandbox",
       "Interactive"
-    ],
-    "emoji": "🧪"
+    ]
   },
   {
     "id": "dinosaurgame",
     "title": "Dinosaur Game",
     "url": "https://offline-dino-game.firebaseapp.com/",
     "category": "clicker",
-    "safetyRating": "green",
-    "desc": "Help T-Rex leap over cactus obstacles and pterodactyls in this browser classic.",
-    "safetyProfile": "Securely hosted on a clean Firebase web architecture. No tracking, completely offline format, and 100% ad-free.",
+    "safetyRating": "yellow",
     "players": "Single Player",
-    "violence": "none",
-    "chat": "none",
+    "safetyProfile": "Ad Blocker Highly Suggested",
+    "desc": "Help T-Rex leap over cactus obstacles and pterodactyls in this browser classic.",
+    "emoji": "🦖",
     "tags": [
       "Chrome Classic",
       "Endless Run",
       "Offline Game"
-    ],
-    "emoji": "🦖"
+    ]
   },
   {
     "id": "twovstwo",
@@ -468,18 +462,16 @@ window.gamesDataset = [
     "title": "Wordle",
     "url": "https://www.nytimes.com/games/wordle/index.html",
     "category": "learning",
-    "safetyRating": "green",
-    "desc": "Solve the daily five-letter word puzzle using smart logic and process of elimination.",
-    "safetyProfile": "Maintained on the clean, regulated New York Times games network. Single-player word tracking with no active chat mechanics.",
+    "safetyRating": "yellow",
     "players": "Single Player",
-    "violence": "none",
-    "chat": "none",
+    "safetyProfile": "Ad Blocker Suggested",
+    "desc": "Solve the daily five-letter word puzzle using smart logic and process of elimination.",
+    "emoji": "📝",
     "tags": [
       "Vocabulary",
       "Daily Puzzle",
       "Logic"
-    ],
-    "emoji": "📝"
+    ]
   },
   {
     "id": "quickdraw",
@@ -538,11 +530,11 @@ window.gamesDataset = [
   {
     "id": "geometrydash",
     "title": "Geometry Dash",
-    "url": "https://geometrydash-free.com/",
+    "url": "https://www.geometrydash.com/",
     "category": "clicker",
     "safetyRating": "yellow",
     "players": "Single Player",
-    "safetyProfile": "Single-player rhythmic platformer. The game itself is clean, but the free third-party portal hosting it uses high-density ad banners.",
+    "safetyProfile": "Ad Blocker Suggested",
     "desc": "Rhythm-based platformer. Dodge dangerous spikes and obstacles to upbeat music.",
     "emoji": "📐",
     "tags": [
