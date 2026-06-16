@@ -75,9 +75,9 @@ window.gamesDataset = [
     "title": "Crossy Road",
     "url": "https://crossyroadgame.io/",
     "category": "1player",
-    "safetyRating": "green",
+    "safetyRating": "yellow",
     "players": "Single Player",
-    "safetyProfile": "Completely local, single-player arcade game. Hosted on a clean, open-source mirror with zero networking capabilities.",
+    "safetyProfile": "Ad Blocker Suggested",
     "desc": "A vibrant, endless-runner take on the classic arcade game Frogger.",
     "emoji": "🐔",
     "tags": [
