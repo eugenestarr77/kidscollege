@@ -105,7 +105,7 @@ window.gamesDataset = [
   {
     "id": "dinosaurgame",
     "title": "Dinosaur Game",
-    "url": "https://offline-dino-game.firebaseapp.com/",
+    "url": "https://trex-runner.com/",
     "category": "clicker",
     "safetyRating": "yellow",
     "players": "Single Player",
