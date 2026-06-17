@@ -560,5 +560,113 @@ window.gamesDataset = [
       "Humorous"
     ],
     "emoji": "🍮"
+  },
+  {
+    "id": "blooket",
+    "title": "Blooket",
+    "url": "https://www.blooket.com/",
+    "category": "learning",
+    "safetyRating": "green",
+    "desc": "An action-packed educational game engine where trivia questions grant power-ups and gold.",
+    "safetyProfile": "Highly secure learning site. Student sessions contain absolutely zero messaging, chat logs, or student-to-student text interactions.",
+    "players": "Group Play",
+    "violence": "none",
+    "chat": "none",
+    "tags": [
+      "Educational",
+      "Trivia",
+      "Quizzes"
+    ],
+    "emoji": "🏫"
+  },
+  {
+    "id": "magiccatacademy",
+    "title": "Magic Cat Academy",
+    "url": "https://www.google.com/logos/2016/halloween16/halloween16.html",
+    "category": "clicker",
+    "safetyRating": "green",
+    "desc": "Swipe and draw magic shapes on screen to help Momo the magic cat defeat spooky school ghosts.",
+    "safetyProfile": "Official, secure Google Archive resource. Completely ad-free, account-free, and safe for all ages.",
+    "players": "Single Player",
+    "violence": "none",
+    "chat": "none",
+    "tags": [
+      "Doodle",
+      "Drawing",
+      "Spooky"
+    ],
+    "emoji": "🐈‍⬛"
+  },
+  {
+    "id": "ponyexpress",
+    "title": "Pony Express",
+    "url": "https://www.google.com/logos/2015/ponyexpress/ponyexpress15.html",
+    "category": "clicker",
+    "safetyRating": "green",
+    "desc": "Dodge rocky obstacles and collect lost mail as a classic Pony Express rider.",
+    "safetyProfile": "Official Google Doodle Archive. 100% ad-free, with zero social interaction or login requirements.",
+    "players": "Single Player",
+    "violence": "none",
+    "chat": "none",
+    "tags": [
+      "Doodle",
+      "Runner",
+      "Retro"
+    ],
+    "emoji": "🐎"
+  },
+  {
+    "id": "doodlebaseball",
+    "title": "Doodle Baseball",
+    "url": "https://www.google.com/logos/2019/july4/july4.html",
+    "category": "clicker",
+    "safetyRating": "green",
+    "desc": "Step up to the plate and hit home runs against fastballs thrown by backyard ballpark foods.",
+    "safetyProfile": "Clean Google interactive application server. No ads, tracking cookies, or social features present.",
+    "players": "Single Player",
+    "violence": "none",
+    "chat": "none",
+    "tags": [
+      "Doodle",
+      "Sports",
+      "Timing"
+    ],
+    "emoji": "🌭"
+  },
+  {
+    "id": "findthedifference",
+    "title": "Find the Difference",
+    "url": "https://www.crazygames.com/game/find-the-difference",
+    "category": "learning",
+    "safetyRating": "yellow",
+    "desc": "Scan and compare highly detailed images side-by-side to find subtle changes.",
+    "safetyProfile": "Hosted on CrazyGames. The visual puzzle is single-player and completely clean, but an active ad-blocker is recommended to hide background site ad grids.",
+    "players": "Single Player",
+    "violence": "none",
+    "chat": "none",
+    "tags": [
+      "Puzzle",
+      "Observation",
+      "Logic"
+    ],
+    "emoji": "🔍"
+  },
+  {
+    "id": "gardengnomes",
+    "title": "Garden Gnomes",
+    "url": "https://www.google.com/logos/2018/gnomes/gnomes18.html",
+    "category": "clicker",
+    "safetyRating": "green",
+    "desc": "Launch colorful garden gnomes from a catapult to plant beautiful flowers and decorate your field.",
+    "safetyProfile": "Official Google Doodle Archive. 100% ad-free, secure, with zero social interaction or tracking features.",
+    "players": "Single Player",
+    "violence": "none",
+    "chat": "none",
+    "tags": [
+      "Doodle",
+      "Catapult",
+      "Timing"
+    ],
+    "emoji": "🪴"
   }
 ];
