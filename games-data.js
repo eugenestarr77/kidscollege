@@ -565,11 +565,11 @@ window.gamesDataset = [
     "id": "blooket",
     "title": "Blooket",
     "url": "https://www.blooket.com/",
-    "category": "learning",
+    "category": "multiplayer",
     "safetyRating": "green",
     "desc": "An action-packed educational game engine where trivia questions grant power-ups and gold.",
     "safetyProfile": "Highly secure learning site. Student sessions contain absolutely zero messaging, chat logs, or student-to-student text interactions.",
-    "players": "Group Play",
+    "players": "60+ Players Max",
     "violence": "none",
     "chat": "none",
     "tags": [
